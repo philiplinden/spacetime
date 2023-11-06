@@ -29,4 +29,29 @@ This model framework permits rapid simulation of heterogeneous nodes acting as P
 Insights obtained from models will then be applied to create an optimal mission profile for a constellation of cislunar spacecraft equipped with space-rated Time Cards that enable the proposed capability of a publicly available minimum viable PNT service. With relevant prediction of cislunar PNT users for each PNT service configuration over the next 5 to 15 years, and also computing the equivalent cost per user for terrestrial GNSS, data-driven investment decisions related to deploying new PNT fleets in cislunar space are possible.
 
 ## Metrics
+The following metrics and quantitative evaluation criteria will be used to evaluate PNT service characteristics.
 
+### Accuracy
+- **Sync precision** - Standard deviation absolute time across the node population
+- **Holdover** - Average clock drift from true time before syncing
+- **Latency (jitter)** - Round trip time, packet delay variation
+
+### Availability
+- **Capacity** - % bandwidth used, peak bandwidth used, sqkm of coverage
+- **Throughput** - Total available bandwidth, # concurrent links
+
+### Continuity
+- **Roaming ability** - # available links, time between links
+- **Failure & recovery rate** - Mean time between failures, mean time to restore
+
+### Interoperability
+- **Standards compatibility** - Meets LunaNet and Moonlight requirements
+- **Technology compatibility** - # comms spectral bands, clients served per band
+
+### Cost
+- **Nodes required for service** - # service nodes, # clients per provider node
+- **Hardware required** - $ per clock, # clocks, $ invested per client served
+
+### Signal Integrity
+- **Packet integrity** - packet loss rate, packet delivery ratio, % duplicate packets
+- **Channel dominance** - signal-to-noise ratio, jam-to-signal ratio
