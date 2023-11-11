@@ -21,6 +21,5 @@ jobs:
             fetch-depth: 0
         - uses: actions/setup-python@v3
         - run: pip install mkdocs
-        - run: git config user.name 'github-actions[bot]' && git config user.email 'github-actions[bot]@users.noreply.github.com'
         - name: Publish docs
           run: mkdocs gh-deploy
