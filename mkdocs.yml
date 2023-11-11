@@ -1,0 +1,17 @@
+site_name: CLOCSS Agent-Based Model
+nav:
+  - 'index.md'
+  - 'motivation.md'
+  - 'approach.md'
+  - 'captains_log.md'
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - python
+    - yaml
+  markdown_extensions:
+    - fenced_code
+    - smarty
+    - toc:
+        permalink: true
