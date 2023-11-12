@@ -1,5 +1,24 @@
 # Captain's Log
 
+## 2023-11-12 - PL
+Objective: plot trajectories.
+
+### Summary
+- Added simple latitude/longitude visualization to the server.
+
+### Notes
+It's hard to judge the nyx propagations of agents without a visualization. So
+let's add some. There are two "easy" plots to make: line plots and the plots
+built in to Nyx.
+
+Took me a while but I finally made a simple grid portrayal for the satellites.
+To get it done, I borrowed continuous space visualizations from the Mesa example
+[boid flockers](https://github.com/projectmesa/mesa-examples/tree/10985d44091b9ba1ecebd013d2d2252e2116649b/examples/boid_flockers/boid_flockers).
+
+#### Adding a data collector to the model
+The `mesa.DataCollector` class init function lets us define reporters from each
+agent using lambda functions, so let's use that to grab some orbit information.
+
 ## 2023-11-11 - PL
 Objective: define a timekeeper agent and preliminary environment.
 

@@ -4,6 +4,7 @@ This module contains the highest level structures that define the model, as
 recommended by Mesa: https://mesa.readthedocs.io/en/stable/best-practices.html
 """
 import logging
+from pprint import pformat
 
 import mesa
 from nyx_space.cosmic import Cosm, Spacecraft, Orbit, SrpConfig
@@ -32,12 +33,29 @@ class SpacecraftAgent(mesa.Agent):
         self.delta_t = delta_t
         self.dyn = dynamics
         self.traj = None
+        self.update()
         log.debug(f"Initialized agent {self.unique_id}")
+
+    def update(self):
+        self.epoch = self.spacecraft.epoch
+        self.altitude = self.spacecraft.orbit.sma_altitude_km()
+        self.longitude = self.spacecraft.orbit.tlong_deg()
+        self.latitude = self.spacecraft.orbit.aol_deg()
+        log.info(pformat({
+            'id': self.unique_id,
+            'epoch': self.epoch,
+            'altitude': self.altitude,
+            'latlon': (self.latitude, self.longitude),
+        }))
+
+    def move(self):
+        self.model.space.move_agent(self, (self.longitude, self.latitude))
 
     def step(self):
         """what happens when the sim ticks forward"""
         self.spacecraft, self.traj = propagate(self.spacecraft, self.dyn, self.delta_t)
-        log.info(f"id: {self.unique_id} epoch: {self.spacecraft.epoch}")
+        self.update()
+        self.move()
 
 
 class ClocssModel(mesa.Model):
@@ -54,9 +72,9 @@ class ClocssModel(mesa.Model):
         raan_deg: float = 35.0,
         aop_deg: float = 65.0,
         ta_deg: float = 590,
-        monte_sma: float = 0.05,
-        monte_ecc: float = 0.10,
-        monte_inc: float = 0.10,
+        monte_sma: float = 5,
+        monte_ecc: float = 10,
+        monte_inc: float = 10,
         monte_kind: str = 'prct',
     ):
         
@@ -80,9 +98,9 @@ class ClocssModel(mesa.Model):
         orbits = generate_orbits(
             prototype_orbit,
             [
-                (StateParameter("SMA"), monte_sma),
-                (StateParameter.Eccentricity, monte_ecc),
-                (StateParameter.Inclination, monte_inc),
+                (StateParameter("SMA"), monte_sma/100),
+                (StateParameter.Eccentricity, monte_ecc/100),
+                (StateParameter.Inclination, monte_inc/100),
             ],
             num_actors,
             kind=monte_kind,
@@ -99,11 +117,12 @@ class ClocssModel(mesa.Model):
         self.schedule = mesa.time.RandomActivation(self)
 
         # Create agents
+        self.space = mesa.space.ContinuousSpace(360, 360, True)
         for i, sc in enumerate(satellites):
             a = SpacecraftAgent(self, i, sc, Unit.Second * float(delta_t),
                                 dynamics)
+            self.space.place_agent(a, (a.longitude, a.latitude))
             self.schedule.add(a)
-        self.space = mesa.space.MultiGrid(0, 0, True)
 
     def step(self):
         """Advance the model by one step."""
