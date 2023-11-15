@@ -4,136 +4,88 @@ This module contains visualizations and the server itself, as recommended by
 Mesa: https://mesa.readthedocs.io/en/stable/best-practices.html
 """
 import logging
-import mesa
-from mesa.visualization.ModularVisualization import (
-    VisualizationElement, CHART_JS_FILE
-)
 
-from .model import ClocssModel, SpacecraftAgent
+from mesa.visualization import ModularServer, NumberInput, Slider
 
+from .tools.visualizations import CanvasContinuous, Circle
+from .model import R_EARTH_KM, OrbitsModel, SpacecraftAgent
 
 log = logging.getLogger()
 
-model_params = {
-    "num_actors": mesa.visualization.Slider(
+
+def satellite_portrayal(agent: SpacecraftAgent) -> dict:
+    """Define a portrayal for a SpacecraftAgent
+
+    Args:
+        agent (SpacecraftAgent): _description_
+
+    Returns:
+        dict: _description_
+    """
+
+    # update portrayal characteristics for each satellite object
+    return Circle(
+        r = 1,
+        Layer = 0,
+        Color = "#2596be",
+        x = agent.x,
+        y = agent.y,
+    ).to_dict()
+
+
+orbits_params = {
+    "num_actors": Slider(
         name="Number of agents:",
         value=50,
         min_value=1,
         max_value=100,
         step=1,
     ),
-    "epoch": '2023-11-11',
-    "delta_t": mesa.visualization.NumberInput(
-        name="delta_t",
-        value=60.0
+    "epoch": "2023-01-01 00:00:00.0000 UTC",
+    "delta_t": NumberInput(name="delta_t", value=60.0),
+    "sma": NumberInput(
+        name="sma",
+        value=6738-R_EARTH_KM,
     ),
-    "altitude_km": mesa.visualization.NumberInput(
-        name="altitude_km",
-        value=400,
-    ),
-    "ecc": mesa.visualization.NumberInput(
+    "ecc": NumberInput(
         name="ecc",
-        value=1e-4,
+        value=0.0005177,
     ),
-    "inc_deg": mesa.visualization.NumberInput(
+    "inc_deg": NumberInput(
         name="inc_deg",
-        value=30.5,
+        value=51.6430,
     ),
-    "raan_deg": mesa.visualization.NumberInput(
+    "raan_deg": NumberInput(
         name="raan_deg",
-        value=35.0,
+        value=300.8040,
     ),
-    "aop_deg": mesa.visualization.NumberInput(
+    "aop_deg": NumberInput(
         name="aop_deg",
-        value=65.0,
+        value=301.9962,
     ),
-    "ta_deg": mesa.visualization.NumberInput(
+    "ta_deg": NumberInput(
         name="ta_deg",
-        value=590,
+        value=320.4914,
     ),
-    "monte_sma": mesa.visualization.Slider(
-        name="SMA variation (%)",
-        value=5,
+    "monte_sma": Slider(
+        name="SMA variation (km)",
+        value=50,
         min_value=0,
         max_value=100,
         step=1,
     ),
-    "monte_ecc": mesa.visualization.Slider(
-        name="Eccentricity variation (%)",
-        value=10,
+    "monte_raan": Slider(
+        name="RAAN variation (deg)",
+        value=90,
         min_value=0,
-        max_value=100,
-        step=1,
-    ),
-    "monte_inc": mesa.visualization.Slider(
-        name="Inclination variation (%)",
-        value=10,
-        min_value=0,
-        max_value=100,
+        max_value=360,
         step=1,
     ),
 }
 
 
-class SimpleCanvas(VisualizationElement):
-    """ from mesa examples
-    examples/boid_flockers/boid_flockers/SimpleContinuousModule.py
-    """
-    local_includes = ["clocss/simple_continuous_canvas.js"]
-    portrayal_method = None
-    canvas_height = 500
-    canvas_width = 500
-
-    def __init__(self, portrayal_method, canvas_height=500, canvas_width=500):
-        """
-        Instantiate a new SimpleCanvas
-        """
-        self.portrayal_method = portrayal_method
-        self.canvas_height = canvas_height
-        self.canvas_width = canvas_width
-        new_element = "new Simple_Continuous_Module({}, {})".format(
-            self.canvas_width, self.canvas_height
-        )
-        self.js_code = "elements.push(" + new_element + ");"
-
-    def render(self, model):
-        space_state = []
-        for obj in model.schedule.agents:
-            portrayal = self.portrayal_method(obj)
-            x, y = obj.pos
-            x = (x - model.space.x_min) / (model.space.x_max - model.space.x_min)
-            y = (y - model.space.y_min) / (model.space.y_max - model.space.y_min)
-            portrayal["x"] = x
-            portrayal["y"] = y
-            space_state.append(portrayal)
-        return space_state
-
-
-def satellite_portrayal(agent):
-    if agent is None:
-        return
-
-    portrayal = {}
-
-    # update portrayal characteristics for each satellite object
-    if isinstance(agent, SpacecraftAgent):
-        portrayal["Shape"] = "circle"
-        portrayal["r"] = 1
-        portrayal["Layer"] = 0
-        portrayal["Filled"] = "true"
-        portrayal["Color"] = '#2596be'
-        portrayal["x"] = agent.longitude
-        portrayal["y"] = agent.latitude
-    else:
-        log.error('wrong type!')
-    return portrayal
-
-
-latlon_grid = SimpleCanvas(
-    satellite_portrayal, 720, 720)
-       
-
-server = mesa.visualization.ModularServer(
-    ClocssModel, [latlon_grid], "CLOCSS Model", model_params
+latlon_grid = CanvasContinuous(satellite_portrayal, 720, 720)
+server = ModularServer(
+    OrbitsModel, [latlon_grid], "Orbits Model", orbits_params
 )
 server.port = 8521
