@@ -3,6 +3,7 @@ nav:
   - 'index.md'
   - 'motivation.md'
   - 'approach.md'
+  - 'example.md'
   - 'captains_log.md'
 theme:
   name: readthedocs
