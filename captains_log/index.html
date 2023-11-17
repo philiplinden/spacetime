@@ -1,0 +1,1019 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="an Agent-Based Model of Heterogeneous Lunar Networks for the Cislunar Open Clock Synchronization System (CLOCSS)">
+      
+      
+      
+      
+        <link rel="prev" href="../reference/">
+      
+      
+        <link rel="next" href="../example/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.8">
+    
+    
+      
+        <title>Captain's Log - CLOCSS Agent-Based Model</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4b4a2bd9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="blue">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#captains-log" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="CLOCSS Agent-Based Model" class="md-header__button md-logo" aria-label="CLOCSS Agent-Based Model" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M75 75 41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24h110.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24v104c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CLOCSS Agent-Based Model
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Captain's Log
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/philiplinden/clocss-abm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    philiplinden/clocss-abm
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="CLOCSS Agent-Based Model" class="md-nav__button md-logo" aria-label="CLOCSS Agent-Based Model" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M75 75 41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24h110.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24v104c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg>
+
+    </a>
+    CLOCSS Agent-Based Model
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/philiplinden/clocss-abm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    philiplinden/clocss-abm
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Captain's Log
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Captain's Log
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-17-pl" class="md-nav__link">
+    2023-11-17 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-17 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-15-pl" class="md-nav__link">
+    2023-11-15 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-15 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_1" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-13-pl" class="md-nav__link">
+    2023-11-13 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-13 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_2" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-12-pl" class="md-nav__link">
+    2023-11-12 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-12 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_3" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_3" class="md-nav__link">
+    Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-data-collector-to-the-model" class="md-nav__link">
+    Adding a data collector to the model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-11-pl" class="md-nav__link">
+    2023-11-11 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-11 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_4" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_4" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-10-pl" class="md-nav__link">
+    2023-11-10 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-10 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_5" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_5" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../example/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Orbit Monte Carlo with Nyx
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-17-pl" class="md-nav__link">
+    2023-11-17 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-17 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-15-pl" class="md-nav__link">
+    2023-11-15 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-15 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_1" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-13-pl" class="md-nav__link">
+    2023-11-13 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-13 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_2" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-12-pl" class="md-nav__link">
+    2023-11-12 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-12 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_3" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_3" class="md-nav__link">
+    Notes
+  </a>
+  
+    <nav class="md-nav" aria-label="Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-data-collector-to-the-model" class="md-nav__link">
+    Adding a data collector to the model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-11-pl" class="md-nav__link">
+    2023-11-11 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-11 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_4" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_4" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2023-11-10-pl" class="md-nav__link">
+    2023-11-10 - PL
+  </a>
+  
+    <nav class="md-nav" aria-label="2023-11-10 - PL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_5" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_5" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="captains-log">Captain's Log<a class="headerlink" href="#captains-log" title="Permanent link">#</a></h1>
+<h2 id="2023-11-17-pl">2023-11-17 - PL<a class="headerlink" href="#2023-11-17-pl" title="Permanent link">#</a></h2>
+<p>Objective: start the network model.</p>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">#</a></h3>
+<ul>
+<li>Moved the spatial components to <code>orbits.py</code>.</li>
+<li>Added additional documentation packages: <code>mkdocs-material</code> and <code>mkautodocs</code>.</li>
+<li>Refreshed the look and feel of the docs pages.</li>
+</ul>
+<h3 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">#</a></h3>
+<p>This model has two main components: the motion model and the network model. I'm
+going to try to keep this in mind as I organize (and re-organize) the codebase.</p>
+<p>Hm, elements are more tightly coupled than I anticipated. <code>OrbitsModel</code> needs a
+set of <code>SpacecraftAgent</code>s to run. The <code>SpacecraftAgent</code>s will be the agents that
+perform actions and such. Maybe there's a way to add inheritance to things so
+that the agents can inherit from a timekeeping agent and an orbiting agent, and
+so on. I'm going to segment it off and develop a timekeeping agent separately,
+then combine them in a refactor effort whats all the machinery is up and
+running.</p>
+<p>In the end I decided to put UI components in <code>server.py</code>. This way, all of the
+visualizations are together. The various model components will be imported by
+<code>model.py</code> as a nexus of sorts (or perhaps an interface?) for the server to
+reach all the various components that will probably show up later. I guess it is
+also a rug to sweep messes under...</p>
+<p>One thing that seems to be missing is code docs (not just authored docs). I
+found an interesting package called
+<a href="https://mkdocstrings.github.io/">mkdocstrings</a> that supposedly automates this
+and integrates with <a href="https://www.mkdocs.org/">MkDocs</a> and is especially tailored
+for the <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+theme. When searching for docs here, I also found a nifty little package called
+<code>mkdocs-click</code> for beautifying <a href="https://click.palletsprojects.com/">Click</a> CLI
+docs.</p>
+<h2 id="2023-11-15-pl">2023-11-15 - PL<a class="headerlink" href="#2023-11-15-pl" title="Permanent link">#</a></h2>
+<p>Objective: report issues with nyx.</p>
+<h3 id="summary_1">Summary<a class="headerlink" href="#summary_1" title="Permanent link">#</a></h3>
+<ul>
+<li>Reported issue in Nyx Python: <a href="https://github.com/nyx-space/nyx/issues/250">#250</a></li>
+<li>Got Nyx monte carlo orbits working: <a href="../notebooks/monte_carlo.ipynb">notebooks/monte_carlo.ipynb</a></li>
+<li>Re-implemented the monte carlo orbit generation in the Mesa model</li>
+<li>Set the server default values to approximate ISS orbit</li>
+</ul>
+<h3 id="notes_1">Notes<a class="headerlink" href="#notes_1" title="Permanent link">#</a></h3>
+<p>While trying to show how the monte carlo functions weren't working, I proved
+myself wrong (in a good way). As shown by <a href="../notebooks/monte_carlo.ipynb">notebooks/monte_carlo.ipynb</a>
+The distributions in SMA and Inclination both work. I didn't have as much luck
+with eccentricity, but other parameters worked just fine. I re-integrated the
+monte carlo orbit generation into the agent generation code. It's much quicker.</p>
+<h2 id="2023-11-13-pl">2023-11-13 - PL<a class="headerlink" href="#2023-11-13-pl" title="Permanent link">#</a></h2>
+<p>Objective: clean up the repo.</p>
+<h3 id="summary_2">Summary<a class="headerlink" href="#summary_2" title="Permanent link">#</a></h3>
+<ul>
+<li>Organization tweaks</li>
+<li>Refactored the "monte carlo" distributions of orbits because the sliders
+  didn't work</li>
+</ul>
+<h3 id="notes_2">Notes<a class="headerlink" href="#notes_2" title="Permanent link">#</a></h3>
+<p>The code got really messy as I was tinkering and trying to get the visualization
+and Nyx to work. I should clean up the code before things get out of hand.</p>
+<p>On the topic of rendering plotly figures from the Mesa server, perhaps I can
+make use of <code>plotly.io.to_json</code> and <code>plotly.io.from_json</code> to pass on the figure
+data to a canvas. For example, create a simple canvas class that accepts the
+figure data as a JSON and a subclass of <code>VisualizationElement</code> that renders
+the plotly figure from json data.</p>
+<p>I discovered that the distribution tweakables for changing agent orbits was
+completely broken. For some reason, only SMA was changing when adjusting input
+parameters to the Nyx monte carlo functions. Changing inclination and
+eccentricity didn't actually have an effect. Since this is just meant to
+introduce some variation between the agents' orbits, I abandoned the Nyx
+built-ins and used simple gaussian distributions to vary the orbital elements
+as each agent is created. The sliders now influence the width of these
+distribution functions.</p>
+<p>Similarly, changing the mean inclination, raan, or argument of periapsis had
+no effect on the orbits that were created by the Nyx monte carlo functions.
+Turns out this is because the monte carlo generator initializes with a default
+<a href="https://github.com/nyx-space/nyx/blob/master/src/mc/generator.rs#L344">orbit</a>
+and I couldn't figure out how to modify this parameter. When I supplied a custom
+orbit to <a href="https://github.com/nyx-space/nyx/blob/master/src/python/monte_carlo/mod.rs#L48C4-L77"><code>generate_orbits()</code></a>
+as an argument, it seemed to be ignored. Rather than debug Nyx, I abandoned this
+function.</p>
+<h2 id="2023-11-12-pl">2023-11-12 - PL<a class="headerlink" href="#2023-11-12-pl" title="Permanent link">#</a></h2>
+<p>Objective: plot trajectories.</p>
+<h3 id="summary_3">Summary<a class="headerlink" href="#summary_3" title="Permanent link">#</a></h3>
+<ul>
+<li>Added simple latitude/longitude visualization to the server.</li>
+</ul>
+<h3 id="notes_3">Notes<a class="headerlink" href="#notes_3" title="Permanent link">#</a></h3>
+<p>It's hard to judge the nyx propagations of agents without a visualization. So
+let's add some. There are two "easy" plots to make: line plots and the plots
+built in to Nyx.</p>
+<p>Took me a while but I finally made a simple grid portrayal for the satellites.
+To get it done, I borrowed continuous space visualizations from the Mesa example
+<a href="https://github.com/projectmesa/mesa-examples/tree/10985d44091b9ba1ecebd013d2d2252e2116649b/examples/boid_flockers/boid_flockers">boid flockers</a>.</p>
+<p>Now that I know I can model trajectories, I'm going to scale back and focus on
+the agent interactions. After a working demo of that, I'll merge the two demos
+and we have our first real satellite sim.</p>
+<h4 id="adding-a-data-collector-to-the-model">Adding a data collector to the model<a class="headerlink" href="#adding-a-data-collector-to-the-model" title="Permanent link">#</a></h4>
+<p>The <code>mesa.DataCollector</code> class init function lets us define reporters from each
+agent using lambda functions, so let's use that to grab some orbit information.</p>
+<h2 id="2023-11-11-pl">2023-11-11 - PL<a class="headerlink" href="#2023-11-11-pl" title="Permanent link">#</a></h2>
+<p>Objective: define a timekeeper agent and preliminary environment.</p>
+<h3 id="summary_4">Summary<a class="headerlink" href="#summary_4" title="Permanent link">#</a></h3>
+<ul>
+<li>Removed example code.</li>
+<li>Built a toy example following the mesa.readthedocs.io tutorials:
+  <a href="../notebooks/sandbox.ipynb">sandbox.ipynb</a></li>
+<li>Decided to keep iterating on Python to learn, but may eventually switch to
+  Rust for speed if necessary.</li>
+<li>Used Nyx tests as a boilerplate for invoking the Nyx API<ul>
+<li>Created spacecraft objects</li>
+<li>Propagated orbits forward in time</li>
+</ul>
+</li>
+<li>Created a basic tunable Mesa server with monte carlo spacecraft agents</li>
+</ul>
+<h3 id="notes_4">Notes<a class="headerlink" href="#notes_4" title="Permanent link">#</a></h3>
+<p>The tutorials suggest using an interactive environment to begin, and I agree
+that it's for the best. The server is a whole other beast and it's too much at
+once to deal with them both for now.</p>
+<p>The Python documentation for <a href="https://nyxspace.com/nyxspace/user_guide/start/">nyx</a>
+is very rust-centric. I can probably get by from referencing the Python source.
+Looks like <a href="https://github.com/nyx-space/hifitime">hifitime</a> Python docs are a
+bit more mature, but still mostly focused on the rust crate. Should I pivot to
+rust? There are <a href="https://github.com/krABMaga/krABMaga">ABM frameworks for rust</a>
+that are plug-and-play...</p>
+<ul>
+<li>Mesa (Python): <a href="https://conference.scipy.org/proceedings/scipy2015/pdfs/jacqueline_kazil.pdf">Masad, et. al. (2015)</a></li>
+<li>krABMaga (Rust): <a href="https://link.springer.com/chapter/10.1007/978-981-15-1078-6_2">Antelmi, et. al. (2019)</a></li>
+</ul>
+<p>For now I'll stick with Python for ease of use. If I run into performance
+bottlenecks, it shouldn't be terribly hard to port the meat of the model to a
+rust framework.</p>
+<p>In the absence of docs, the next best place to look for boilerplate code to get
+me started with Nyx is in the tests. As a simple demo, we'll propagate orbits
+as the simulation progresses or something.</p>
+<h2 id="2023-11-10-pl">2023-11-10 - PL<a class="headerlink" href="#2023-11-10-pl" title="Permanent link">#</a></h2>
+<p>Objective: block out the project structure.</p>
+<h3 id="summary_5">Summary<a class="headerlink" href="#summary_5" title="Permanent link">#</a></h3>
+<ul>
+<li>Initialized the project metadata and dependencies with Python Poetry</li>
+<li>Added docs via MkDocs</li>
+<li>Set up a working example from <a href="https://github.com/projectmesa/mesa-examples/tree/main/examples/virus_on_network">mesa-examples</a></li>
+</ul>
+<h3 id="notes_5">Notes<a class="headerlink" href="#notes_5" title="Permanent link">#</a></h3>
+<p>I know it's too early to really have documentation or a package manager but
+Poetry and MkDocs are so easy so might as well. Besides, they make the whole
+project feel so professional, so there's really no reason not to.</p>
+<p>As for <a href="https://mesa.readthedocs.io/en/stable/overview.html">Mesa</a>, the examples
+library is great for validating the setup and establishing a boilerplate project
+setup. The website also has <a href="https://mesa.readthedocs.io/en/stable/best-practices.html">Best Practices</a>
+but it's basically just "use a readme and these file names".</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs.sticky", "instant"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.81fa17fe.min.js"></script>
+      
+    
+  </body>
+</html>
