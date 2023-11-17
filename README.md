@@ -7,5 +7,5 @@ This project aims to use agent-based modeling and simulations to explore how net
 # Instructions
 
 ```shell
-poetry run mesa runserver clocss
+poetry run mesa runserver
 ```
