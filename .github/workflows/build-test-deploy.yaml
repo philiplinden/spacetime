@@ -1,0 +1,55 @@
+name: build-test-deploy
+# Controls when the workflow will run
+on:
+    # Triggers the workflow on push or pull request events but only for the "main" branch
+    push:
+      branches: [ "main" ]
+      paths:
+        - "**.md"
+        - "mkdocs.yml"
+    pull_request:
+      branches: [ "main" ]
+  
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: setup python
+        uses: actions/setup-python@v3
+      - run: pip install poetry
+      - run: poetry build
+
+  docs:
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v3
+      - run: > 
+          pip install mkdocs mkdocs-material mkdocstrings mkdocstrings-python
+      - name: MkDocs build
+        run: mkdocs build
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
