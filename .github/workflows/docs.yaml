@@ -20,6 +20,6 @@ jobs:
           with:
             fetch-depth: 0
         - uses: actions/setup-python@v3
-        - run: pip install mkdocs
+        - run: pip install mkdocs mkdocs-material mkdocstrings mkdocstrings-python
         - name: Publish docs
           run: mkdocs gh-deploy
