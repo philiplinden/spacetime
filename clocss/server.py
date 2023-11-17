@@ -8,30 +8,11 @@ import logging
 from mesa.visualization import ModularServer, NumberInput, Slider
 
 from .tools.visualizations import CanvasContinuous, Circle
-from .model import R_EARTH_KM, OrbitsModel, SpacecraftAgent
+from .model import OrbitsModel, SpacecraftAgent
+
 
 log = logging.getLogger()
-
-
-def satellite_portrayal(agent: SpacecraftAgent) -> dict:
-    """Define a portrayal for a SpacecraftAgent
-
-    Args:
-        agent (SpacecraftAgent): _description_
-
-    Returns:
-        dict: _description_
-    """
-
-    # update portrayal characteristics for each satellite object
-    return Circle(
-        r = 1,
-        Layer = 0,
-        Color = "#2596be",
-        x = agent.x,
-        y = agent.y,
-    ).to_dict()
-
+R_EARTH_KM = 6387
 
 orbits_params = {
     "num_actors": Slider(
@@ -82,6 +63,26 @@ orbits_params = {
         step=1,
     ),
 }
+
+
+def satellite_portrayal(agent: SpacecraftAgent) -> dict:
+    """Define a portrayal for a SpacecraftAgent
+
+    Args:
+        agent (SpacecraftAgent): _description_
+
+    Returns:
+        dict: _description_
+    """
+
+    # update portrayal characteristics for each satellite object
+    return Circle(
+        r = 1,
+        Layer = 0,
+        Color = "#2596be",
+        x = agent.x,
+        y = agent.y,
+    ).to_dict()
 
 
 latlon_grid = CanvasContinuous(satellite_portrayal, 720, 720)

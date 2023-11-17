@@ -1,17 +1,52 @@
 # Captain's Log
 
+## 2023-11-17 - PL
+Objective: start the network model.
+
+### Summary
+- Moved the spatial components to `orbits.py`.
+- Added additional documentation packages: `mkdocs-material` and `mkautodocs`.
+- Refreshed the look and feel of the docs pages.
+
+### Notes
+This model has two main components: the motion model and the network model. I'm
+going to try to keep this in mind as I organize (and re-organize) the codebase.
+
+Hm, elements are more tightly coupled than I anticipated. `OrbitsModel` needs a
+set of `SpacecraftAgent`s to run. The `SpacecraftAgent`s will be the agents that
+perform actions and such. Maybe there's a way to add inheritance to things so
+that the agents can inherit from a timekeeping agent and an orbiting agent, and
+so on. I'm going to segment it off and develop a timekeeping agent separately,
+then combine them in a refactor effort whats all the machinery is up and
+running.
+
+In the end I decided to put UI components in `server.py`. This way, all of the
+visualizations are together. The various model components will be imported by
+`model.py` as a nexus of sorts (or perhaps an interface?) for the server to
+reach all the various components that will probably show up later. I guess it is
+also a rug to sweep messes under...
+
+One thing that seems to be missing is code docs (not just authored docs). I
+found an interesting package called
+[mkdocstrings](https://mkdocstrings.github.io/) that supposedly automates this
+and integrates with [MkDocs](https://www.mkdocs.org/) and is especially tailored
+for the [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
+theme. When searching for docs here, I also found a nifty little package called
+`mkdocs-click` for beautifying [Click](https://click.palletsprojects.com/) CLI
+docs.
+
 ## 2023-11-15 - PL
 Objective: report issues with nyx.
 
 ### Summary
 - Reported issue in Nyx Python: [#250](https://github.com/nyx-space/nyx/issues/250)
-- Got Nyx monte carlo orbits working: [notebooks/monte_carlo.ipynb](notebooks/monte_carlo.ipynb)
+- Got Nyx monte carlo orbits working: [notebooks/monte_carlo.ipynb](../notebooks/monte_carlo.ipynb)
 - Re-implemented the monte carlo orbit generation in the Mesa model
 - Set the server default values to approximate ISS orbit
 
 ### Notes
 While trying to show how the monte carlo functions weren't working, I proved
-myself wrong (in a good way). As shown by [notebooks/monte_carlo.ipynb](notebooks/monte_carlo.ipynb)
+myself wrong (in a good way). As shown by [notebooks/monte_carlo.ipynb](../notebooks/monte_carlo.ipynb)
 The distributions in SMA and Inclination both work. I didn't have as much luck
 with eccentricity, but other parameters worked just fine. I re-integrated the
 monte carlo orbit generation into the agent generation code. It's much quicker.
@@ -36,7 +71,7 @@ the plotly figure from json data.
 
 I discovered that the distribution tweakables for changing agent orbits was
 completely broken. For some reason, only SMA was changing when adjusting input
-parameters to the Nyx monte carlo functions. Changing inclination and 
+parameters to the Nyx monte carlo functions. Changing inclination and
 eccentricity didn't actually have an effect. Since this is just meant to
 introduce some variation between the agents' orbits, I abandoned the Nyx
 built-ins and used simple gaussian distributions to vary the orbital elements
@@ -80,8 +115,8 @@ Objective: define a timekeeper agent and preliminary environment.
 
 ### Summary
 - Removed example code.
-- Built a toy example following the mesa.readthedocs.io tutorials: 
-  [sandbox.ipynb](../sandbox.ipynb)
+- Built a toy example following the mesa.readthedocs.io tutorials:
+  [sandbox.ipynb](../notebooks/sandbox.ipynb)
 - Decided to keep iterating on Python to learn, but may eventually switch to
   Rust for speed if necessary.
 - Used Nyx tests as a boilerplate for invoking the Nyx API
@@ -96,10 +131,11 @@ once to deal with them both for now.
 
 The Python documentation for [nyx](https://nyxspace.com/nyxspace/user_guide/start/)
 is very rust-centric. I can probably get by from referencing the Python source.
-Looks like [hifitime](https://github.com/nyx-space/hifitime) Python docs are a 
+Looks like [hifitime](https://github.com/nyx-space/hifitime) Python docs are a
 bit more mature, but still mostly focused on the rust crate. Should I pivot to
 rust? There are [ABM frameworks for rust](https://github.com/krABMaga/krABMaga)
 that are plug-and-play...
+
 - Mesa (Python): [Masad, et. al. (2015)](https://conference.scipy.org/proceedings/scipy2015/pdfs/jacqueline_kazil.pdf)
 - krABMaga (Rust): [Antelmi, et. al. (2019)](https://link.springer.com/chapter/10.1007/978-981-15-1078-6_2)
 

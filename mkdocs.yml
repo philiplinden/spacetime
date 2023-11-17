@@ -1,18 +1,45 @@
 site_name: CLOCSS Agent-Based Model
+site_description: an Agent-Based Model of Heterogeneous Lunar Networks for the Cislunar Open Clock Synchronization System (CLOCSS)
+repo_url: https://github.com/philiplinden/clocss-abm
+repo_name: philiplinden/clocss-abm
+
 nav:
-  - 'index.md'
-  - 'motivation.md'
-  - 'approach.md'
-  - 'example.md'
-  - 'captains_log.md'
+  - Home: index.md
+  - Development:
+    - reference.md
+    - captains_log.md
+  - Examples:
+    - example.md
+
 theme:
-  name: readthedocs
-  highlightjs: true
-  hljs_languages:
-    - python
-    - yaml
-  markdown_extensions:
-    - fenced_code
-    - smarty
-    - toc:
-        permalink: true
+  name: material
+  icon: 
+    logo: fontawesome/solid/clock-rotate-left
+  palette:
+    primary: white
+    accent: blue
+  features:
+    - navigation.tabs.sticky
+    - instant
+
+markdown_extensions:
+  - footnotes
+  - toc:
+      permalink: '#'
+
+plugins:
+  - search
+  - mkdocstrings:
+      watch: clocss
+      default_handler: python
+      handlers:
+        python:
+          options:
+            show_submodules: true
+            show_if_no_docstring: false
+            filters:
+              - "!^_"
+              - "^__"
+          paths: [clocss]
+          rendering:
+            show_source: true
