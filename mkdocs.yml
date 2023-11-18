@@ -6,8 +6,8 @@ repo_name: philiplinden/clocss-abm
 nav:
   - Home: index.md
   - Development:
-    - reference.md
     - captains_log.md
+    - reference.md
   - Examples:
     - example.md
 

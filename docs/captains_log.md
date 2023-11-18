@@ -4,6 +4,32 @@
 Objective: start the network model.
 
 ### Summary
+- Added `networkx` as a dependency.
+
+### Notes
+I started looking at the Mesa example `virus-on-network` for inspiration and
+guidance on making a model of networked agents. It imports the package
+[networkx](https://networkx.org/), which looks super helpful for this use case.
+The docs request citing the package in works using it, so here it is.
+
+> Aric A. Hagberg, Daniel A. Schult and Pieter J. Swart, “Exploring network
+> structure, dynamics, and function using NetworkX”, in Proceedings of the 7th
+> Python in Science Conference (SciPy2008), Gäel Varoquaux, Travis Vaught, and
+> Jarrod Millman (Eds), (Pasadena, CA USA), pp. 11–15, Aug 2008
+
+It is super easy to generate random graphs and plot them with `networkx`! This
+will help a ton.
+
+```python
+import networkx as nx
+G = nx.fast_gnp_random_graph(10, .2)
+nx.draw(G)
+```
+
+## 2023-11-16 - PL
+Objective: start the network model.
+
+### Summary
 - Moved the spatial components to `orbits.py`.
 - Added additional documentation packages: `mkdocs-material` and `mkautodocs`.
 - Refreshed the look and feel of the docs pages.
