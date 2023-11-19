@@ -31,7 +31,11 @@ The next fun things to do with `networkx` are:
   across the canvas. Change the value of the "minesweeper" node based on how
   many "mine" nodes are within `x` distance of it. Ideally we'd also draw an
   edge between the minesweeper and the mines it can see.
- 
+
+I chatted with Ashley K about the bigger picture. She suggested:
+- make a team page and list what they bring to the table
+- what ingredients do we have to bake the pie? what is the equivalent of
+  preheating the oven?
 
 ## 2023-11-17 - PL
 Objective: start the network model.

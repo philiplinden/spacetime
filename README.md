@@ -9,9 +9,9 @@ This project aims to use agent-based modeling and simulations to explore how net
 # install python poetry
 pip install poetry
 
+# install all dependencies
+poetry install
+
 # just start the server!
 poetry run mesa runserver
-
-# for developers, install all dependencies
-poetry install
 ```
