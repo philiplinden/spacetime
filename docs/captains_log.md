@@ -4,7 +4,9 @@
 Objective: play with networkx.
 
 ### Summary
-- Exported the whole monte carlo notebook to the docs.
+- Exported notebooks to the docs as html.
+- Wrote a script and tinkered with the github actions workflow to
+  auto-deploy example pages for all notebooks.
 
 ### Notes
 I realized that since Jupyter notebooks exported to HTML are able to be
