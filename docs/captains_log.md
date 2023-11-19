@@ -1,5 +1,36 @@
 # Captain's Log
 
+## 2023-11-18 - PL
+Objective: play with networkx.
+
+### Summary
+- Exported the whole monte carlo notebook to the docs.
+
+### Notes
+I realized that since Jupyter notebooks exported to HTML are able to be
+displayed in the docs by simply pasting the raw HTML into the markdown file, I
+added a clever cell to the end of the example notebooks so that the whole
+notebook can be shown on the GitHub Pages site.
+[Did it work?](../docs/examples/monte_carlo.md)
+
+```bash
+jupyter nbconvert notebooks/monte_carlo.ipynb --to html
+cat monte_carlo.html >> docs/monte_carlo.md
+```
+The next fun things to do with `networkx` are:
+- Follow [some](https://math.libretexts.org/Bookshelves/Scientific_Computing_Simulations_and_Modeling/Book:_Introduction_to_the_Modeling_and_Analysis_of_Complex_Systems_(Sayama)/15:_Basics_of_Networks/15.03:_Constructing_Network_Models_with_NetworkX)
+  [tutorials](https://www.youtube.com/watch?v=VetBkjcm9Go) to do simple graph
+  theory and network analysis.
+- Make a simple Mesa server that lets you control the number of nodes and a
+  "range" parameter with sliders. The "range" variable controls how many "jumps"
+  can go between the "home" node and other nodes. Color edges that fall in range
+  the center node.
+- Make a random "minefield" of static nodes, and one "minesweeper" that moves
+  across the canvas. Change the value of the "minesweeper" node based on how
+  many "mine" nodes are within `x` distance of it. Ideally we'd also draw an
+  edge between the minesweeper and the mines it can see.
+ 
+
 ## 2023-11-17 - PL
 Objective: start the network model.
 

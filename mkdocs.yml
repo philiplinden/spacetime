@@ -9,7 +9,8 @@ nav:
     - captains_log.md
     - reference.md
   - Examples:
-    - example.md
+    - examples/monte_carlo.md
+    - examples/networkx_learning.md
 
 theme:
   name: material
