@@ -1,5 +1,25 @@
 # Captain's Log
 
+## 2023-11-19 - PL
+Objective: learn some more network analysis techniques.
+
+### Summary
+- Followed some networkx tutorials.
+- Discovered python-igraph package.
+
+### Notes
+Networkx looks to be so powerful and still so easy to use. I can see that some
+network analysis (centrality, betweenness) will be useful in understanding how
+important (or not) certain nodes are to the network.
+[Reference 1](https://www.youtube.com/watch?v=VetBkjcm9Go),
+[Reference 2](https://github.com/jdfoote/Intro-to-Programming-and-Data-Science/blob/summer2020/extra_topics/network_analysis.ipynb)
+
+There is another popular network analysis library called
+[igraph](https://igraph.org/python/tutorial/0.9.8/tutorial.html), which might
+be better for visualizations. From what I can tell, igraph allows properties to
+be assigned to nodes and edges, but is much slower when it comes to mutating
+the graph ([source](https://igraph.discourse.group/t/igraph-is-much-slower-than-networkx-when-generating-a-graph/853)).
+
 ## 2023-11-18 - PL
 Objective: introduce the repo to new people.
 
