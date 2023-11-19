@@ -39,9 +39,8 @@ jobs:
         run: poetry run mkdocs build
       - uses: actions/upload-artifact@v3
         with:
-          name: site
+          name: github-pages
           path: site
-          retention-days: 1
 
   deploy:
     # Add a dependency to the build job
@@ -65,12 +64,12 @@ jobs:
           fetch-depth: 0
       - uses: actions/download-artifact@v3
         with:
-          name: site
+          name: github-pages
           path: site
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: site/
+          path: site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
