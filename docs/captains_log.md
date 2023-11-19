@@ -7,6 +7,7 @@ Objective: introduce the repo to new people.
 - Exported notebooks to the docs as html.
 - Wrote a script and tinkered with the github actions workflow to auto-deploy
   example pages for all notebooks.
+- Generated some node graphs.
 
 ### Notes
 I realized that since Jupyter notebooks exported to HTML are able to be
@@ -23,6 +24,7 @@ The next fun things to do with `networkx` are:
 - Follow [some](https://math.libretexts.org/Bookshelves/Scientific_Computing_Simulations_and_Modeling/Book:_Introduction_to_the_Modeling_and_Analysis_of_Complex_Systems_(Sayama)/15:_Basics_of_Networks/15.03:_Constructing_Network_Models_with_NetworkX)
   [tutorials](https://www.youtube.com/watch?v=VetBkjcm9Go) to do simple graph
   theory and network analysis.
+
 - Make a simple Mesa server that lets you control the number of nodes and a
   "range" parameter with sliders. The "range" variable controls how many "jumps"
   can go between the "home" node and other nodes. Color edges that fall in range
@@ -33,6 +35,7 @@ The next fun things to do with `networkx` are:
   edge between the minesweeper and the mines it can see.
 
 I chatted with Ashley K about the bigger picture. She suggested:
+
 - make a team page and list what they bring to the table
 - what ingredients do we have to bake the pie? what is the equivalent of
   preheating the oven?
