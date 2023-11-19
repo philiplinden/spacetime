@@ -1,12 +1,12 @@
 # Captain's Log
 
 ## 2023-11-18 - PL
-Objective: play with networkx.
+Objective: introduce the repo to new people.
 
 ### Summary
 - Exported notebooks to the docs as html.
-- Wrote a script and tinkered with the github actions workflow to
-  auto-deploy example pages for all notebooks.
+- Wrote a script and tinkered with the github actions workflow to auto-deploy
+  example pages for all notebooks.
 
 ### Notes
 I realized that since Jupyter notebooks exported to HTML are able to be
