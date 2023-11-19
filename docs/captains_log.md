@@ -19,6 +19,7 @@ There is another popular network analysis library called
 be better for visualizations. From what I can tell, igraph allows properties to
 be assigned to nodes and edges, but is much slower when it comes to mutating
 the graph ([source](https://igraph.discourse.group/t/igraph-is-much-slower-than-networkx-when-generating-a-graph/853)).
+The general consensus is that networkx is better for large, dynamic networks.
 
 ## 2023-11-18 - PL
 Objective: introduce the repo to new people.
