@@ -1761,6 +1761,20 @@ Markdown = ">=3.3"
 mkdocs = ">=1.1"
 
 [[package]]
+name = "mkdocs-include-dir-to-nav"
+version = "1.2.0"
+description = "A MkDocs plugin include all file in dir to navigation"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "mkdocs_include_dir_to_nav-1.2.0-py3-none-any.whl", hash = "sha256:b09de17ad754aa93aec7ba64acf8fdd53f7a2ceb92e8cffe21646b0e97f4ddf0"},
+    {file = "mkdocs_include_dir_to_nav-1.2.0.tar.gz", hash = "sha256:2d7b0bb581471fce6f215b6381f1f4d90a3a069829281b7f5d01a5b7abee15d0"},
+]
+
+[package.dependencies]
+mkdocs = ">=1.0.4"
+
+[[package]]
 name = "mkdocs-material"
 version = "9.4.9"
 description = "Documentation that simply works"
@@ -3765,4 +3779,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "9704b37a4f7b2e637cecdf2641043336c15fad35390c39643a456c2cdb87b133"
+content-hash = "16d6fdaf5dda117f38f9f729bc4ff1ed12c7b67b2629b87c8c71baaaa5cff474"

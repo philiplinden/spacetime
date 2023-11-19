@@ -8,9 +8,7 @@ nav:
   - Development:
     - captains_log.md
     - reference.md
-  - Examples:
-    - examples/monte_carlo.md
-    - examples/networkx_learning.md
+  - Examples: examples/
 
 theme:
   name: material
@@ -30,8 +28,8 @@ markdown_extensions:
 
 plugins:
   - search
+  - include_dir_to_nav
   - mkdocstrings:
-      watch: clocss
       default_handler: python
       handlers:
         python:

@@ -13,7 +13,7 @@ I realized that since Jupyter notebooks exported to HTML are able to be
 displayed in the docs by simply pasting the raw HTML into the markdown file, I
 added a clever cell to the end of the example notebooks so that the whole
 notebook can be shown on the GitHub Pages site.
-[Did it work?](../docs/examples/monte_carlo.md)
+[Did it work?](examples/monte_carlo.md)
 
 ```bash
 jupyter nbconvert notebooks/monte_carlo.ipynb --to html
