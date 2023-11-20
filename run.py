@@ -6,6 +6,7 @@ by Mesa: https://mesa.readthedocs.io/en/stable/best-practices.html
 Invoke this script with
     mesa runserver
 """
-from clocss.server import server
+from clocss.server import orbits_server, networks_server
 
-server.launch(open_browser=True)
+# orbits_server.launch(open_browser=True)
+networks_server.launch(open_browser=True)

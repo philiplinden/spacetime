@@ -5,7 +5,9 @@ Objective: learn some more network analysis techniques.
 
 ### Summary
 - Followed some networkx tutorials.
-- Discovered python-igraph package.
+- Discovered the igraph package.
+- Discovered the Multi-level Mesa package.
+- Designed a trivial networks Mesa model to work on for learning.
 
 ### Notes
 Networkx looks to be so powerful and still so easy to use. I can see that some
@@ -20,6 +22,43 @@ be better for visualizations. From what I can tell, igraph allows properties to
 be assigned to nodes and edges, but is much slower when it comes to mutating
 the graph ([source](https://igraph.discourse.group/t/igraph-is-much-slower-than-networkx-when-generating-a-graph/853)).
 The general consensus is that networkx is better for large, dynamic networks.
+
+Quick searches of using Networkx with Mesa yielded an interesting discovery:
+[Multi-level Mesa](https://github.com/tpike3/multilevel_mesa)
+> Multi-level Mesa's views complex systems as adaptive networks and uses a
+> network graph structure to allow dynamic management of agent modules (groups)
+> and model schedules.
+The page doesn't do a great job explaining why I'd want to use this over vanilla
+Mesa, but it is apparently designed for the kind of problem I'm already trying
+to solve... I should read the [paper](https://arxiv.org/pdf/1904.08315.pdf).
+
+> Instead of specifying specific groups and roles, as connections between agents
+> change through the dynamics of the ABMs, new modules (groups) can form or
+> dissolve and new behaviors can activate or lay dormant. This approach allows
+> for neutral networks to exist within any model where certain behaviors may
+> only emerge under specific conditions and are not previously seen. Multi-level
+> Mesa goes beyond existing approaches by creating a greater synergy between
+> network science and ABMs, the interaction of agents produces a dynamic
+> network, which in turn alters the behavior of the agents.
+>
+> [...]
+>
+> Policy for Multi-level Mesa is understood to be group behavior which alters
+> behavior of the agents in their group. If the agent is not part of the group
+> it will behave differently.
+
+Considering this package was authored 3 years ago and never updated since then,
+I think the best approach is to use Multi-level Mesa as inspiration but not a
+dependency.
+
+I want to make a trivial network model with agents, but to be useful the agents
+must do something over time. Without overthinking it, here's the plan:
+
+- Each agent has a chance to move one grid space per step in a random direction.
+- Each agent has a radius where it can connect to other nodes within its radius.
+- The weight of each connection is proportional to its length.
+- An agent's likelihood to move is inversly proportional to the total weight of
+  all its connections.
 
 ## 2023-11-18 - PL
 Objective: introduce the repo to new people.

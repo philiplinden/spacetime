@@ -86,7 +86,7 @@ def satellite_portrayal(agent: SpacecraftAgent) -> dict:
 
 
 latlon_grid = CanvasContinuous(satellite_portrayal, 720, 720)
-server = ModularServer(
+orbits_server = ModularServer(
     OrbitsModel, [latlon_grid], "Orbits Model", orbits_params
 )
-server.port = 8521
+orbits_server.port = 8521

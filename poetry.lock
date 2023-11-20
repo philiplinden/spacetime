@@ -785,6 +785,98 @@ files = [
 ]
 
 [[package]]
+name = "hifitime"
+version = "3.8.5"
+description = "Ultra-precise date and time handling in Rust for scientific applications with leap second support"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "hifitime-3.8.5-cp310-cp310-macosx_10_7_x86_64.whl", hash = "sha256:271381c03ce98941bfdd930e0fad96c26e536504e7a275c652e559ed6961d261"},
+    {file = "hifitime-3.8.5-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:8331562b4a594409e74269ce64ab6fcca85bc404503782547ffe85821e2e353c"},
+    {file = "hifitime-3.8.5-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:de2435cc796186a178e11c13b537a41b30d5f0503cf3ccfdf05d6c72eb4b20f9"},
+    {file = "hifitime-3.8.5-cp310-cp310-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:654e9ff7399147c33868dfcbc729498ecd9650a60e060c3d7bea92f254115ef7"},
+    {file = "hifitime-3.8.5-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:9a4cf722908a4df5cd5ef07f745745577451e2fe5c0c0fa487fe3a5cfbfffc08"},
+    {file = "hifitime-3.8.5-cp310-cp310-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:a81b17ba330256e3352c52de9e9f38d7ddfe4d7b8ad0e48ffe172af54b999a42"},
+    {file = "hifitime-3.8.5-cp310-cp310-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:3a08f991955818aea268449f9129f3971dd1edf1d07e1de5b2d217d2d088b4a9"},
+    {file = "hifitime-3.8.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b730a64b0d0790475b47779d22465660ec7b03c0b9f4feffb7ece7599d95f865"},
+    {file = "hifitime-3.8.5-cp310-none-win32.whl", hash = "sha256:4537488611369245a5d37da238ccb35ee0f4af64c4ea46d2e5f673c8a65733d2"},
+    {file = "hifitime-3.8.5-cp310-none-win_amd64.whl", hash = "sha256:b7ee6963cc9125d93e87d39f15d20864159d9628996bbd6e6c7bea7bac421960"},
+    {file = "hifitime-3.8.5-cp311-cp311-macosx_10_7_x86_64.whl", hash = "sha256:c80df627332dd02ecab29d999efd9b15c575d17e58547db603f2ec7b31a370ea"},
+    {file = "hifitime-3.8.5-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:45e8b66c03ec9cac3a46c81902798b3fefe9b1e35cc1fe3880c014346654473a"},
+    {file = "hifitime-3.8.5-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3ba9f273cfb8f8c2e6103d1a9efbdf65ea4d13e8a45cd598dd1beab272698689"},
+    {file = "hifitime-3.8.5-cp311-cp311-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:56ed084e1ea8310d1854b50eafef5ed1d4abfbb06678398d8235bdf387ee5127"},
+    {file = "hifitime-3.8.5-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:5f1eef946a325f08a03e318d38c0ce103b4d34cc3e6768c1e65bdfcb24cffb88"},
+    {file = "hifitime-3.8.5-cp311-cp311-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:472ecf8bf11d4a3406569fb9f5973e189749a9bd0108b3d361d040cff23274f6"},
+    {file = "hifitime-3.8.5-cp311-cp311-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:b1187b59d4b7a98d599187d3a3d788643562b7c8a271873a4ec1c8b029a5ec6a"},
+    {file = "hifitime-3.8.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:271ce70035b6bffb0f83f4ecea8d9c508ceafedf3a44ed8348601756f0b597f9"},
+    {file = "hifitime-3.8.5-cp311-none-win32.whl", hash = "sha256:4911fa1e9536ed843a322f5ab007b4f0bcc7e120c76332caefe1ae0d6166911f"},
+    {file = "hifitime-3.8.5-cp311-none-win_amd64.whl", hash = "sha256:93b0334b2d93dcc9316252287f806eac30c6a30beb294c1344815286f163e1de"},
+    {file = "hifitime-3.8.5-cp312-cp312-macosx_10_7_x86_64.whl", hash = "sha256:b3ad0cd1f97d551f7152bfcf35416612727406dc98974aef0ad5f75a2de45f8c"},
+    {file = "hifitime-3.8.5-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:d0d29d589141a533696ad36639a899d04eeb79449ef94e027428681d264aff54"},
+    {file = "hifitime-3.8.5-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:01f83093f0094ee3e38b2bf69bcd0f9309402da90b82f675feb84cb889d3b55a"},
+    {file = "hifitime-3.8.5-cp312-cp312-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:7d9de630019e26439aa9a4c82435171f7445eb09a90901c08d34fe1bf0c4f8f5"},
+    {file = "hifitime-3.8.5-cp312-cp312-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:789f99d4d5fb0ec7f4c0296510afe691a115e375a80868f00dcda46abb8b6b88"},
+    {file = "hifitime-3.8.5-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:a68548f86eb2fef686923c9ae42da7859f4b935320da6cce3dd4ba1938426884"},
+    {file = "hifitime-3.8.5-cp312-cp312-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:dbf818c928f0c32b5f8fdb01f85a3fad4135d8650f33853b4bc701c05d99ea06"},
+    {file = "hifitime-3.8.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f3614fe0acabfc8c89009fe6b06cad0eb72a11d086280cd71fdff4fd9e5ea7fa"},
+    {file = "hifitime-3.8.5-cp312-none-win32.whl", hash = "sha256:e03e0c6dd54f62ac718d6c5a1cf052ff6965d84d271834239de8ac7f39ebd216"},
+    {file = "hifitime-3.8.5-cp312-none-win_amd64.whl", hash = "sha256:25d49cc8e8949bf6a0aaaa44971f6253c6d74555cd7c1faf772489c511cd27ad"},
+    {file = "hifitime-3.8.5-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1028d85948ea95550eb26f0d3637643917dd1af05952c2c00fbbdf72d3134b65"},
+    {file = "hifitime-3.8.5-cp313-cp313-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:044820474da17d356b6d7aa08ce6c809d2f78635da71fb488a8e78c6f40c5e39"},
+    {file = "hifitime-3.8.5-cp313-cp313-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:1b85feea2504d4bd4abc13276c2359ed54b08b842ec68e2880835e47f54f102b"},
+    {file = "hifitime-3.8.5-cp313-cp313-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:f4b732a96f6d850bb032ec8002584f3d155346ab8dc333c821caf9ce1039b85e"},
+    {file = "hifitime-3.8.5-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:319f529fe9063ef9830721c9739c328cee0ba03dba42ae1e66cdd06efd28ea1f"},
+    {file = "hifitime-3.8.5-cp37-cp37m-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:2cf2f9d298bfd810ad8bd913ae34faf9129f0f783d59517cb505d82b07fcf574"},
+    {file = "hifitime-3.8.5-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:cfb6377afbee2a4b63da2ab56ee9523c609cf73553055a84538aa98cf0dd0453"},
+    {file = "hifitime-3.8.5-cp37-cp37m-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:891f944ba1b1d50a51fa8591c51f6d6b0f3906fe1dbde743b7ac9535bd0a24fd"},
+    {file = "hifitime-3.8.5-cp37-cp37m-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:069f952d7f1180b532cb80e395ef7a282fd3e2cac347d2ba2072def81d6f1f16"},
+    {file = "hifitime-3.8.5-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2655532bbb6810f3cfcddc6f7d3935d9ec1dccc725ca44cf23e1d18581ce3603"},
+    {file = "hifitime-3.8.5-cp37-none-win32.whl", hash = "sha256:253e286e36906a049547034613665d5971e503a30feba4035a654cd9c28aa56a"},
+    {file = "hifitime-3.8.5-cp37-none-win_amd64.whl", hash = "sha256:5a97754050234cb8399a99b7a76b177c69189e90a8db0740721c4b5269594087"},
+    {file = "hifitime-3.8.5-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f42fa72c2377befc5435e415af38d26ef7aa2f08485904f2817552414db9fb0a"},
+    {file = "hifitime-3.8.5-cp38-cp38-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:dc91bbf2ec1f86501675061fc633499cc0e19686e01fa0e1bb7833daef890870"},
+    {file = "hifitime-3.8.5-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:976326d69df11fc61176333d71197eb4cd3b9ab43c6eb86df27f64ae00b06029"},
+    {file = "hifitime-3.8.5-cp38-cp38-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:43e0381f11a71e5c8e40879b9a5d1fae07734b140e271b1b5c87f531970e223e"},
+    {file = "hifitime-3.8.5-cp38-cp38-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:b9ce822ab01d62bb7065e07df34fed875b61a449169e69995006d8db878e57dd"},
+    {file = "hifitime-3.8.5-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b26952fab915059f7887f148f348bfbd4454c03701e1e0eb6252735c031bdbe4"},
+    {file = "hifitime-3.8.5-cp38-none-win32.whl", hash = "sha256:6f04b7a6a31a53eb27825e4ec1a1a23f66541dd2365478796a2b4a932e16ac12"},
+    {file = "hifitime-3.8.5-cp38-none-win_amd64.whl", hash = "sha256:929dd1e657f180737bc34406fcb6ade10d14361ac3d573bb72123ef2d68a6140"},
+    {file = "hifitime-3.8.5-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b8da409822a8efa0caefb0c40560d9c6770dd4e8ab81882249c026464ec491ce"},
+    {file = "hifitime-3.8.5-cp39-cp39-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:33d0665afa2f73dad8e36f2b9ed7a8695fbb72a5046b810da2f90f45d425fd65"},
+    {file = "hifitime-3.8.5-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:8337554e35bf114053cf9eb39a497163ed171b14b97bb47b4b0079721f634eba"},
+    {file = "hifitime-3.8.5-cp39-cp39-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:e8f600b801122ee6c7860bee1c56be6598475c1552f13f1aee03dfa660215c55"},
+    {file = "hifitime-3.8.5-cp39-cp39-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:396e829d849deff90ccd7a205a878ccd0e07963d7694f48f57bef9a5f795dced"},
+    {file = "hifitime-3.8.5-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fbf80552bd96936de607e2b0adb5fd8622c7fbb5d7f47b844f7b6ad6acd98a48"},
+    {file = "hifitime-3.8.5-cp39-none-win32.whl", hash = "sha256:0820b9d151e6633023468217835ac4f0a6a6692ca2dfef88887366de55f2ce51"},
+    {file = "hifitime-3.8.5-cp39-none-win_amd64.whl", hash = "sha256:db5fb31462fd8a2edc1b83e0bb1a8432f06b211360f2579b56fe786302ed2c72"},
+    {file = "hifitime-3.8.5-pp310-pypy310_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ff7b935546fbc32f5925a7b174b40a677ed0a7c6b34f48c392ed623bd4e0ee25"},
+    {file = "hifitime-3.8.5-pp310-pypy310_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:ba5023a96324f76af30b25b16b763c631a926d7c3bef4358229c92689791db58"},
+    {file = "hifitime-3.8.5-pp310-pypy310_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:323f2f73c5b9716de02824f5e595d64f894f27b22b241d4d33b657148395ab1d"},
+    {file = "hifitime-3.8.5-pp310-pypy310_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:a6951f169e307717c51e6afdc5b2db55a3b0972ea8938924f3194392511983aa"},
+    {file = "hifitime-3.8.5-pp310-pypy310_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:3715effabf9b19ef6b0b5e7989bccb03f9430fc09af75e45208aa399c3c5dca9"},
+    {file = "hifitime-3.8.5-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8ce8db9adfe1243515bdb151bc972dfc5bffa6386be80985a7e02efa20c454fe"},
+    {file = "hifitime-3.8.5-pp37-pypy37_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7b4457c0921e92353f55fbe400c005550b35390fed8bb4f064987de9767284ad"},
+    {file = "hifitime-3.8.5-pp37-pypy37_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:fb4709076b256eb1302b0e3d5384e48741fa52db3baba7dc0856bdc7de61c58d"},
+    {file = "hifitime-3.8.5-pp37-pypy37_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:cff62d6b7663d16c79df0b1c92495939e8be7574c30382a2bc98ed7a5234dfb4"},
+    {file = "hifitime-3.8.5-pp37-pypy37_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:b976cef2d982c44f6fdc1b4dd55134950c4525e575d4cd198654fd55ffd04dd4"},
+    {file = "hifitime-3.8.5-pp37-pypy37_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:aa397f94604b67de7af9aabe68487fcce7b1e211b694461009ba4e7b9253cf7e"},
+    {file = "hifitime-3.8.5-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:24c174ecb620401a34ace5a920f5e7ae77c08431945d154350e30856522539a7"},
+    {file = "hifitime-3.8.5-pp38-pypy38_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:245085b32f1cbe327de4a400b062d9d619646d333517bf9cd6a4b469c53f639c"},
+    {file = "hifitime-3.8.5-pp38-pypy38_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:e0197e6d853692e87d483b263f0f5b66535f3dafc67da28ff1c0274be2e3f0a7"},
+    {file = "hifitime-3.8.5-pp38-pypy38_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:7e461fff7525f1594f2d2f60518466c5fa0bb563580371a0d0988f256b9550e7"},
+    {file = "hifitime-3.8.5-pp38-pypy38_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:bc2694862703d8b913c2bc6937f25a58c51306e5ca09754436b480bb7eee4724"},
+    {file = "hifitime-3.8.5-pp38-pypy38_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:e7afc78190f4c124c4b9a8b35f801638add6176a34a14608cab76872c92c92b3"},
+    {file = "hifitime-3.8.5-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:832b39be1e48d6a2f8ab23a52b5a1b4a6b55cf121c5aaf60741031318ee213ec"},
+    {file = "hifitime-3.8.5-pp39-pypy39_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bd44b6ee900c667ffabd8d0bab13e28c1db75347503108465738cd869c642933"},
+    {file = "hifitime-3.8.5-pp39-pypy39_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:0376358b8adaa465b9de9932937cf31e190c59742f28d6b966b884bc907df3e8"},
+    {file = "hifitime-3.8.5-pp39-pypy39_pp73-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:96a376349e42f979f4bb0603aed3ed2d2987f479dab8470169cdca17c5435209"},
+    {file = "hifitime-3.8.5-pp39-pypy39_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:2b8150ac72e87acc9fe566c853c0f3bbf074b423fcfeb14d7b242c2d90c8bcc8"},
+    {file = "hifitime-3.8.5-pp39-pypy39_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:a7fe86182decb3faffcc9e364cf7a0698c6862041c9bc23c720249bb283418d2"},
+    {file = "hifitime-3.8.5-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c0c93d4ee4beb81763aa65c74385088e9f15b2aecc8051777345a2b8a33084f0"},
+    {file = "hifitime-3.8.5.tar.gz", hash = "sha256:f85cd63f6b6ab0cdfaa75425b878a038714a134061b2e0274afd5b19acf507a4"},
+]
+
+[[package]]
 name = "humanize"
 version = "4.8.0"
 description = "Python humanize utilities"
@@ -3779,4 +3871,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "16d6fdaf5dda117f38f9f729bc4ff1ed12c7b67b2629b87c8c71baaaa5cff474"
+content-hash = "4a4007db1ff6e06d8aeb7af062d944846c6c928dee46ec8a5638185d642a2f53"
