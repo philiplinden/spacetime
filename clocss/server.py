@@ -12,6 +12,11 @@ from .model import OrbitsModel, SpacecraftAgent
 
 
 log = logging.getLogger()
+
+# ------------------------------------------------------------
+#  ORBITS MODEL
+# ------------------------------------------------------------
+
 R_EARTH_KM = 6387
 
 orbits_params = {
@@ -90,3 +95,10 @@ orbits_server = ModularServer(
     OrbitsModel, [latlon_grid], "Orbits Model", orbits_params
 )
 orbits_server.port = 8521
+
+# ------------------------------------------------------------
+#  NETWORKS MODEL
+# ------------------------------------------------------------
+networks_server = ModularServer(
+    
+)

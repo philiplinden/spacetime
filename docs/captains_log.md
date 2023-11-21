@@ -1,5 +1,46 @@
 # Captain's Log
 
+## 2023-11-20 - PL
+Objective: implement the simple model I designed 
+
+### Summary
+- Reformatted `docs/index.md` a little and changed the summary on the `README`
+  to a less technical and more straightforward paragraph. Thanks, ChatGPT.
+
+### Notes
+In explaining this project with some folks, I found that the given summaries
+were too dense with jargon. I used ChatGPT (3.5 Turbo) to give me a few
+iterations of a simpler summary. Turned out okay, I think. I got the best result
+when providing the bot the entirety of `docs/index.md` and asking it to
+summarize without any new information, and then to keep shortening and re-asking
+to use plainer language.
+
+[Marco Polo](https://en.wikipedia.org/wiki/Marco_Polo_(game)). That's what my
+constraints described. So much easier to move forward after realizing that.
+The twist is that the _seeker_ moves toward other nodes, but the _runners_ run
+away.
+
+The rules:
+  1. There are n Runners and one Seeker.
+  2. Runners flee from the Seeker.
+  3. The Seeker tries to occupy a grid space adjacent to a Runner.
+  4. The first Runner to be adjacent to the Seeker becomes the new Seeker.
+      When this happens, the (new) Seeker must wait a period before moving.
+
+World parameters:
+  - The number of Runners, n
+  - The size of the grid, x and y
+  - Whether the world is toroidal (edges wrap, like Pac-Man)
+
+Runner parameters:
+  - Runner speed (grid spaces per jump)
+  - Runner awareness (detection range, in grid spaces)
+
+Seeker parameters:
+  - Seeker speed (grid spaces per jump)
+  - Seeker awareness (detection range, in grid spaces)
+  - Cooldown time after becoming the seeker (in time steps)
+
 ## 2023-11-19 - PL
 Objective: learn some more network analysis techniques.
 
