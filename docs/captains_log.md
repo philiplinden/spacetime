@@ -1,5 +1,45 @@
 # Captain's Log
 
+## 2023-11-21 - PL
+Objective: work on the marco polo model.
+
+### Summary
+- Moved the orbits demo and marco polo models to their own subdirectories so
+  they can be called independently with `mesa runserver clocss/demos/orbits` or
+  `mesa runserver clocss/demos/marcopolo`.
+- Gave demos their own breathing room in the docs.
+- Incremental progress on the Marco Polo model.
+
+### Notes
+Another reorg. The orbits demo and marco polo demo are not really part of the
+CLOCSS ABM, they're just Mesa and Nyx demos I'm using to learn. I've broken
+them out into their own directory to make that clear. That said, both demos
+borrow some code from `clocss` so they're not totally decoupled. Doesn't matter
+that much to me.
+
+I'm thinking that there should be one class of agents, and a simple flag or enum
+that designates whether the agent is a seeker or runner. Since the agents share
+the same base class anyway, the only thing that's different is the movement
+direction in response to pings. Seekers move toward runners, runners move away
+from the seeker and ignore other runners. I think I should reserve agent classes
+for fundamental differences in behavior, like a satellite versus a rover, or
+a ground station versus a network server.
+
+Made good progress on Marco Polo today. I realized that if I'm gonna make the
+agent's role an attribute, there has to be something to inhibit the seekers or
+else this is just Tag. I decided Seekers have half the normal detection range.
+
+I spent like 3 hours trying to figure out how to make the grid space wrap around
+on the sides. I think this means `torus=True` but as it stands, all the agents
+stick to the edges when hitting the edge of the map.
+
+I tried calculating the next index myself, which worked until I hit the edge
+where I got `IndexError`s because I wasn't accounting for the torus adjacency.
+But when I use the mesa `get_neighborhood` it doesn't wrap either. Maybe I
+should skip the neighborhood thing and go straight to calling `torus_adj`?
+
+I'm done for the night ):
+
 ## 2023-11-20 - PL
 Objective: implement the simple model I designed 
 

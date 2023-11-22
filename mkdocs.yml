@@ -8,7 +8,9 @@ nav:
   - Development:
     - captains_log.md
     - reference.md
-  - Examples: examples/
+  - Examples: 
+    - Notebooks: examples/
+    - Demo Models: demos/
 
 theme:
   name: material
@@ -34,11 +36,12 @@ plugins:
       handlers:
         python:
           options:
+            docstring_style: google
             show_submodules: true
             show_if_no_docstring: false
             filters:
               - "!^_"
               - "^__"
-          paths: [clocss]
+              - "demos/*"
           rendering:
             show_source: true

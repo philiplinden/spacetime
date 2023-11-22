@@ -15,6 +15,7 @@ pandas = "<2.1.0"
 matplotlib = "^3.8.1"
 networkx = "^3.2.1"
 hifitime = "^3.8.5"
+numpy = "^1.26.2"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"

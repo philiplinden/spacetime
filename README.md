@@ -25,5 +25,5 @@ pip install poetry
 poetry install
 
 # just start the server!
-poetry run mesa runserver
+poetry run mesa runserver clocss/demos/orbits
 ```

@@ -7,16 +7,11 @@ import logging
 
 from mesa.visualization import ModularServer, NumberInput, Slider
 
-from .tools.visualizations import CanvasContinuous, Circle
-from .model import OrbitsModel, SpacecraftAgent
+from clocss.tools.visualizations import CanvasContinuous, Circle
+from clocss.demos.orbits.model import OrbitsModel, SpacecraftAgent
 
 
 log = logging.getLogger()
-
-# ------------------------------------------------------------
-#  ORBITS MODEL
-# ------------------------------------------------------------
-
 R_EARTH_KM = 6387
 
 orbits_params = {
@@ -95,10 +90,3 @@ orbits_server = ModularServer(
     OrbitsModel, [latlon_grid], "Orbits Model", orbits_params
 )
 orbits_server.port = 8521
-
-# ------------------------------------------------------------
-#  NETWORKS MODEL
-# ------------------------------------------------------------
-networks_server = ModularServer(
-    
-)
