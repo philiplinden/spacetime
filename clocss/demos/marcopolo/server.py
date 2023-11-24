@@ -14,11 +14,11 @@ from clocss.demos import marcopolo as mp
 log = logging.getLogger()
 
 
-width, height = 50, 50
+width, height = 5, 5
 marcopolo_params = {
     "num_agents": Slider(
         name="Number of agents",
-        value=10,
+        value=1,
         min_value=1,
         max_value=100,
         step=1,

@@ -1,5 +1,17 @@
 # Captain's Log
 
+## 2023-11-22 - PL
+Objective: work on the marco polo model.
+
+### Summary
+- Investigated https://github.com/philiplinden/clocss-abm/issues/2
+- Resolved https://github.com/philiplinden/clocss-abm/issues/2
+
+### Notes
+I moved `get_neighborhood` debugging investigations to GitHub issue
+[#2](https://github.com/philiplinden/clocss-abm/issues/2). I ended up fixing it
+by trying to explain what was going wrong. Classic.
+
 ## 2023-11-21 - PL
 Objective: work on the marco polo model.
 

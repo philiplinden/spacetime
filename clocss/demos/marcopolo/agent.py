@@ -113,10 +113,10 @@ class MarcoPoloAgent(mesa.Agent):
         return 2/r if self.role == Role.SEEKER else 1/r
 
     @property
-    def facing(self) -> float:
-        """radians from gridspace "up" that the agent considers forward
+    def facing(self) -> Direction:
+        """gridspace direction that the agent considers "forward"
         """
-        return self._facing.to_radians()
+        return self._facing
 
     @facing.setter
     def facing(self, angle_from_up: float):
@@ -130,6 +130,7 @@ class MarcoPoloAgent(mesa.Agent):
         """
         new_facing = Direction.from_radians(angle_from_up)
         if new_facing == Direction.EAST or new_facing == Direction.WEST:
+            # randomly pick the cell above or below the edge
             new_facing = Direction(new_facing.value + random.choice([-1, 1]))
         self._facing = new_facing
 
@@ -202,36 +203,35 @@ class MarcoPoloAgent(mesa.Agent):
         """
         x, y = self.pos
         if x is None or y is None:
-            raise Exception(f'{self.pos=}')
-            
-        neighborhood = self.model.grid.get_neighborhood(self.pos, radius=1)
-        print(f'{neighborhood=}')
-        match self._facing:
+            raise Exception(f'Position must not be None (got {self.pos=})')
+
+        match self.facing:
             case Direction.NORTH:
-                new_pos = neighborhood[0]
-            case Direction.NORTHWEST:
-                new_pos = neighborhood[1]
-            case Direction.SOUTHWEST:
-                new_pos = neighborhood[2]
-            case Direction.SOUTH:
-                new_pos = neighborhood[3]
-            case Direction.SOUTHEAST:
-                new_pos = neighborhood[4]
+                new_pos = (x, y-1)
             case Direction.NORTHEAST:
-                new_pos = neighborhood[5]
+                new_pos = (x+1, y-1)
+            case Direction.SOUTHEAST:
+                new_pos = (x+1, y)
+            case Direction.SOUTH:
+                new_pos = (x, y+1)
+            case Direction.SOUTHWEST:
+                new_pos = (x-1, y)
+            case Direction.NORTHWEST:
+                new_pos = (x-1, y-1)
             case _:
-                raise RuntimeError(f'{self._facing=} {self.pos=} {new_pos=}')
-        return new_pos
+                raise RuntimeError(f'{self.facing=} is not a valid direction')
+
+        return self.model.grid.torus_adj_2d(new_pos)
 
     def move(self):
         """Move forward in a straight line.
         """
         target_cell = self._cell_in_front()
-        print(f'{target_cell=}')
+        print(f'AGENT {self.unique_id} WANTS TO MOVE TO {target_cell}')
         try:
             self.model.grid.move_agent(self, target_cell)
         except Exception as e:
-            print(f'couldnt move: {e}')
+            print(f'AGENT {self.unique_id} FAILED TO MOVE: {e}')
         # otherwise, can't move!
 
     def step(self):
@@ -239,7 +239,7 @@ class MarcoPoloAgent(mesa.Agent):
         self.turn(pings)
         if self.is_mobile:
             self.move()
-        print(f'{self.__dict__}')
+        print(f'AGENT {self.unique_id} MOVED TO {self.pos}')
 
 
 def portray_agent(agent: MarcoPoloAgent) -> dict:
