@@ -6,9 +6,7 @@ repo_name: philiplinden/clocss-abm
 nav:
   - Home: index.md
   - Development:
-    - captains_log.md
     - reference.md
-  - Examples: 
     - Notebooks: examples/
     - Demo Models: demos/
 
