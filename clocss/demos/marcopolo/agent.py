@@ -1,45 +1,45 @@
-from collections import namedtuple
 from enum import Enum
+import logging
 from math import pi
 import random
-from typing import List
+from typing import Iterable, List
 
 import mesa
+import numpy as np
+
+from clocss.tools import grid
 
 
-# A radial vector centered at the detector.
-#   direction: int - radians from the agent's facing direction.
-#   magnitude: float - reciprocal of the Euclidean distance to the detection.
-#   role: Role - Is the detected agent a seeker or runner?
-DetectionPing = namedtuple("DetectionPing", ["direction", "magnitude", "role"])
+log = logging.getLogger()
 
 
 class Role(Enum):
     SEEKER = 0
     RUNNER = 1
 
-class Direction(Enum):
-    """ Radial angle from gridspace "up".
 
-    The usefulness of this enum is to snap movement or facing to the gridspace.
-    """
-    NORTH = 0
-    NORTHEAST = 1
-    EAST = 2
-    SOUTHEAST = 3
-    SOUTH = 4
-    SOUTHWEST = 5
-    WEST = 6
-    NORTHWEST = 7
+class DetectionPing:
+    ''' A radial vector centered at the detector. '''
+    #: float - radians from the agent's facing direction.
+    direction: float
+    #: float - reciprocal of the Euclidean distance to the detection.
+    amplitude: float
+    #: Role - Is the detected agent a seeker or runner?
+    signature: Role
 
-    @staticmethod
-    def from_radians(angle_from_up: float):
-        angle = angle_from_up % (2 * pi)
-        closest = angle // (pi/4)
-        return Direction(closest)
+    def __init__(self, source, other):
+        self.signature = other.role
 
-    def to_radians(self) -> float:
-        return self.value * (pi/4)
+        origin_to_source = np.array(source.pos)
+        origin_to_other = np.array(other.pos)
+        source_to_other = origin_to_source - origin_to_other
+        length = float(np.linalg.norm(source_to_other))
+
+        self.amplitude = 1 / length
+
+        heading = source.facing.to_radians() # 0 == aligned with y-axis
+        angle_to_ping = np.arccos(source_to_other[1] / length)
+        self.direction = angle_to_ping - heading
 
 
 class MarcoPoloAgent(mesa.Agent):
@@ -86,24 +86,25 @@ class MarcoPoloAgent(mesa.Agent):
     # int: timesteps between movements of 1 gridspace. Must be > 0
     move_interval: int
     # Direction: gridspace direction that the agent considers "forward"
-    _facing: Direction
+    _facing: grid.Direction
 
     def __init__(self,
                  unique_id: int,
                  model: mesa.Model,
-                 role: Role,
                  speed: int = 1,
                  detection_range: int = 100,
                  facing: float = 0.0,
-                 cooldown_timer: int = 0,
+                 cooldown_duration: int = 0,
     ):
         super().__init__(unique_id, model)
-        self.pos = (model.grid.width / 2, model.grid.height / 2)
-        self.role = role
+        self.pos: grid.Coordinate = (0, 0)
+        self.gridspace = model.grid
+        self.role = Role.RUNNER
         self.move_interval = int(100/max(speed, 1))
         self.search_radius = detection_range
         self.facing = facing
-        self.cooldown_timer = cooldown_timer
+        self.cooldown_duration = cooldown_duration
+        self.cooldown_timer = 0
         self.time_since_last_move = 0
 
     @property
@@ -113,41 +114,46 @@ class MarcoPoloAgent(mesa.Agent):
         return 2/r if self.role == Role.SEEKER else 1/r
 
     @property
-    def facing(self) -> Direction:
+    def facing(self) -> grid.Direction:
         """gridspace direction that the agent considers "forward"
         """
         return self._facing
 
     @facing.setter
-    def facing(self, angle_from_up: float):
-        """direction from gridspace "up" that the agent considers forward
+    def facing(self, angle_from_up: float | grid.Direction):
+        if isinstance(angle_from_up, float):
+            self._facing = self.gridspace.facing(angle_from_up)
+        elif isinstance(angle_from_up, grid.Direction):
+            self._facing = angle_from_up
+        else:
+            raise TypeError(
+                f'Must be float or Direction, not {type(angle_from_up)}')
 
-        The gridspace is assumed to be a q-odd hex grid. If the input angle
-        is due east or due west, randomly choose an adjacent direction.
-
-        Args:
-            angle_from_up (float): radians (CW) from gridspace "up"
-        """
-        new_facing = Direction.from_radians(angle_from_up)
-        if new_facing == Direction.EAST or new_facing == Direction.WEST:
-            # randomly pick the cell above or below the edge
-            new_facing = Direction(new_facing.value + random.choice([-1, 1]))
-        self._facing = new_facing
+    def _cell_in_front(self):
+        return self.gridspace.cell_in_front(self.pos, self.facing)
 
     @property
-    def is_mobile(self):
+    def is_frozen(self):
         if self.cooldown_timer > 0:
             # if there's time banked in the cooldown, you can't move
             self.cooldown_timer -= 1
-
         elif self.time_since_last_move >= self.move_interval:
             # time to move!
             self.time_since_last_move = 0
-            return True
-
+            return False
         # if you got here, stay put
         self.time_since_last_move += 1
-        return False
+        return True
+
+    def tag_other(self, other: mesa.Agent):
+        log.info(f'Agent {self.unique_id} tagged Agent {other.unique_id}.')
+        self.role = Role.RUNNER
+        other.tagged()
+
+    def tagged(self):
+        self.cooldown_timer += self.cooldown_duration
+        self.role = Role.SEEKER
+        log.info(f'Agent {self.unique_id} is now the SEEKER!')
 
     def detect(self) -> List[DetectionPing]:
         """Sense the surrounding space and return a list of discovered agents.
@@ -157,9 +163,40 @@ class MarcoPoloAgent(mesa.Agent):
         Returns:
             List[DetectionPing]: List of pings that were detected
         """
-        return []
+        detections = []
+        # FIXME: this is really expensive, O(N^2)!
+        for agent in self.model.agents:
+            if agent.unique_id == self.unique_id:
+                # don't detect yourself
+                continue
+            maybe_detection = DetectionPing(self, agent)
+            # tag anyone if you find them in an adjacent cell
+            if self.role == Role.SEEKER and maybe_detection.amplitude >= 1:
+                self.tag_other(agent)
+                # the only detection that matters now is this one
+                maybe_detection.signature = Role.SEEKER
+                detections = [maybe_detection]
+                break
+            # otherwise just sense their presence if close enough
+            elif maybe_detection.amplitude > self.detection_threshold:
+                detections.append(maybe_detection)
+        return detections
 
-    def turn(self, detection_pings: List[DetectionPing]) -> float:
+    @staticmethod
+    def _max_radial_density(radial_directions: Iterable[float],
+                            nbins: int = 360):
+        """Compute the radial direction toward the highest probability density.
+
+        This function takes a list of radial directions and computes the
+        histogram with NBINS equally spaced bins between 0 and 2pi.
+        """
+        # project directions outside of [0,2pi) onto the unit circle
+        angles = [theta % 2*pi for theta in radial_directions]
+        density, angle = np.histogram(angles, bins=nbins, range=(0, 2*pi),
+                                      density=True)
+        return angle[np.argmax(density)]
+
+    def turn(self, detection_pings: List[DetectionPing] = []):
         """Choose a direction to move in.
 
         Seekers want to face toward the maximum density of Runners.
@@ -169,83 +206,60 @@ class MarcoPoloAgent(mesa.Agent):
             # pick a random direction
             heading_radians = random.random() * (2*pi)
         else:
-            # TODO: pick the heading based on detections
-            heading_radians = -1
-        return heading_radians
-
-    def _cell_in_front(self):
-        """Get the grid coordinate of the cell adjacing to the cell in the
-        direction it is facing.
-
-        For a HexGrid the parity of the x coordinate of the point is
-        important, the neighborhood can be sketched as:
-
-            Always: (0,-), (0,+)
-            When x is even: (-,+), (-,0), (+,+), (+,0)
-            When x is odd:  (-,0), (-,-), (+,0), (+,-)
-
-        ```text
-                           __N__
-                          /     \\
-                    _____/  x,y-1\\_____
-                NW /     \\       /     \\ NE
-                  /x-1,y-1\\_____/x+1,y-1\\
-                  \\       /     \\       /
-                   \\_____/  x,y  \\_____/
-                   /     \\       /     \\
-                  /x-1,y  \\_____/x+1,y  \\
-                  \\       /     \\       /
-                SW \\_____/  x,y+1\\_____/ SE
-                         \\       /
-                          \\_____/
-                              S
-        ```
-        """
-        x, y = self.pos
-        if x is None or y is None:
-            raise Exception(f'Position must not be None (got {self.pos=})')
-
-        match self.facing:
-            case Direction.NORTH:
-                new_pos = (x, y-1)
-            case Direction.NORTHEAST:
-                new_pos = (x+1, y-1)
-            case Direction.SOUTHEAST:
-                new_pos = (x+1, y)
-            case Direction.SOUTH:
-                new_pos = (x, y+1)
-            case Direction.SOUTHWEST:
-                new_pos = (x-1, y)
-            case Direction.NORTHWEST:
-                new_pos = (x-1, y-1)
-            case _:
-                raise RuntimeError(f'{self.facing=} is not a valid direction')
-
-        return self.model.grid.torus_adj_2d(new_pos)
+            max_density_heading = self._max_radial_density(
+                [ping.direction for ping in detection_pings \
+                    if ping.signature != self.role])
+            if self.role == Role.RUNNER:
+                # run away!
+                heading_radians = pi + max_density_heading
+            else:
+                # go get em!
+                heading_radians = max_density_heading
+        self.facing = heading_radians
 
     def move(self):
         """Move forward in a straight line.
         """
         target_cell = self._cell_in_front()
-        print(f'AGENT {self.unique_id} WANTS TO MOVE TO {target_cell}')
-        try:
-            self.model.grid.move_agent(self, target_cell)
-        except Exception as e:
-            print(f'AGENT {self.unique_id} FAILED TO MOVE: {e}')
-        # otherwise, can't move!
+        if self.gridspace.is_cell_empty(target_cell):
+            self.gridspace.move_agent(self, target_cell)
+        else:
+            self.facing = self.facing.random_adjacent()
+            log.debug(f'Turning to {self.facing} and trying again...')
+            self.move()
 
     def step(self):
-        pings = self.detect()
-        self.turn(pings)
-        if self.is_mobile:
-            self.move()
-        print(f'AGENT {self.unique_id} MOVED TO {self.pos}')
+        if not self.is_frozen:
+            pings = self.detect()
+            self.turn(pings)
+            try:
+                self.move()
+            except Exception as e:
+                log.debug(f'Agent {self.unique_id} failed to move ({e})')
 
 
-def portray_agent(agent: MarcoPoloAgent) -> dict:
+def portray_agent_on_hex(agent: MarcoPoloAgent) -> dict:
     return {
         "Shape": "circle",
-        "r": .9,
+        "r": 1,
+        "text": agent.unique_id,
+        "text_color": "white",
+        "Filled": "true",
+        "Layer": 0,
+        "x": agent.pos[0],
+        "y": agent.pos[1],
+        "Color": 'red' if agent.role == Role.SEEKER else 'green',
+    }
+
+
+def portray_agent_on_square(agent: MarcoPoloAgent) -> dict:
+    return {
+        "Shape": "arrowHead",
+        "scale": 1,
+        "heading_x": np.cos(agent.facing.to_radians()),
+        "heading_y": np.sin(agent.facing.to_radians()),
+        "text": agent.unique_id,
+        "text_color": "white",
         "Filled": "true",
         "Layer": 0,
         "x": agent.pos[0],

@@ -5,8 +5,9 @@ Mesa: https://mesa.readthedocs.io/en/stable/best-practices.html
 """
 import logging
 
-from mesa.visualization import ModularServer, Slider, Checkbox, CanvasHexGrid
-
+from mesa.visualization import (
+    ModularServer, Slider, Checkbox, Choice, CanvasGrid, CanvasHexGrid
+)
 
 from clocss.demos import marcopolo as mp
 
@@ -14,11 +15,10 @@ from clocss.demos import marcopolo as mp
 log = logging.getLogger()
 
 
-width, height = 5, 5
 marcopolo_params = {
     "num_agents": Slider(
         name="Number of agents",
-        value=1,
+        value=50,
         min_value=1,
         max_value=100,
         step=1,
@@ -41,10 +41,10 @@ marcopolo_params = {
     
     "detection_range_mean": Slider(
         name="agent detection range (grid spaces)",
-        value=300,
-        min_value=50,
-        max_value=500,
-        step=50,
+        value=10,
+        min_value=10,
+        max_value=100,
+        step=1,
     ),
     "detection_range_std": Slider(
         name="agent detection range standard deviation",
@@ -60,11 +60,24 @@ marcopolo_params = {
         max_value=10,
         step=1,
     ),
-    "grid_width": width,
-    "grid_height": height,
+    "gridstyle": "hex",
+    "grid_width":  100,
+    "grid_height":  100,
 }
 
-canvas = CanvasHexGrid(mp.agent.portray_agent, width, height, 1000, 1000)
+if marcopolo_params['gridstyle'] == "square":
+    canvas = CanvasGrid(
+        mp.agent.portray_agent_on_square,
+        max(marcopolo_params['grid_width'], 10),
+        max(marcopolo_params['grid_width'], 10),
+        1000, 1000)
+else:
+    canvas = CanvasHexGrid(
+        mp.agent.portray_agent_on_hex,
+        max(marcopolo_params['grid_width'], 10),
+        max(marcopolo_params['grid_width'], 10),
+    1000, 1000)
 marcopolo_server = ModularServer(
-    mp.model.MarcoPoloModel, [canvas], model_params=marcopolo_params, port=8521,
+    mp.model.MarcoPoloModel, [canvas], model_params=marcopolo_params,
+    port=8521,
 )

@@ -3,12 +3,17 @@
 This module contains the highest level structures that define the model, as
 recommended by Mesa: https://mesa.readthedocs.io/en/stable/best-practices.html
 """
+import logging
 from math import pi
 import random
 
 import mesa
 
-from clocss.demos.marcopolo.agent import MarcoPoloAgent, Role
+from clocss.demos.marcopolo.agent import MarcoPoloAgent
+from clocss.tools import grid
+
+
+log = logging.getLogger()
 
 
 class MarcoPoloModel(mesa.Model):
@@ -46,6 +51,7 @@ class MarcoPoloModel(mesa.Model):
     def __init__(
         self,
         num_agents: int = 10,
+        gridstyle: str = "hex",
         grid_width: int = 500,
         grid_height: int = 500,
         torus: bool = True,
@@ -59,6 +65,7 @@ class MarcoPoloModel(mesa.Model):
 
         Args:
             num_agents (int, optional): Number of agents.
+            gridstyle (str, optional): grid shape (square or hex).
             grid_width (int, optional): Width of world space.
             grid_height (int, optional): Height of world space.
             torus (bool, optional): Whether the edges of the world wrap, like
@@ -78,9 +85,12 @@ class MarcoPoloModel(mesa.Model):
             ValueError: Cannot have more agents than grid spaces.
         """
         super().__init__()
-        self.grid = mesa.space.HexSingleGrid(grid_width, grid_height,
-                                             torus=torus)
+        if gridstyle.lower() == "square":
+            self.grid = grid.SquareGrid(grid_width, grid_height, torus=torus)
+        else:
+            self.grid = grid.HexGrid(grid_width, grid_height, torus=torus)
         self.schedule = mesa.time.RandomActivation(self)
+        self.agents = []
 
         # sanity check to avoid an infinite loop while placing agents
         if num_agents > self.grid.num_cells:
@@ -89,25 +99,22 @@ class MarcoPoloModel(mesa.Model):
                              f'{self.grid.num_cells} agents')
 
         for n in range(num_agents):
-            if n == 0:
-                role = Role.SEEKER
-                cooldown_timer = max(tag_cooldown, 0)
-            else:
-                role = Role.RUNNER
-                cooldown_timer = 0
-
             a = MarcoPoloAgent(
                 unique_id=n,
                 model=self,
-                role=role,
                 facing=random.random() * (2*pi),
                 speed=int(random.gauss(speed_mean, max(speed_std, 0))),
                 detection_range=int(random.gauss(
                     detection_range_mean, max(detection_range_std, 0))),
-                cooldown_timer=cooldown_timer,
+                cooldown_duration=max(tag_cooldown, 0),
             )
+            if n == 0:
+                # agent 0 starts as the seeker
+                a.tagged()
+
             self.place_agent(a)
             self.schedule.add(a)
+            self.agents.append(a)
 
     def place_agent(self, agent: mesa.Agent):
         """Add the agent to a random unoccupied grid cell"""
