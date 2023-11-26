@@ -4,42 +4,88 @@ repo_url: https://github.com/philiplinden/clocss-abm
 repo_name: philiplinden/clocss-abm
 
 nav:
-  - Home: index.md
+  - Home:
+    - About: index.md
+    - API Reference: reference.md
   - Development:
-    - reference.md
+    - Exploratory Models: demos/
     - Notebooks: examples/
-    - Demo Models: demos/
 
 theme:
   name: material
   icon: 
     logo: fontawesome/solid/clock-rotate-left
   palette:
-    primary: white
-    accent: blue
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: blue
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
   features:
+    - content.code.copy
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tabs
     - navigation.tabs.sticky
-    - instant
+    - navigation.tracking
+    - search
+    - search.suggest
+    - search.highlight
 
 markdown_extensions:
+  - attr_list
   - footnotes
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji 
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.highlight:
+      anchor_linenums: true
+      use_pygments: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - toc:
       permalink: '#'
+      baselevel: '2'
 
 plugins:
   - search
   - include_dir_to_nav
+  - git-authors
+  - offline
   - mkdocstrings:
       default_handler: python
       handlers:
         python:
           options:
             docstring_style: google
+            docstring_section_style: spacy
+            inherited_members: true
+            heading_level: 2
             show_submodules: true
-            show_if_no_docstring: false
-            filters:
-              - "!^_"
-              - "^__"
-              - "demos/*"
-          rendering:
             show_source: true
+            group_by_category: true
+            show_category_heading: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            show_if_no_docstring: false
+            ignore_init_summary: false
+            trim_doctest_flags: true
+            filters:
+              - "^_"
+              - "^__"
+              - "!demos/*"

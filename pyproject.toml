@@ -27,6 +27,10 @@ mkdocstrings = "^0.24.0"
 mkdocstrings-python = "^1.7.4"
 nbconvert = "^7.11.0"
 mkdocs-include-dir-to-nav = "^1.2.0"
+mkdocs-git-authors-plugin = "^0.7.2"
+markdown = "^3.5.1"
+pymdown-extensions = "^10.5"
+pygments = "^2.17.2"
 
 [build-system]
 requires = ["poetry-core"]

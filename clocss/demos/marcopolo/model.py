@@ -58,24 +58,21 @@ class MarcoPoloModel(mesa.Model):
         """Create a Marco Polo world.
 
         Args:
-            num_agents (int, optional): Number of agents. Defaults to 10.
-            grid_width (int, optional): Width of world space. Defaults to 500.
-            grid_height (int, optional): Height of world space. Defaults to 500.
+            num_agents (int, optional): Number of agents.
+            grid_width (int, optional): Width of world space.
+            grid_height (int, optional): Height of world space.
             torus (bool, optional): Whether the edges of the world wrap, like
-                                    in Pac-Man. Defaults to False.
+                                    in Pac-Man.
             speed_mean (float, optional): Average time steps between movements.
-                                          Defaults to 5.
             speed_std (float, optional): Standard deviation speed of the
-                                         population. Defaults to 1.
+                                         population.
             detection_range_mean (float, optional): Average Euclidian distance
                                                     that agents can detect
-                                                    others. Defaults to 100.
+                                                    others.
             detection_range_std (float, optional): Standard deviation detection
                                                    range of the population.
-                                                   Defaults to 1.
             tag_cooldown (int, optional): Minimum time steps an agent spends
                                           immobilized after becoming a Seeker.
-                                          Defaults to 10.
 
         Raises:
             ValueError: Cannot have more agents than grid spaces.
