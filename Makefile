@@ -1,4 +1,4 @@
-NOTEBOOKS ?= notebooks/
+NOTEBOOKS ?= docs/notebooks/
 DOCS ?= docs/examples/
 
 define ipynb-to-md
