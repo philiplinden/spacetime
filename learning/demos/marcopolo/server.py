@@ -6,10 +6,10 @@ Mesa: https://mesa.readthedocs.io/en/stable/best-practices.html
 import logging
 
 from mesa.visualization import (
-    ModularServer, Slider, Checkbox, Choice, CanvasGrid, CanvasHexGrid
+    ModularServer, Slider, Checkbox, CanvasGrid, CanvasHexGrid
 )
 
-from clocss.demos import marcopolo as mp
+from learning.demos import marcopolo as mp
 
 
 log = logging.getLogger()

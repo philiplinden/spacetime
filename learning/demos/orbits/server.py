@@ -7,8 +7,8 @@ import logging
 
 from mesa.visualization import ModularServer, NumberInput, Slider
 
-from clocss.tools.visualizations import CanvasContinuous, Circle
-from clocss.demos.orbits.model import OrbitsModel, SpacecraftAgent
+from learning.tools.visualizations import CanvasContinuous, Circle
+from learning.demos.orbits.model import OrbitsModel, SpacecraftAgent
 
 
 log = logging.getLogger()

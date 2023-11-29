@@ -16,14 +16,36 @@ aims to predict system performance relative to interconnected assets and
 considers interoperability with other missions, including the definition of a
 Lunar Reference Frame.
 
-# Instructions
+**Documentation is available at [philiplinden.github.io/clocss-abm](https://philiplinden.github.io/clocss-abm/).**
+
+## Getting Started
+
+### Setup (Python)
+
+Install dependencies to a virtual environment using Python Poetry.
 ```shell
 # install python poetry
 pip install poetry
 
 # install all dependencies
 poetry install
+```
 
-# just start the server!
-poetry run mesa runserver clocss/demos/orbits
+### Usage (Python)
+There are two demo models that run interactively in the browser.
+
+#### Orbits
+The Orbits model uses Nyx to spawn a collection of satellites and propagate their
+trajectories. Mesa is used to set up and execute the simulation.
+
+```shell
+poetry run mesa runserver learrning/demos/orbits
+```
+
+#### Marco Polo
+The Marco Polo model uses Mesa to spawn a collection of agents to play the
+children's game _Marco Polo_.
+
+```shell
+poetry run mesa runserver learning/demos/marcopolo
 ```

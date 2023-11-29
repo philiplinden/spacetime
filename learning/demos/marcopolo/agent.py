@@ -7,7 +7,7 @@ from typing import Iterable, List
 import mesa
 import numpy as np
 
-from clocss.tools import grid
+from learning.tools import grid
 
 
 log = logging.getLogger()

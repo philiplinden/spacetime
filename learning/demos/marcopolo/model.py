@@ -9,8 +9,8 @@ import random
 
 import mesa
 
-from clocss.demos.marcopolo.agent import MarcoPoloAgent
-from clocss.tools import grid
+from learning.demos.marcopolo.agent import MarcoPoloAgent
+from learning.tools import grid
 
 
 log = logging.getLogger()

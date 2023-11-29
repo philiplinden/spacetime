@@ -6,10 +6,13 @@ repo_name: philiplinden/clocss-abm
 nav:
   - Home:
     - About: index.md
-    - API Reference: reference.md
+    - Model Requirements: requirements.md
   - Development:
-    - Exploratory Models: demos/
-    - Notebooks: examples/
+    - Project Structure: structure.md
+    - Python: 
+      - Tools: python/python_reference.md
+      - Exploratory Models: python/demos/
+      - Notebooks: python/notebooks/
 
 theme:
   name: material
@@ -88,4 +91,4 @@ plugins:
             filters:
               - "^_"
               - "^__"
-              - "!demos/*"
+              - "!demos/"
