@@ -18,9 +18,9 @@ Lunar Reference Frame.
 
 **Documentation is available at [philiplinden.github.io/clocss-abm](https://philiplinden.github.io/clocss-abm/).**
 
-## Getting Started
+## Getting Started with Python
 
-### Setup (Python)
+### Setup
 
 Install dependencies to a virtual environment using Python Poetry.
 ```shell
@@ -31,7 +31,7 @@ pip install poetry
 poetry install
 ```
 
-### Usage (Python)
+### Usage
 There are two demo models that run interactively in the browser.
 
 #### Orbits
@@ -49,3 +49,31 @@ children's game _Marco Polo_.
 ```shell
 poetry run mesa runserver learning/demos/marcopolo
 ```
+
+## Getting Started with Rust
+
+### Setup
+Install the dependencies for your operating system that are needed to run Bevy:
+< link >
+
+### Usage
+
+```shell
+# run with terminal UI
+cargo run
+
+# run with graphical UI using hardware acceleration
+cargo run --features visualization
+
+# run with graphical UI using web assembly
+cargo run --features visualization_wasm
+```
+
+## Attribution
+
+This project borrows from example code provided by
+[krABMaga/examples](https://github.com/krABMaga/examples),
+[nyx-space/nyx](https://github.com/nyx-space/nyx), and
+[Canleskis/particular](https://github.com/Canleskis/particular).
+
+Attributions for all assets are listed in [assets/README.md](assets/README.md).

@@ -1,0 +1,21 @@
+[package]
+name = "clocss-abm"
+version = "0.1.0"
+edition = "2021"
+license = "AGPL-3.0-or-later"
+readme = "README.md"
+description = "an Agent-Based Model of Heterogeneous Lunar Networks"
+authors = ["Philip Linden <lindenphilipj@gmail.com>"]
+homepage = "https://philiplinden.github.io/clocss-abm/"
+repository = "https://github.com/philiplinden/clocss-abm"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+krabmaga = "0.4.1"
+nyx-space = "1.1.2"
+particular = "0.6.1"
+
+[features]
+visualization = ["krabmaga/visualization"]
+visualization_wasm = ["krabmaga/visualization_wasm"]
