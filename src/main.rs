@@ -1,5 +1,14 @@
+/*!
+ * The main module instantiates the world and starts the simulation.
+ * 
+ * A different main function is used if the `visualization` feature is enabled.
+ * By default, the simulation is run without any visualization.
+ * 
+ * This module's layout is borrowed from the krABMaga template.
+ */
+
 // Global imports (needed for the simulation to run)
-use crate::model::sea::Sea;
+use crate::model::world::World;
 mod model;
 
 #[cfg(not(any(feature = "visualization", feature = "visualization_wasm")))]
@@ -8,7 +17,7 @@ use krabmaga::*;
 // Visualization specific imports
 #[cfg(any(feature = "visualization", feature = "visualization_wasm"))]
 use {
-    crate::visualization::sea_vis::SeaVis, krabmaga::bevy::prelude::Color,
+    crate::visualization::sea_vis::WorldVis, krabmaga::bevy::prelude::Color,
     krabmaga::visualization::visualization::Visualization,
 };
 
@@ -26,7 +35,7 @@ fn main() {
     let num_agents = 20;
     let dim: (f32, f32) = (400., 400.);
 
-    let state = Sea::new(dim, num_agents);
+    let state = World::new(dim, num_agents);
 
     simulate!(state, step, 10);
 }
@@ -39,11 +48,11 @@ fn main() {
     let num_agents = 10;
     let dim: (f32, f32) = (400., 400.);
 
-    let state = Sea::new(dim, num_agents);
+    let state = World::new(dim, num_agents);
     Visualization::default()
         .with_window_dimensions(800., 800.)
         .with_simulation_dimensions(dim.0, dim.1)
         .with_background_color(Color::BLUE)
         .with_name("Template")
-        .start::<SeaVis, Sea>(SeaVis, state);
+        .start::<WorldVis, World>(WorldVis, state);
 }

@@ -1,3 +1,13 @@
+/*!
+ * The world where agents interact.
+ *
+ * The world is a space where agents act, react, and interact wth each other.
+ * Agents may move across the world space. The world has properties that
+ * constrain agent motion, like gravity, friction, drag, and so on. Similarly,
+ * the world state is the "true" state of the environment in the simulation.
+ *
+ * The krABMaga template calls this the "Sea" (where many "Crab" agents live).
+ */
 use std::any::Any;
 
 use super::crab::Crab;
@@ -10,16 +20,16 @@ use krabmaga::{
 
 /// Expand the state definition according to your model, for example by having a grid struct field to
 /// store the agents' locations.
-pub struct Sea {
+pub struct World {
     pub step: u64,
     pub field: Field2D<Crab>,
     pub dim: (f32, f32),
     pub num_agents: u32,
 }
 
-impl Sea {
-    pub fn new(dim: (f32, f32), num_agents: u32) -> Sea {
-        Sea {
+impl World {
+    pub fn new(dim: (f32, f32), num_agents: u32) -> World {
+        World {
             step: 0,
             field: Field2D::new(dim.0, dim.1, DISCRETIZATION, TOROIDAL),
             dim,
@@ -28,7 +38,7 @@ impl Sea {
     }
 }
 
-impl State for Sea {
+impl State for World {
     /// Put the code that should be executed for each state update here. The state is updated once for each
     /// schedule step.
     fn update(&mut self, _step: u64) {

@@ -1,4 +1,14 @@
-use crate::model::sea::Sea;
+/*!
+ * An agent that lives in the world.
+ *
+ * An agent is a single entity in the simulation. Agents sense the world, but
+ * their perception may not exactly match the world's "true" state---its
+ * sensors might not be ideal---in order to form an understanding of its own
+ * state. Agents are able to interact with the world and with other agents.
+ *
+ * The krABMaga template calls this a "Crab" (that lives in the "Sea").
+ */
+use crate::model::world::World;
 use core::fmt;
 use krabmaga::engine::agent::Agent;
 use krabmaga::engine::fields::field_2d::{toroidal_transform, Location2D};
@@ -21,7 +31,7 @@ pub struct Crab {
 impl Agent for Crab {
     /// Put the code that should happen for each step, for each agent here.
     fn step(&mut self, state: &mut dyn State) {
-        let state = state.as_any().downcast_ref::<Sea>().unwrap();
+        let state = state.as_any().downcast_ref::<World>().unwrap();
         let mut rng = rand::thread_rng();
 
         if rng.gen_bool(0.5) {
