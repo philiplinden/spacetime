@@ -1,2 +1,2 @@
-pub mod crab;
+pub mod body;
 pub mod world;
