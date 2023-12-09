@@ -17,7 +17,7 @@ Typefaces and fonts.
 
 - [Earth](poly/Earth.glb) by Poly by Google
   [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
-  [Poly Pizza](https://poly.pizza/m/cfM9k9LFaLz)
+  [Poly Pizza](https://poly.pizza/m/88CP80Kgb-u)
 - [Moon](poly/Moon.glb) by Poly by Google
   [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
   [Poly Pizza](https://poly.pizza/m/9OPocAqXM0u)

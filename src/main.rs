@@ -1,34 +1,39 @@
 /*!
- * The main module instantiates the world and starts the simulation.
- * 
- * A different main function is used if the `visualization` feature is enabled.
- * By default, the simulation is run without any visualization.
- * 
- * This module's layout is borrowed from the krABMaga template.
+ * Uses Bevy game engine as the basis for a model of heterogeneous PNT nodes.
  */
 
-// Global imports (needed for the simulation to run)
-use crate::model::world::World;
-mod model;
+use bevy::diagnostic::{FrameTimeDiagnosticsPlugin};
+use bevy::time::FixedTimestep;
+use bevy::{prelude::*, window::PresentMode};
+use bevy_mouse_tracking_plugin::{prelude::*, MainCamera, MousePosWorld};
+use bevy_pancam::{PanCam, PanCamPlugin};
+use bevy_prototype_debug_lines::DebugLines;
+use bevy_rapier2d::prelude::*;
 
-use krabmaga::simulate;
-use nyx_space::time::Epoch;
-
-/// Length of a single simulation step, in seconds.
-pub static DT: f32 = 1.0 / 60.0;
-/// number of satellites to spawn
-pub static NUM_AGENTS: u32 = 1;
+const DT: f32 = 1.0 / 60.0;
 
 fn main() {
-    // init for cosmic params
-    let dt = Epoch::from_gregorian_tai_at_midnight(2021, 3, 4);
-    // number of steps to run
-    let step = 1000;
-    // number of repetitions
-    let rep = 1;
-    // spawn agents in the world
-    let state = World::new(NUM_AGENTS, dt);
-
-    // start the sim
-    simulate!(state, step, rep);
+    // Creating an app, adding systems, and calling .run() handles the exec loop
+    App::new()
+    .add_plugins(DefaultPlugins.set(WindowPlugin {
+        primary_window: WindowDescriptor {
+            title: "Particular demo".to_string(),
+            width: 1500.0,
+            height: 900.0,
+            present_mode: PresentMode::AutoNoVsync,
+            fit_canvas_to_parent: true,
+            canvas: Some("#app".to_owned()),
+            ..default()
+        },
+        ..default()
+    }))
+    .add_plugins(FrameTimeDiagnosticsPlugin)
+    .add_plugins(EguiPlugin)
+    .add_plugins(PanCamPlugin)
+    .add_plugins(MousePosPlugin)
+    .add_plugins(
+        RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(1.0)
+            .with_default_system_setup(false),
+    )
+    .insert_resource(ClearColor(Color::BLACK))
 }

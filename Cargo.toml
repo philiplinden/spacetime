@@ -12,10 +12,14 @@ repository = "https://github.com/philiplinden/clocss-abm"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-krabmaga = "0.4.1"
+bevy = { version = "0.12.1", features = ["dynamic_linking"] }
 nyx-space = "1.1.2"
 particular = "0.6.1"
 
-[features]
-visualization = ["krabmaga/visualization"]
-visualization_wasm = ["krabmaga/visualization_wasm"]
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+[profile.dev.package."*"]
+opt-level = 3

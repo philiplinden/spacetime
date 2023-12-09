@@ -59,14 +59,7 @@ Install the dependencies for your operating system that are needed to run Bevy:
 ### Usage
 
 ```shell
-# run with terminal UI
 cargo run
-
-# run with graphical UI using hardware acceleration
-cargo run --features visualization
-
-# run with graphical UI using web assembly
-cargo run --features visualization_wasm
 ```
 
 ## Attribution
