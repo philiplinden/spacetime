@@ -2,6 +2,9 @@
 an Agent-Based Model of Heterogeneous Lunar Networks for the Cislunar Open Clock
 Synchronization System (CLOCSS)
 
+[![python](https://github.com/philiplinden/clocss-abm/actions/workflows/python.yaml/badge.svg?branch=main)](https://github.com/philiplinden/clocss-abm/actions/workflows/python.yaml)
+[![rust](https://github.com/philiplinden/clocss-abm/actions/workflows/rust.yaml/badge.svg?branch=main)](https://github.com/philiplinden/clocss-abm/actions/workflows/rust.yaml)
+
 `clocss-abm` employs Agent-Based Modeling to examine lunar networks in the
 Cislunar Open Clock Synchronization System. It focuses on how network topology
 and time synchronization evolve in a growing lunar ecosystem, evaluating both
@@ -18,9 +21,9 @@ Lunar Reference Frame.
 
 **Documentation is available at [philiplinden.github.io/clocss-abm](https://philiplinden.github.io/clocss-abm/).**
 
-## Getting Started
+## Getting Started with Python
 
-### Setup (Python)
+### Setup
 
 Install dependencies to a virtual environment using Python Poetry.
 ```shell
@@ -31,7 +34,7 @@ pip install poetry
 poetry install
 ```
 
-### Usage (Python)
+### Usage
 There are two demo models that run interactively in the browser.
 
 #### Orbits
@@ -49,3 +52,24 @@ children's game _Marco Polo_.
 ```shell
 poetry run mesa runserver learning/demos/marcopolo
 ```
+
+## Getting Started with Rust
+
+### Setup
+Install the dependencies for your operating system that are needed to run Bevy:
+< link >
+
+### Usage
+
+```shell
+cargo run
+```
+
+## Attribution
+
+This project borrows from example code provided by
+[krABMaga/examples](https://github.com/krABMaga/examples),
+[nyx-space/nyx](https://github.com/nyx-space/nyx), and
+[Canleskis/particular](https://github.com/Canleskis/particular).
+
+Attributions for all assets are listed in [assets/README.md](assets/README.md).
