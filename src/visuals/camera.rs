@@ -2,6 +2,8 @@ use bevy::prelude::*;
 use bevy_mouse_tracking_plugin::prelude::MousePosPlugin;
 use bevy_panorbit_camera::{PanOrbitCamera, PanOrbitCameraPlugin};
 
+use crate::cosmic::{EARTH_RADIUS_M, ORIGIN};
+
 pub struct CameraPlugin;
 
 impl Plugin for CameraPlugin {
@@ -15,7 +17,7 @@ impl Plugin for CameraPlugin {
 fn spawn_camera(mut commands: Commands) {
     commands.spawn((
         Camera3dBundle {
-            transform: Transform::from_translation(Vec3::new(0.0, 1.5, 5.0)),
+            transform: Transform::from_xyz(0.0, EARTH_RADIUS_M, 5.0).looking_at(ORIGIN, Vec3::Z),
             ..default()
         },
         PanOrbitCamera::default(),
