@@ -1,23 +1,23 @@
 name: build-python
 # Controls when the workflow will run
 on:
-    # Triggers the workflow on push or pull request events but only for the "main" branch
-    push:
-      branches: [ "main" ]
-    pull_request:
-      branches: [ "main" ]
-    # Allows you to run this workflow manually from the Actions tab
-    workflow_dispatch: {}
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch: {}
 
 jobs:
   build-python:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: setup python
+      - name: Setup Python
         uses: actions/setup-python@v3
       - run: pip install poetry
       - run: poetry build
@@ -26,11 +26,11 @@ jobs:
       - build-python
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: setup python
+      - name: Setup Python
         uses: actions/setup-python@v3
       - run: pip install poetry
       - run: poetry install --with dev,docs
