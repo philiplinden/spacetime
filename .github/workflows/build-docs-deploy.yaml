@@ -9,7 +9,23 @@ on:
   
     # Allows you to run this workflow manually from the Actions tab
     workflow_dispatch: {}
+
 jobs:
+  build-rust:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clippy
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          components: rustfmt, clippy
+      - name: Release build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --all-features
+
   build-python:
     runs-on: ubuntu-latest
     steps:
@@ -23,7 +39,9 @@ jobs:
       - run: poetry build
 
   docs:
-    needs: build-python
+    needs: 
+      - build-python
+      - build-rust
     runs-on: ubuntu-latest
     steps:
       - name: checkout
