@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use bevy_mouse_tracking_plugin::{prelude::MousePosPlugin, MainCamera};
+use bevy_mouse_tracking_plugin::prelude::MousePosPlugin;
 use bevy_panorbit_camera::{PanOrbitCamera, PanOrbitCameraPlugin};
 
 pub struct CameraPlugin;
