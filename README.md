@@ -2,6 +2,9 @@
 an Agent-Based Model of Heterogeneous Lunar Networks for the Cislunar Open Clock
 Synchronization System (CLOCSS)
 
+[![python](https://github.com/philiplinden/clocss-abm/actions/workflows/python.yaml/badge.svg?branch=main)](https://github.com/philiplinden/clocss-abm/actions/workflows/python.yaml)
+[![rust](https://github.com/philiplinden/clocss-abm/actions/workflows/rust.yaml/badge.svg?branch=main)](https://github.com/philiplinden/clocss-abm/actions/workflows/rust.yaml)
+
 `clocss-abm` employs Agent-Based Modeling to examine lunar networks in the
 Cislunar Open Clock Synchronization System. It focuses on how network topology
 and time synchronization evolve in a growing lunar ecosystem, evaluating both
