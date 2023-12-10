@@ -2,28 +2,37 @@
 This file lists attributions and links (where applicable) to assets included in
 this project.
 
-## emojis
-Emojis, as images.
-
-- [crab](emojis/crab.png) by (???) [???] via [krABMaga/examples](https://github.com/krABMaga/examples/blob/main/template/assets/emojis/crab.png)
-
 ## fonts
 Typefaces and fonts.
 
-- [FiraSans Bold](fonts/FiraSans-Bold.ttf) by (???) [???] via [krABMaga/examples](https://github.com/krABMaga/examples/blob/main/template/assets/fonts/FiraSans-Bold.ttf)
+- [Linden Hill](fonts/Linden_Hill.otf) by 
+  [Barry Schwartz](http://www.crudfactory.com/)
+  [[OFL-1.1](https://openfontlicense.org/)] via
+  [The League of Movable Type](https://www.theleagueofmoveabletype.com/linden-hill)
+- [Drafting* Mono](fonts/DraftingMono-Light.otf) by
+  [Owen Earl](https://ewonrael.github.io/) 
+  [[OFL-1.1](https://openfontlicense.org/)] via
+  [Indestructible Type*](https://indestructibletype.com/Drafting/)
+- [Silkscreen](fonts/slkscr.ttf) by
+  [Jason Kottke](jason@kottke.org) 
+  [[OFL-1.1](http://scripts.sil.org/OFL)] via
+  [kottke.org](https://kottke.org/plus/type/silkscreen/)
 
 ## poly
 3D assets.
 
-- [Earth](poly/Earth.glb) by Poly by Google
+- [Analog Clock](models/AnalogClock.glb) by Poly by Google 
+  [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
+  [Poly Pizza](https://poly.pizza/m/75WO8AEQSpJ)
+- [Earth](models/Earth.glb) by Poly by Google
   [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
   [Poly Pizza](https://poly.pizza/m/88CP80Kgb-u)
-- [Moon](poly/Moon.glb) by Poly by Google
+- [Moon](models/Moon.glb) by Poly by Google
   [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
   [Poly Pizza](https://poly.pizza/m/9OPocAqXM0u)
-- [Satellite](poly/Satellite.glb) by Poly by Google
+- [Satellite](models/Satellite.glb) by Poly by Google
   [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
   [Poly Pizza](https://poly.pizza/m/fmYHY1leH_P)
-- [Satellite dish](poly/Satellite-dish.glb) by Poly by Google
+- [Satellite dish](models/Satellite-dish.glb) by Poly by Google
   [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
   [Poly Pizza](https://poly.pizza/m/5iVbfDhRnN7)
