@@ -68,21 +68,29 @@ struct CelestialBodyBundle {
     body: CelestialBody,
     model: SceneBundle,
     collider: Collider,
+    mass_props: ColliderMassProperties,
 }
 
 impl CelestialBodyBundle {
     fn new(name: &str, position: Vec3, asset_server: Res<AssetServer>) -> Self {
         let body = CelestialBody::from_preset(name);
-        let radius = body.radius.get::<meter>();
+        let radius_m = body.radius.get::<meter>();
+        let mass_kg = body.mass.get::<kilogram>();
+        info!(
+            "Spawning {:?}: Radius {:?} m, Mass {:?} kg",
+            name, radius_m, mass_kg
+        );
         let asset = asset_server.load(&body.model_path);
         CelestialBodyBundle {
             body,
             model: SceneBundle {
                 scene: asset,
-                transform: Transform::from_xyz(position.x, position.y, position.z),
+                transform: Transform::from_xyz(position.x, position.y, position.z)
+                    .with_scale(Vec3::splat(radius_m)),
                 ..Default::default()
             },
-            collider: Collider::ball(radius),
+            collider: Collider::ball(radius_m),
+            mass_props: ColliderMassProperties::Mass(mass_kg),
         }
     }
 }
@@ -94,7 +102,7 @@ fn spawn_earth(mut commands: Commands, asset_server: Res<AssetServer>) {
 fn spawn_moon(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(CelestialBodyBundle::new(
         "Luna",
-        Vec3::new(1.0E3, 0.0, 0.0),
+        Vec3::new(384_400.0E3, 0.0, 0.0),
         asset_server,
     ));
 }

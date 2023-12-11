@@ -17,13 +17,12 @@ struct SatelliteBundle {
 
 fn spawn_satellite(mut commands: Commands, asset_server: Res<AssetServer>) {
     let model = asset_server.load("models/Satellite.glb#Scene0");
-    commands
-        .spawn(SatelliteBundle {
-            model: SceneBundle {
-                scene: model,
-                transform: Transform::from_xyz(0.0, 1.0E7, 0.0),
-                ..Default::default()
-            },
-            collider: Collider::cuboid(2.0, 1.0, 1.0)
-        });
+    commands.spawn(SatelliteBundle {
+        model: SceneBundle {
+            scene: model,
+            transform: Transform::from_xyz(0.0, 1.0E5, 0.999999E9).with_scale(Vec3::splat(7.5)),
+            ..Default::default()
+        },
+        collider: Collider::cuboid(7.5, 1.0, 2.0),
+    });
 }

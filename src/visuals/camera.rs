@@ -15,7 +15,7 @@ impl Plugin for CameraPlugin {
 fn spawn_camera(mut commands: Commands) {
     commands.spawn((
         Camera3dBundle {
-            transform: Transform::from_xyz(0.0, 1.0E6, 5.0).looking_at(Vec3::ZERO, Vec3::Z),
+            transform: Transform::from_xyz(0.0, 1.0E5, 1.0E9).looking_at(Vec3::ZERO, Vec3::Z),
             ..default()
         },
         PanOrbitCamera::default(),
