@@ -1,21 +1,29 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
-use crate::cosmic::EARTH_RADIUS_M;
-
 pub struct InitEntitiesPlugin;
 
 impl Plugin for InitEntitiesPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, spawn_ball);
+        app.add_systems(Startup, spawn_satellite);
     }
 }
 
-fn spawn_ball(mut commands: Commands) {
-    /* Create the bouncing ball. */
+#[derive(Bundle)]
+struct SatelliteBundle {
+    model: SceneBundle,
+    collider: Collider,
+}
+
+fn spawn_satellite(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let model = asset_server.load("models/Satellite.glb#Scene0");
     commands
-        .spawn(RigidBody::Dynamic)
-        .insert(Collider::ball(0.5))
-        .insert(Restitution::coefficient(0.7))
-        .insert(TransformBundle::from(Transform::from_xyz(0.0, EARTH_RADIUS_M, 0.0)));
+        .spawn(SatelliteBundle {
+            model: SceneBundle {
+                scene: model,
+                transform: Transform::from_xyz(0.0, 1.0E7, 0.0),
+                ..Default::default()
+            },
+            collider: Collider::cuboid(2.0, 1.0, 1.0)
+        });
 }

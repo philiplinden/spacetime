@@ -19,7 +19,6 @@ fn main() {
         .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
         // init world
         .add_plugins(cosmic::InitWorldPlugin)
-        .add_plugins(components::spacecraft::InitEntitiesPlugin)
         // debug
         .add_plugins(debug::DebugToolsPlugin)
         .run();

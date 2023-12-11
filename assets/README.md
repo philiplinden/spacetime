@@ -26,7 +26,7 @@ Typefaces and fonts.
   [Poly Pizza](https://poly.pizza/m/75WO8AEQSpJ)
 - [Earth](models/Earth.glb) by Poly by Google
   [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
-  [Poly Pizza](https://poly.pizza/m/cfM9k9LFaLz)
+  [Poly Pizza](https://poly.pizza/m/58PjkXNdpPb)
 - [Moon](models/Moon.glb) by Poly by Google
   [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
   [Poly Pizza](https://poly.pizza/m/9OPocAqXM0u)
