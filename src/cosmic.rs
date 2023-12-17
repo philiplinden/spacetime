@@ -6,18 +6,7 @@ use uom::si::{
     mass::kilogram,
 };
 
-pub struct InitWorldPlugin;
-
-impl Plugin for InitWorldPlugin {
-    fn build(&self, app: &mut App) {
-        app.insert_resource(ClearColor(Color::BLACK))
-            .insert_resource(AmbientLight {
-                color: Color::default(),
-                brightness: 0.75,
-            })
-            .add_systems(Startup, (spawn_earth, spawn_moon));
-    }
-}
+use crate::visuals::{camera::Followed, ui::Selected};
 
 #[derive(Component, Debug)]
 struct CelestialBody {
@@ -51,12 +40,12 @@ impl CelestialBody {
                 mass: Mass::new::<kilogram>(7.342E22),
                 model_path: String::from("models/Moon.glb#Scene0"),
             }),
-            // "Sun" => Ok(CelestialBody {
-            //     name: String::from("Sun"),
-            //     radius: Length::new::<kilometer>(696_342.0),
-            //     mass: Mass::new::<kilogram>(1.98847E30),
-            //     model_path: String::from("models/Sun.glb#Scene0"),
-            // }),
+            "Sun" => Ok(CelestialBody {
+                name: String::from("Sun"),
+                radius: Length::new::<kilometer>(696_342.0),
+                mass: Mass::new::<kilogram>(1.98847E30),
+                model_path: String::from("models/Sun.glb#Scene0"),
+            }),
             _ => Err(()),
         };
         preset.unwrap()
@@ -105,4 +94,38 @@ fn spawn_moon(mut commands: Commands, asset_server: Res<AssetServer>) {
         Vec3::new(384_400.0E3, 0.0, 0.0),
         asset_server,
     ));
+}
+
+fn spawn_sun(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let range = 149_597_871_000.0;
+    let sun = CelestialBodyBundle::new("Sun", Vec3::new(range, 0.0, 0.0), asset_server);
+    let radius = sun.body.radius.get::<meter>();
+    let star = commands
+        .spawn((
+            sun,
+            PointLight {
+                radius,
+                color: Color::rgb(1.0, 1.0, 0.9) * 2.0,
+                intensity: range,
+                range: range * 10.0,
+                shadows_enabled: true,
+                ..default()
+            },
+            Selected,
+        ))
+        .id();
+    commands.insert_resource(Followed(Some(star)));
+}
+
+pub struct InitCelestialsPlugin;
+
+impl Plugin for InitCelestialsPlugin {
+    fn build(&self, app: &mut App) {
+        app.insert_resource(ClearColor(Color::GRAY))
+            .insert_resource(AmbientLight {
+                color: Color::default(),
+                brightness: 0.75,
+            })
+            .add_systems(Startup, (spawn_sun, spawn_earth, spawn_moon));
+    }
 }

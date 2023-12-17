@@ -18,7 +18,7 @@ Typefaces and fonts.
   [[OFL-1.1](http://scripts.sil.org/OFL)] via
   [kottke.org](https://kottke.org/plus/type/silkscreen/)
 
-## poly
+## models
 3D assets.
 
 - [Analog Clock](models/AnalogClock.glb) by Poly by Google 
@@ -36,3 +36,6 @@ Typefaces and fonts.
 - [Satellite dish](models/Satellite-dish.glb) by Poly by Google
   [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via
   [Poly Pizza](https://poly.pizza/m/5iVbfDhRnN7)
+- [Sun](models/Sun.glb) by Poly by Google 
+  [[CC-BY](https://creativecommons.org/licenses/by/3.0/)] via 
+  [Poly Pizza](https://poly.pizza/m/69ejysWdDXG)

@@ -14,13 +14,14 @@ fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
         // ui
-        .add_plugins(visuals::ui::FpsCounterPlugin)
-        .add_plugins(visuals::camera::CameraPlugin)
-        // physics
+        .add_plugins((
+            visuals::camera::CameraPlugin,
+            visuals::ui::FpsCounterPlugin,
+        )) // physics
         .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
-        // init world
-        .add_plugins(cosmic::InitWorldPlugin)
-        .add_plugins(spacecraft::InitEntitiesPlugin)
+        // spawn entities
+        // .add_plugins(cosmic::InitCelestialsPlugin)
+        .add_plugins(spacecraft::InitParticipantsPlugin)
         // debug
         .add_plugins(debug::DebugToolsPlugin)
         .run();
