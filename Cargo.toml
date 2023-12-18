@@ -12,11 +12,8 @@ repository = "https://github.com/philiplinden/clocss-abm"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = { version = "0.12.1", features = ["dynamic_linking"] }
-bevy_mouse_tracking_plugin = "0.7.0"
-bevy_panorbit_camera = "0.9.2"
-bevy_rapier3d = { version = "0.23.0", features = ["parallel", "debug-render-3d"] }
-hifitime = { version = "3.8.5", features = ["std"] }
+hifitime = "3.8.5"
+krabmaga = { version = "0.4.1", features = ["visualization"] }
 uom = "0.35.0"
 
 # Enable a small amount of optimization in debug mode
