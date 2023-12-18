@@ -1,28 +1,15 @@
-/*!
- * Uses Bevy game engine as the basis for a model of heterogeneous PNT nodes.
- */
-mod components;
-mod cosmic;
-mod debug;
-mod spacecraft;
-mod visuals;
+use krabmaga::*;
 
-use bevy::prelude::*;
-use bevy_rapier3d::prelude::*;
+use crate::model::spacetime::Realm;
+
+mod model;
+
+pub static TOROIDAL: bool = true;
+pub static DISCRETIZATION: f32 = 1.0;
 
 fn main() {
-    App::new()
-        .add_plugins(DefaultPlugins)
-        // ui
-        .add_plugins((
-            visuals::camera::CameraPlugin,
-            visuals::ui::FpsCounterPlugin,
-        )) // physics
-        .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
-        // spawn entities
-        // .add_plugins(cosmic::InitCelestialsPlugin)
-        .add_plugins(spacecraft::InitParticipantsPlugin)
-        // debug
-        .add_plugins(debug::DebugToolsPlugin)
-        .run();
+    let step = 100;
+    let state = Realm::new((1_000_000.0, 1_000_000.0));
+
+    simulate!(state, step, 10);
 }
