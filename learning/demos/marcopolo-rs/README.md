@@ -8,7 +8,7 @@ Python counterpart can be found at [learning/demos/marcopolo/](./marcopolo/).
 ![detections](assets/Detections_0.png)
 
 ![state](assets/State_0.png)
-(0 -> running away, 1 -> chasing others, 2 -> "frozen" or waiting)
+(0 -> "frozen" or waiting, 1 -> running away ("not it"), 2 -> chasing others ("it"))
 
 This readme is a guide to running the demo starting from scratch.
 
