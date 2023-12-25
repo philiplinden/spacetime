@@ -1,0 +1,119 @@
+name: build-doc-deploy
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+    paths: ["learning"]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch: {}
+
+jobs:
+  build-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v3
+      - run: pip install poetry
+      - run: poetry build
+  docs-python:
+    needs: build-python
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v3
+      - run: pip install poetry
+      - run: poetry install --with dev,docs
+      - name: Export notebooks as examples
+        run: poetry run make ipynb2md
+      - name: MkDocs build
+        run: poetry run mkdocs build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: site
+
+  build-rust:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+      - name: Install Dependencies
+        run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --all-features
+  docs-rust:
+    needs: build-rust
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: rust-docs
+      - name: Build marcopolo-rs docs
+        working-directory: learning/demos/marcopolo-rs
+        run: cargo doc --no-deps --all-features --release --target-dir docs/rust
+      - uses: actions/upload-artifact@v3
+        with:
+          name: rustdoc
+          path: docs/rust
+
+  docs-deploy:
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - docs-python
+      - docs-rust
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v3
+        with:
+          name: site
+          path: site
+      - uses: actions/download-artifact@v3
+        with:
+          name: rustdoc
+          path: docs/rust
+      - run: mv docs/rust site
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+        if: github.event_name != 'pull_request'
