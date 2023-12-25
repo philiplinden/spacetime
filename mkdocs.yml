@@ -13,7 +13,8 @@ nav:
       - Tools: python/python_reference.md
       - Exploratory Models: python/demos/
       - Notebooks: python/notebooks/
-
+    - Rust:
+      - Exploratory Models: rust/demos/
 theme:
   name: material
   icon: 

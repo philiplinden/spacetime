@@ -1,0 +1,84 @@
+name: docs
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch: {}
+
+jobs:
+  python-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v3
+      - run: pip install poetry
+      - run: poetry install --with dev,docs
+      - name: Export notebooks as examples
+        run: poetry run make ipynb2md
+      - name: MkDocs build
+        run: poetry run mkdocs build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: site
+  rust-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: rustdoc
+      - name: Build marcopolo-rs docs
+        working-directory: learning/demos/marcopolo-rs
+        run: cargo doc
+      - name: Move marcopolo-rs to docs dir
+        run: mv learning/demos/marcopolo-rs/target/docs docs/rust
+      - uses: actions/upload-artifact@v3
+        with:
+          name: rustdoc
+          path: docs/rust
+  deploy:
+    needs:
+      - python-docs
+      - rust-docs
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v3
+        with:
+          name: rustdoc
+          path: docs/rust
+      - uses: actions/download-artifact@v3
+        with:
+          name: site
+          path: site
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+        if: github.event_name != 'pull_request'
