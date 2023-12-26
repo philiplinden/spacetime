@@ -9,6 +9,14 @@ Modeling how the approach may be used in practice and at scale informs decisions
 about how to architect a robust cislunar PNT system that scales with the
 population.
 
+## Purpose
+
+1. The code in this repository is intended for analytical use for a specific
+   problem. It is not meant to be a general-purpose library.
+2. This project and its code are evolving as my personal understanding of
+   modeling and coding techniques on the way to discovering answers to questions
+   about the nature of a possible decentralized PNT service for the Moon.
+
 ## Approach
 This project aims to use agent-based modeling and simulations to explore how
 centralized and decentralized PNT service network topologies evolve in a growing
