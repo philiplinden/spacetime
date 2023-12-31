@@ -1065,6 +1065,7 @@ dependencies = [
  "log",
  "pretty_env_logger",
  "uom",
+ "uuid",
 ]
 
 [[package]]
