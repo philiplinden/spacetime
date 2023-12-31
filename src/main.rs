@@ -1,13 +1,12 @@
 use krabmaga::*;
 
-use crate::model::sim::Realm;
-
 mod model;
+use crate::model::Realm;
 
-pub static TOROIDAL: bool = true;
-pub static DISCRETIZATION: f32 = 1.0;
 
 fn main() {
+    pretty_env_logger::init();
+
     let step = 100;
     let state = Realm::default();
 
