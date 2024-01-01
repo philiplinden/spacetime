@@ -12,11 +12,15 @@ repository = "https://github.com/philiplinden/clocss-abm"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+bevy = "0.12.1"
+bevy-inspector-egui = "0.22.1"
+bevy_egui = "0.24.0"
+bevy_pancam = { version = "0.10.0", features = ["bevy_egui"] }
+bevy_rand = "0.4.0"
+bevy_rapier2d = "0.23.0"
 hifitime = "3.8.5"
-krabmaga = { version = "0.4.1", features = ["visualization"] }
 log = "0.4.20"
 pretty_env_logger = "0.5.0"
-uom = "0.35.0"
 uuid = { version = "1.6.1", features = ["v4"] }
 
 # Enable a small amount of optimization in debug mode
