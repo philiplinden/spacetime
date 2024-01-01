@@ -20,5 +20,7 @@
  * 
  *      dt = gamma * dtau
  * 
- * Note that if we integrate over time and substitute v -> (g * t), we arrive at the same definition as before.
+ * Note that if we integrate over time and substitute v -> (g * t), we arrive at the same definition as before. However,
+ * using the more complicated form with acceleration lets us account for the accelerations from gravity when an object
+ * is near a large body.
  */
