@@ -4,7 +4,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-    paths: ["learning", "docs", "src"]
+    paths: ["learning"]
   pull_request:
     branches: [ "main" ]
   # Allows you to run this workflow manually from the Actions tab
@@ -77,6 +77,10 @@ jobs:
       - name: Build marcopolo-rs docs
         working-directory: learning/demos/marcopolo-rs
         run: cargo doc --no-deps --all-features --release --target-dir docs/rust
+      - uses: actions/upload-artifact@v3
+        with:
+          name: rustdoc
+          path: docs/rust
 
   docs-deploy:
     if: github.ref == 'refs/heads/main'
@@ -100,6 +104,10 @@ jobs:
         with:
           name: site
           path: site
+      - uses: actions/download-artifact@v3
+        with:
+          name: rustdoc
+          path: docs/rust
       - run: mv docs/rust site
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
