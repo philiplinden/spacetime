@@ -1,28 +1,9 @@
-# Disclaimer
+# Model Structure
+The code structure of the model will have a significant impact on its complexity
+and performance. It is important for complexity to be minimized and performance
+to be maximized in order for the results to be trusted and reproducible.
 
-1. The code in this repository is intended for analytical use for a specific
-   problem. It is not meant to be a general-purpose library.
-2. This project and its code are evolving as my personal understanding of
-   modeling and coding techniques on the way to discovering answers to questions
-   about the nature of a possible decentralized PNT service for the Moon.
-
-# Code Organization
-
-This project contains Python implementations and Rust implementations.
-
-## Python
-Preliminary explorations were done in Python using the Mesa framework and the
-Python package from nyx-space. You can find some iPy notebooks and Mesa models
-that showcase elements of these packages, along with code reference thereof.
-
-* [Project Mesa](https://github.com/projectmesa/mesa)
-* [Nyx Space](https://github.com/nyx-space/nyx)
-
-## Rust
-
-The Rust implementation of this model is built around an Entity-Component-System
-(ECS) architecture to make the most of the tools and ethos behind Rust and core
-crates like Bevy. This approach also aligns well with the intent of the model.
+## Entity-Component-System (ECS)
 
 An ECS architecture allows for a modular and scalable design, making it easier
 to manage the simulation's complexity. Components store data, and systems
@@ -30,62 +11,44 @@ operate on that data, while resources hold shared data needed across systems.
 This separation of concerns and data-driven approach is a key characteristic of
 ECS.
 
-1. **Components:**
-    - **Clock Component (`Clock`):**
-        - Represents individual clocks in the simulation.
-        - Contains parameters such as speed, local gravity, clock time, and PTP
-          clock information.
-        - Includes a `Radio` component for radio communication parameters.
-    - **Quartz Oscillator Component (`QuartzOscillator`):**
-        - Represents properties of a quartz oscillator associated with a clock.
-        - Includes parameters like frequency offset, aging rate, and temperature
-          sensitivity.
-    - **Time Resource (`TimeResource`):**
-        - A resource to keep track of the time elapsed between frames.
-    - **TUI Stats Component (`TuiStats`):**
-        - Holds information related to TUI (Text-based User Interface) stats for
-          display.
-    - **PtpClock Component (`PtpClock`):**
-        - Represents PTP-related information, including offset and delay.
-    - **PtpMessage Component (`PtpMessage`):**
-        - Placeholder component for PTP message.
-    - **Radio Component (`Radio`):**
-        - Represents radio communication parameters such as transmitter power,
-          receiver sensitivity, and field of view.
-2. **Systems:**
-    - **Time Dilation System (`TimeDilationSystem`):**
-        - Calculates the time dilation factor for each clock based on speed,
-          local gravity, and oscillator parameters.
-        - Updates the clock time accordingly.
-    - **Simulate Clock System (`SimulateClockSystem`):**
-        - Simulates the behavior of each clock, updating parameters like speed,
-          local gravity, and aging.
-        - Handles the aging of quartz oscillators.
-    - **PtpSyncSystem (`PtpSyncSystem`):**
-        - Handles PTP synchronization logic, updating clock offset and delay
-          based on PTP messages.
-    - **Radio Communication System (`RadioCommunicationSystem`):**
-        - Simulates radio communication logic, determining entities within the
-          field of view and sending messages.
-    - **Update TUI System (`UpdateTuiSystem`):**
-        - Updates TUI stats based on simulation data.
-        - Prints the stats to the terminal for visualization.
-    - **PtpSyncSenderSystem (`PtpSyncSenderSystem`):**
-        - Sends PTP messages to synchronize clocks.
-    - **Radio Communication Sender System (`RadioCommunicationSenderSystem`):**
-        - Simulates sending radio messages to entities within the field of view.
-3. **Initialization:**
-    - In the Bevy app, entities are created with the relevant components, such
-      as `Clock`, `QuartzOscillator`, `PtpClock`, and `Radio`.
-    - The ECS systems are added to the app to process and update entities during
-      each frame.
-4. **Interaction:**
-    - Components hold the state of entities (e.g., clock parameters, oscillator
-      properties, PTP information, radio communication parameters).
-    - Systems process and update entities based on their components and the
-      logic defined in each system.
+![Unity ECS diagram](https://docs.unity3d.com/Packages/com.unity.entities@0.1/manual/images/ECSBlockDiagram.png)
 
-This ECS architecture allows for a modular and scalable design, making it easier
-to manage the simulation's complexity, including PTP synchronization and radio
-communication. Components store data, and systems operate on that data, while
-resources hold shared data needed across systems.
+[Rust Example](https://github.com/bevyengine/bevy/blob/main/examples/ecs/ecs_guide.rs)
+
+In our simulation, the _schedule_ is critical. The engine or framework we choose
+will need to decide the order of operations each "tick" of the simulation, and
+we must consider this order when designing the system.
+
+## Choosing a Framework
+ECS frameworks like [Bevy](https://bevyengine.org/) enable real-time,
+interactive simulations, but it can be less deterministic and structured than a
+discrete-event simulation, since it is [not specially tailored for that purpose](https://github.com/bevyengine/bevy/discussions/1678).
+
+[krABMaga](https://krabmaga.github.io/)[^1] is a purpose-built discrete-events
+simulation engine writting in Rust and designed to be a batteries-included tool
+for building Agent-Based Models (ABMs). While krABMaga can leverage Bevy to
+visualize the model, under the hood it maintains a stricter state and execution
+schedule based on the popular [MASON library](https://cs.gmu.edu/~eclab/projects/mason/).
+
+![ECS in krABMaga](https://krabmaga.github.io/images/krabmaga-arch.jpg)
+
+In the end, both are ECS frameworks that can be used here. krABMaga adds some
+creature comforts but encourages a certain style. Bevy is the toolbox that can
+be used to build whatever you want, but elbow grease is a necessity. Since both
+are ECS frameworks, our model can be built from first principles and we can
+decide how to run and visualize it later. We might find that the best approach
+is using both together.
+
+[^1]: ```bibtex
+@ARTICLE{AntelmiASIASIM2019,
+  author={Antelmi, A. and Cordasco, G. and D’Auria, M. and De Vinco, D. and Negro, A. and Spagnuolo, C.},
+  title={On Evaluating Rust as a Programming Language for the Future of Massive Agent-Based Simulations},
+  journal={Communications in Computer and Information Science},
+  note={Conference of 19th Asia Simulation Conference, AsiaSim 2019 ; Conference Date: 30 October 2019 Through 1 November 2019;  Conference Code:233729},
+  year={2019},
+  volume={1094},
+  pages={15-28},
+  doi={10.1007/978-981-15-1078-6_2},
+  issn={18650929},
+  isbn={9789811510779},
+}```

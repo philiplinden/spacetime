@@ -1,4 +1,4 @@
-use crate::model::spacetime::Realm;
+use crate::model::sim::Realm;
 use core::fmt;
 use krabmaga::engine::{
     agent::Agent,
