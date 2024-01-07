@@ -1,3 +1,3 @@
 pub mod components;
-pub mod ui;
+pub mod gui;
 pub mod systems;
