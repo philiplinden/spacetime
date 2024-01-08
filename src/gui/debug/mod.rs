@@ -1,4 +1,3 @@
-pub mod labels;
 pub mod performance;
 
 use performance::FpsMonitorPlugin;
@@ -7,6 +6,7 @@ use performance::FpsMonitorPlugin;
 use bevy::input::common_conditions::input_toggle_active;
 use bevy::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use bevy_rapier3d::render::RapierDebugRenderPlugin;
 
 pub struct DebugUiPlugin;
 
@@ -16,6 +16,7 @@ impl Plugin for DebugUiPlugin {
             FpsMonitorPlugin,
             // EntityLabelPlugin,
             WorldInspectorPlugin::default().run_if(input_toggle_active(true, KeyCode::Escape)),
+            RapierDebugRenderPlugin::default(),
         ));
     }
 }

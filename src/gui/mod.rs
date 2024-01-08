@@ -1,16 +1,19 @@
-mod debug;
-pub use debug::DebugUiPlugin;
+pub mod debug;
+pub mod select;
 
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPlugin};
-use bevy_pancam::{PanCam, PanCamPlugin};
 
 pub struct BaseUiPlugin;
 
 impl Plugin for BaseUiPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins((EguiPlugin, PanCamPlugin::default()))
-            .add_systems(Startup, setup_camera)
+        app.add_plugins(EguiPlugin)
+            .insert_resource(ClearColor(Color::BLACK))
+            .insert_resource(AmbientLight {
+                color: Color::NONE,
+                brightness: 0.0,
+            })
             .add_systems(PostStartup, setup_egui);
     }
 }
@@ -21,8 +24,4 @@ fn setup_egui(mut ctxs: EguiContexts) {
         window_stroke: egui::Stroke::NONE,
         ..egui::Visuals::dark()
     });
-}
-
-fn setup_camera(mut commands: Commands) {
-    commands.spawn((Camera3dBundle::default(), PanCam::default()));
 }
