@@ -17,7 +17,6 @@ networkx = "^3.2.1"
 hifitime = "^3.8.5"
 numpy = "^1.26.2"
 astropy = "^6.0.0"
-gala = "^1.8.1"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
