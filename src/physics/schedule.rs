@@ -1,123 +1,164 @@
-use bevy::{ecs::schedule::ScheduleLabel, prelude::*};
-use bevy_rapier3d::prelude::*;
+/* This is a custom physics schedule for use with Bevy.
+ * It is based on https://github.com/Canleskis/particular/blob/main/examples/pocket-solar-system/src/physics.rs
+ *
+ * This is basically a tiny physics engine. Unlike fully-feature physics engines like Rapier, this physics schedule
+ * ONLY calculates motion. It does NOT include features related to collisions.
+ */
 
-#[derive(Default, Resource)]
-pub struct RealWorldTick(pub f32);
+use std::time::Duration;
 
+use bevy::ecs::schedule;
+use bevy::prelude::*;
 
-#[derive(ScheduleLabel, Clone, Debug, PartialEq, Eq, Hash)]
-pub struct PreRapierSchedule;
+use crate::physics::{sympletic_euler, Acceleration, Velocity, Position};
 
-#[derive(ScheduleLabel, Clone, Debug, PartialEq, Eq, Hash)]
-struct SyncRapierSchedule;
+#[derive(schedule::ScheduleLabel, Debug, Hash, PartialEq, Eq, Clone)]
+pub struct PhysicsSchedule;
 
-#[derive(ScheduleLabel, Clone, Debug, PartialEq, Eq, Hash)]
-struct StepRapierSchedule;
-
-pub fn time_sync(
-    time: Res<Time>,
-    config: Res<RapierConfiguration>,
-    mut physics_time: ResMut<RealWorldTick>,
-    mut sim_to_render_time: ResMut<SimulationToRenderTime>,
-) {
-    if !config.physics_pipeline_active {
-        return;
-    }
-
-    let TimestepMode::Fixed { dt, .. } = config.timestep_mode else {
-        return;
-    };
-
-    if sim_to_render_time.diff > dt {
-        sim_to_render_time.diff = 0.0;
-    }
-
-    physics_time.0 = time.delta_seconds().min(dt);
-    sim_to_render_time.diff += time.delta_seconds();
+#[derive(SystemSet, Debug, Hash, PartialEq, Eq, Clone)]
+pub enum PhysicsSet {
+    First,
+    Main,
+    Last,
 }
 
-pub fn physics_step(world: &mut World) {
-    let config = world.resource::<RapierConfiguration>();
-    let sim_to_render_time = world.resource::<SimulationToRenderTime>();
-
-    let TimestepMode::Fixed { dt, .. } = config.timestep_mode else {
-        return;
-    };
-
-    let is_physics_step = config.physics_pipeline_active && sim_to_render_time.diff > dt;
-
-    if is_physics_step {
-        world.run_schedule(PreRapierSchedule);
-    }
-
-    world.run_schedule(SyncRapierSchedule);
-
-    if is_physics_step {
-        world.run_schedule(StepRapierSchedule);
-    }
+#[derive(Resource, Clone, Copy)]
+pub struct PhysicsSettings {
+    pub delta_time: f32,
+    pub time_scale: f32,
 }
 
-pub struct CustomRapierSchedule;
-
-impl Plugin for CustomRapierSchedule {
-    fn build(&self, app: &mut App) {
-        app.init_resource::<RealWorldTick>()
-            .add_systems(First, time_sync)
-            .add_systems(PreUpdate, physics_step);
-
-        let mut pre_schedule = Schedule::new(PreRapierSchedule);
-        pre_schedule.add_systems(apply_accelerations);
-
-        let mut sync_schedule = Schedule::new(SyncRapierSchedule);
-        sync_schedule.configure_sets(PhysicsSet::SyncBackend);
-        sync_schedule.add_systems((RapierPhysicsPlugin::<()>::get_systems(
-            PhysicsSet::SyncBackend,
-        )
-        .in_set(PhysicsSet::SyncBackend),));
-
-        let mut step_schedule = Schedule::new(StepRapierSchedule);
-        step_schedule.configure_sets((PhysicsSet::StepSimulation, PhysicsSet::Writeback).chain());
-        step_schedule.add_systems((
-            RapierPhysicsPlugin::<()>::get_systems(PhysicsSet::StepSimulation)
-                .in_set(PhysicsSet::StepSimulation),
-            RapierPhysicsPlugin::<()>::get_systems(PhysicsSet::Writeback)
-                .in_set(PhysicsSet::Writeback),
-        ));
-
-        app.add_schedule(pre_schedule)
-            .add_schedule(sync_schedule)
-            .add_schedule(step_schedule);
-
-        app.insert_resource(RapierConfiguration {
-            gravity: Vec3::ZERO,
-            timestep_mode: TimestepMode::Fixed {
-                dt: crate::DT,
-                substeps: 1,
-            },
+impl PhysicsSettings {
+    pub fn delta_time(delta_time: f32) -> Self {
+        Self {
+            delta_time,
             ..default()
-        });
+        }
+    }
+
+    pub fn period(&self) -> f32 {
+        self.delta_time / self.time_scale
+    }
+
+    pub fn steps_per_second(&self) -> usize {
+        self.delta_time.recip().round() as _
     }
 }
 
-#[derive(Component, Debug, Default)]
-pub struct Acceleration {
-    pub linear: Vec3,
-    pub angular: f32,
+impl Default for PhysicsSettings {
+    fn default() -> Self {
+        Self {
+            delta_time: 1.0 / 60.0,
+            time_scale: 1.0,
+        }
+    }
 }
 
-fn apply_accelerations(
-    config: Res<RapierConfiguration>,
-    mut query: Query<(&mut Acceleration, &mut Velocity)>,
+#[derive(Resource, Default)]
+pub struct PhysicsTime {
+    accumulated: f32,
+    pub paused: bool,
+}
+
+impl PhysicsTime {
+    fn tick(&mut self, delta: f32) {
+        if !self.paused {
+            self.accumulated += delta;
+        }
+    }
+
+    fn can_step(&self, period: f32) -> bool {
+        !self.paused && self.accumulated >= period
+    }
+}
+
+#[derive(Resource, Deref, Clone, Copy, Default)]
+pub struct ElapsedPhysicsTime(Duration);
+
+#[derive(Component, Clone, Copy, Debug, Default, Reflect)]
+pub struct Interpolated {
+    previous_position: Option<Vec3>,
+}
+
+pub struct PhysicsPlugin;
+
+impl Plugin for PhysicsPlugin {
+    fn build(&self, app: &mut App) {
+        app.register_type::<Acceleration>()
+            .register_type::<Velocity>()
+            .add_schedule(Schedule::new(PhysicsSchedule))
+            .configure_sets(
+                PhysicsSchedule,
+                (PhysicsSet::First, PhysicsSet::Main, PhysicsSet::Last).chain(),
+            )
+            .insert_resource(PhysicsTime::default())
+            .insert_resource(ElapsedPhysicsTime::default())
+            .add_systems(PreUpdate, run_physics_schedule)
+            .add_systems(
+                PhysicsSchedule,
+                (
+                    (track_elapsed_time, cache_previous_positions).in_set(PhysicsSet::First),
+                    integrate_positions.in_set(PhysicsSet::Main),
+                ),
+            )
+            .add_systems(Update, update_transforms);
+    }
+}
+
+fn run_physics_schedule(world: &mut World) {
+    let delta = world.resource::<Time>().delta_seconds();
+    world.resource_mut::<PhysicsTime>().tick(delta);
+
+    let period = world.resource::<PhysicsSettings>().period();
+    while world.resource::<PhysicsTime>().can_step(period) {
+        world.resource_mut::<PhysicsTime>().accumulated -= period;
+        world.run_schedule(PhysicsSchedule);
+    }
+}
+
+fn track_elapsed_time(physics: Res<PhysicsSettings>, mut elapsed: ResMut<ElapsedPhysicsTime>) {
+    elapsed.0 += Duration::from_secs_f32(physics.delta_time);
+}
+
+fn cache_previous_positions(mut query: Query<(&Position, &mut Interpolated)>) {
+    for (position, mut interpolated) in &mut query {
+        interpolated.previous_position = Some(**position);
+    }
+}
+
+fn integrate_positions(
+    physics: Res<PhysicsSettings>,
+    mut query: Query<(&mut Acceleration, &mut Velocity, &mut Position)>,
 ) {
-    let TimestepMode::Fixed { dt, .. } = config.timestep_mode else {
+    for (mut acceleration, mut velocity, mut position) in &mut query {
+        (**velocity, **position) =
+            sympletic_euler(**acceleration, **velocity, **position, physics.delta_time);
+
+        **acceleration = Vec3::ZERO;
+    }
+}
+
+/// Interpolates or sets the transform depending on if the entity has an [`Interpolated`] component.
+/// Can look unnatural if the `delta_time / time_scale` change is significant between two frames.
+fn update_transforms(
+    physics: Res<PhysicsSettings>,
+    physics_time: Res<PhysicsTime>,
+    mut query: Query<(&mut Transform, &Position, Option<&Interpolated>)>,
+) {
+    if physics_time.paused {
         return;
-    };
+    }
 
-    for (mut acceleration, mut velocity) in &mut query {
-        velocity.linvel += acceleration.linear * dt;
-        velocity.angvel += acceleration.angular * dt;
+    let s = physics_time.accumulated / physics.period();
 
-        acceleration.linear = Default::default();
-        acceleration.angular = Default::default();
+    for (mut transform, position, interpolated) in &mut query {
+        let new_position = interpolated
+            .and_then(|interpolated| interpolated.previous_position)
+            .map(|previous_position| previous_position.lerp(**position, s))
+            .unwrap_or(**position);
+
+        if transform.translation != new_position {
+            transform.translation = new_position;
+        }
     }
 }

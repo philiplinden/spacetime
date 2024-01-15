@@ -3,6 +3,10 @@ use bevy::{
     prelude::*,
 };
 
+use crate::SCALE;
+
+static MAX_ZOOM_LIMIT: f32 = 1.0e3;
+
 #[derive(Component, Default)]
 pub struct OrbitCamera {
     pub min_distance: f32,
@@ -46,7 +50,7 @@ pub fn camera_controls(
         .sum::<f32>();
 
     *radius -= *radius * scroll * 0.2;
-    *radius = radius.clamp(orbit.min_distance, 10000.0);
+    *radius = radius.clamp(orbit.min_distance, MAX_ZOOM_LIMIT);
 
     let delta = input_mouse
         .pressed(MouseButton::Right)
@@ -78,7 +82,7 @@ pub fn camera_controls(
 fn setup_camera(mut commands: Commands) {
     commands.spawn((
         Camera3dBundle {
-            transform: Transform::from_xyz(0.0, 0.0, 200.0)
+            transform: Transform::from_xyz(0.0, 0.0, 1.0e7 * SCALE)
                 .looking_at(Vec3::new(0.0, 0.0, 0.0), Vec3::Y),
             camera: Camera {
                 hdr: true,

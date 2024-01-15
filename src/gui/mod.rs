@@ -1,5 +1,8 @@
 pub mod debug;
+pub mod hud;
+pub mod orbit_prediction;
 pub mod select;
+pub mod label;
 
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPlugin};
@@ -24,4 +27,12 @@ fn setup_egui(mut ctxs: EguiContexts) {
         window_stroke: egui::Stroke::NONE,
         ..egui::Visuals::dark()
     });
+}
+
+pub fn format_duration(duration: std::time::Duration, precision: usize) -> String {
+    humantime::format_duration(duration)
+        .to_string()
+        .split_inclusive(' ')
+        .take(precision)
+        .collect::<String>()
 }

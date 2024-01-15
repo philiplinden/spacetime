@@ -1,13 +1,17 @@
 use bevy::prelude::*;
-use bevy_rapier3d::prelude::*;
-
 mod components;
 mod gui;
 mod physics;
 
 use components::{body, camera};
 
+// The physics engine runs at a fixed timestep, with each step corresponding to the duration specified below.
 pub const DT: f32 = 1.0 / 60.0;
+
+// This affects the size of every elements in the physics engine, by multiplying all the length-related quantities by
+// the physics_scale factor. This should likely always be 1.0 in 3D. In 2D, this is useful to specify a
+// “pixels-per-meter” conversion ratio.
+pub const SCALE: f32 = 1.0;
 
 fn main() {
     App::new()
@@ -23,19 +27,27 @@ fn main() {
                 }),
                 ..default()
             }),
-
             // Interface
             gui::BaseUiPlugin,
+            gui::hud::HudPlugin,
+            gui::orbit_prediction::OrbitPredictionPlugin,
+            gui::select::SelectionPlugin,
             gui::debug::DebugUiPlugin, // requires BaseUiPlugin
+            // Camera
             camera::CameraPlugin,
-
             //Physics
-            RapierPhysicsPlugin::<NoUserData>::default().with_default_system_setup(false),
-            physics::CustomRapierSchedule,
-            physics::ParticularPlugin,
+            physics::PhysicsPlugin,
+            physics::GravityPlugin,
         ))
+        // Resources
+        .insert_resource(ClearColor(Color::BLACK))
+        .insert_resource(AmbientLight {
+            color: Color::NONE,
+            brightness: 0.0,
+        })
+        .insert_resource(physics::PhysicsSettings::delta_time(1.0 / 60.0))
         // Spawn bodies
-        .add_systems(Startup, body::spawn_bodies)
+        .add_systems(Startup, body::setup_scene)
         .add_systems(First, body::add_materials)
         .run();
 }
