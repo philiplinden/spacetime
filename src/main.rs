@@ -32,18 +32,10 @@ fn main() {
             //Physics
             RapierPhysicsPlugin::<NoUserData>::default().with_default_system_setup(false),
             physics::CustomRapierSchedule,
+            physics::ParticularPlugin,
         ))
         // Spawn bodies
         .add_systems(Startup, body::spawn_bodies)
         .add_systems(First, body::add_materials)
         .run();
 }
-
-// fn load_gltf_things(mut commands: Commands, server: Res<AssetServer>) {
-//     // spawn a whole scene
-//     let my_scene: Handle<Scene> = server.load("models/Earth.glb#Scene0");
-//     commands.spawn(SceneBundle {
-//         scene: my_scene,
-//         ..Default::default()
-//     });
-// }
