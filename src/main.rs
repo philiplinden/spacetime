@@ -1,15 +1,41 @@
-use krabmaga::*;
+use bevy::prelude::*;
+use bevy_rapier3d::prelude::*;
 
-use crate::model::sim::Realm;
+mod components;
+mod gui;
+mod physics;
 
-mod model;
+use components::{body, camera};
 
-pub static TOROIDAL: bool = true;
-pub static DISCRETIZATION: f32 = 1.0;
+pub const DT: f32 = 1.0 / 60.0;
 
 fn main() {
-    let step = 100;
-    let state = Realm::default();
+    App::new()
+        .add_plugins((
+            DefaultPlugins.set(WindowPlugin {
+                primary_window: Some(Window {
+                    #[cfg(not(target_arch = "wasm32"))]
+                    resolution: bevy::window::WindowResolution::new(1920.0, 1080.0),
+                    fit_canvas_to_parent: true,
+                    prevent_default_event_handling: false,
+                    canvas: Some("#app".to_owned()),
+                    ..default()
+                }),
+                ..default()
+            }),
 
-    simulate!(state, step, 10);
+            // Interface
+            gui::BaseUiPlugin,
+            gui::debug::DebugUiPlugin, // requires BaseUiPlugin
+            camera::CameraPlugin,
+
+            //Physics
+            RapierPhysicsPlugin::<NoUserData>::default().with_default_system_setup(false),
+            physics::CustomRapierSchedule,
+            physics::ParticularPlugin,
+        ))
+        // Spawn bodies
+        .add_systems(Startup, body::spawn_bodies)
+        .add_systems(First, body::add_materials)
+        .run();
 }
