@@ -12,3 +12,4 @@ ipynb2md:
 		$(basename $(notdir $(wildcard $(NOTEBOOKS)*.ipynb))), \
 		$(call ipynb-to-md, $(nb)) \
 	)
+	cp $(NOTEBOOKS)*.png $(PYTHON_DOCS)

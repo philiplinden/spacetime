@@ -4,7 +4,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-    paths: ["learning"]
   pull_request:
     branches: [ "main" ]
   # Allows you to run this workflow manually from the Actions tab
@@ -100,7 +99,6 @@ jobs:
         with:
           name: site
           path: site
-      - run: mv docs/rust site
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
