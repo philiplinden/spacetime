@@ -1,5 +1,10 @@
-mod nbody;
+pub mod constants;
 mod schedule;
+mod spacetime;
 
-pub use schedule::CustomRapierSchedule;
-pub use nbody::ParticularPlugin;
+pub use schedule::{
+    ElapsedPhysicsTime, Interpolated, PhysicsSchedulePlugin, PhysicsSettings, PhysicsTime,
+};
+pub use spacetime::{
+    sympletic_euler, Acceleration, GravityPlugin, Mass, Position, Velocity, NBODY_COMPUTE_METHOD,
+};

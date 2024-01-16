@@ -1,13 +1,5 @@
-use crate::components::camera::{OrbitCamera, camera_controls};
+use crate::camera::{OrbitCamera, camera_controls};
 use bevy::prelude::*;
-
-#[derive(Component, Default)]
-pub struct Clickable {
-    pub radius: f32,
-}
-
-#[derive(Event, Deref, DerefMut)]
-pub struct ClickEvent(pub Option<Entity>);
 
 #[derive(Resource, Deref, DerefMut, Default)]
 pub struct Followed(pub Option<Entity>);
@@ -17,31 +9,48 @@ pub struct CanFollow {
     pub min_camera_distance: f32,
 }
 
+#[derive(Component, Default)]
+pub struct Selected;
+
+#[derive(Component, Default)]
+pub struct CanSelect {
+    pub radius: f32,
+}
+
+#[derive(Event, Deref, DerefMut)]
+pub struct ClickEvent(pub Option<Entity>);
+
 pub struct SelectionPlugin;
 
 impl Plugin for SelectionPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<Followed>()
             .add_event::<ClickEvent>()
-            .add_systems(Update, (entity_picker, follow_clicked).chain())
+            .add_systems(Update, (entity_picker, select_clicked).chain())
             .add_systems(PostUpdate, sync_followed.before(camera_controls));
     }
 }
 
 fn entity_picker(
+    mut ctxs: bevy_egui::EguiContexts,
     mut click_entity_events: EventWriter<ClickEvent>,
     mouse_input: Res<Input<MouseButton>>,
     query_window: Query<&Window>,
     query_camera: Query<(&GlobalTransform, &Camera)>,
-    query_can_select: Query<(Entity, &Transform, &Clickable)>,
+    query_can_select: Query<(Entity, &Transform, &CanSelect)>,
 ) {
     if !mouse_input.just_pressed(MouseButton::Left) {
+        return;
+    }
+
+    if ctxs.ctx_mut().is_pointer_over_area() {
         return;
     }
 
     let Ok(window) = query_window.get_single() else {
         return;
     };
+
     let Ok((camera_transform, camera)) = query_camera.get_single() else {
         return;
     };
@@ -52,11 +61,11 @@ fn entity_picker(
         .and_then(|ray| {
             query_can_select
                 .iter()
-                .fold(None, |acc, (entity, transform, clickable)| {
+                .fold(None, |acc, (entity, transform, can_select)| {
                     let distance = transform.translation - ray.origin;
                     let proj = ray.direction.dot(distance);
                     let mag = distance.length_squared();
-                    let radius = clickable.radius + mag.sqrt() / 150.0;
+                    let radius = can_select.radius + mag.sqrt() / 150.0;
                     let d = (proj * proj + radius * radius >= mag).then_some((entity, mag));
 
                     acc.filter(|&(_, mag2)| d.is_none() || mag2 < mag).or(d)
@@ -67,10 +76,18 @@ fn entity_picker(
     click_entity_events.send(ClickEvent(clicked_entity));
 }
 
-fn follow_clicked(mut click_events: EventReader<ClickEvent>, mut followed: ResMut<Followed>) {
-    for &ClickEvent(entity) in click_events.read() {
+fn select_clicked(
+    mut commands: Commands,
+    mut selection_events: EventReader<ClickEvent>,
+    query_selected: Query<Entity, With<Selected>>,
+) {
+    for &ClickEvent(entity) in selection_events.read() {
+        for entity in &query_selected {
+            commands.entity(entity).remove::<Selected>();
+        }
+
         if let Some(entity) = entity {
-            followed.replace(entity);
+            commands.entity(entity).insert(Selected);
         }
     }
 }
@@ -95,7 +112,7 @@ fn sync_followed(
 fn _show_pickable_zone(
     mut gizmos: Gizmos,
     query_camera: Query<&GlobalTransform, With<Camera>>,
-    query_can_select: Query<(&Transform, &Clickable)>,
+    query_can_select: Query<(&Transform, &CanSelect)>,
 ) {
     let Ok(camera_transform) = query_camera.get_single() else {
         return;
