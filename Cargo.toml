@@ -13,13 +13,12 @@ repository = "https://github.com/philiplinden/clocss-abm"
 
 [dependencies]
 bevy = { version = "0.12.0", features = ["dynamic_linking"] }
-bevy-inspector-egui = { version = "0.22.1", features = ["highlight_changes"] }
+# bevy-inspector-egui = { version = "0.22.0", features = ["highlight_changes"] }
 bevy_egui = "0.24.0"
 crossbeam-channel = "0.5.11"
 hifitime = "3.8.5"
 humantime = "2.1.0"
 particular = { version = "0.6.1", features = ["gpu"] }
-rand = "0.8.5"
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]

@@ -3,18 +3,8 @@ mod schedule;
 mod spacetime;
 
 pub use schedule::{
-    Interpolated,
-    PhysicsPlugin,
-    PhysicsSettings,
-    PhysicsTime,
-    ElapsedPhysicsTime,
+    ElapsedPhysicsTime, Interpolated, PhysicsSchedulePlugin, PhysicsSettings, PhysicsTime,
 };
 pub use spacetime::{
-    GravityPlugin,
-    Acceleration,
-    Velocity,
-    Position,
-    Mass,
-    NBODY_COMPUTE_METHOD,
-    sympletic_euler,
+    sympletic_euler, Acceleration, GravityPlugin, Mass, Position, Velocity, NBODY_COMPUTE_METHOD,
 };

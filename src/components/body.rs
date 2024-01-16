@@ -1,96 +1,17 @@
 use bevy::prelude::*;
 
+use crate::SCALED_LENGTH;
 use crate::physics::{
-    PhysicsSettings, Interpolated, Acceleration, Velocity, Position, Mass
+    Interpolated, Acceleration, Velocity, Position, Mass
 };
 use crate::gui::{
     label::Labelled,
-    orbit_prediction::{ComputePredictionEvent, PredictionBundle, PredictionDraw},
-    select::{CanSelect, Selected, CanFollow, Followed}
+    orbit_prediction::{PredictionBundle, PredictionDraw},
+    select::{CanSelect, CanFollow}
 };
 
 // Planetoids, stars, and other natural bodies are called CELESTIALS
 // Artificial bodies are called SPACECRAFT or STATION
-
-pub fn setup_scene(
-    mut commands: Commands,
-    mut event_writer: EventWriter<ComputePredictionEvent>,
-    physics: Res<PhysicsSettings>,
-) {
-    let star_color = Color::rgb(1.0, 1.0, 0.9);
-    let star = BodySetting {
-        name: "Star",
-        velocity: Vec3::new(-0.1826, -0.001, 0.0),
-        mu: 5E3,
-        radius: 8.0,
-        material: StandardMaterial {
-            base_color: star_color,
-            emissive: star_color * 2.0,
-            ..default()
-        },
-        ..default()
-    };
-
-    let planet = BodySetting {
-        name: "Planet",
-        position: Vec3::new(0.0, 60.0, 0.0),
-        mu: 100.0,
-        radius: 2.0,
-        material: StandardMaterial {
-            base_color: Color::rgb(0.0, 0.6, 1.0),
-            ..default()
-        },
-        ..default()
-    }
-    .orbiting(&star, Vec3::Z);
-
-    let moon = BodySetting {
-        name: "Moon",
-        position: planet.position + Vec3::new(4.5, 0.0, 0.0),
-        mu: 1.0,
-        radius: 0.6,
-        material: StandardMaterial {
-            base_color: Color::rgb(0.6, 0.4, 0.1),
-            ..default()
-        },
-        ..default()
-    }
-    .orbiting(&planet, Vec3::new(0.0, 0.5, -1.0));
-
-    let comet = BodySetting {
-        name: "Comet",
-        velocity: Vec3::new(2.8, 0.15, 0.4),
-        position: Vec3::new(-200.0, 138.0, -18.0),
-        mu: 0.000,
-        radius: 0.1,
-        material: StandardMaterial {
-            base_color: Color::rgb(0.3, 0.3, 0.3),
-            ..default()
-        },
-    };
-
-    let mut star_bundle = BodyBundle::new(star);
-    star_bundle.prediction_bundle.draw.steps = Some(0);
-    let star = commands.spawn((star_bundle, Selected)).id();
-
-    let mut planet_bundle = BodyBundle::new(planet);
-    planet_bundle.prediction_bundle.draw.reference = Some(star);
-    let planet = commands.spawn(planet_bundle).id();
-
-    let mut moon_bundle = BodyBundle::new(moon);
-    moon_bundle.prediction_bundle.draw.reference = Some(planet);
-    commands.spawn(moon_bundle);
-
-    let mut comet_bundle = BodyBundle::new(comet);
-    comet_bundle.prediction_bundle.draw.reference = Some(star);
-    commands.spawn(comet_bundle);
-
-    commands.insert_resource(Followed(Some(star)));
-
-    event_writer.send(ComputePredictionEvent {
-        steps: physics.steps_per_second() * 60 * 5,
-    });
-}
 
 #[derive(Component, Clone)]
 pub struct BodyMaterial {
@@ -123,7 +44,7 @@ pub fn add_materials(
                     point_light: PointLight {
                         color: material.emissive,
                         intensity: 5E4,
-                        range: 2E3,
+                        range: 2E3 * SCALED_LENGTH,
                         shadows_enabled: true,
                         ..default()
                     },
@@ -163,16 +84,16 @@ pub struct BodyBundle {
 
 #[derive(Default, Clone)]
 pub struct BodySetting {
-    name: &'static str,
-    velocity: Vec3,
-    position: Vec3,
-    mu: f32,
-    radius: f32,
-    material: StandardMaterial,
+    pub name: &'static str,
+    pub velocity: Vec3,
+    pub position: Vec3,
+    pub mu: f32,
+    pub radius: f32,
+    pub material: StandardMaterial,
 }
 
 impl BodySetting {
-    fn orbiting(mut self, orbiting: &Self, axis: Vec3) -> Self {
+   pub fn orbiting(mut self, orbiting: &Self, axis: Vec3) -> Self {
         let distance = self.position - orbiting.position;
 
         self.velocity = distance.cross(axis).normalize()

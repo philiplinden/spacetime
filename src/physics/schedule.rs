@@ -80,9 +80,9 @@ pub struct Interpolated {
     previous_position: Option<Vec3>,
 }
 
-pub struct PhysicsPlugin;
+pub struct PhysicsSchedulePlugin;
 
-impl Plugin for PhysicsPlugin {
+impl Plugin for PhysicsSchedulePlugin {
     fn build(&self, app: &mut App) {
         app.register_type::<Acceleration>()
             .register_type::<Velocity>()

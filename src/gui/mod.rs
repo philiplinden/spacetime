@@ -1,23 +1,28 @@
-pub mod debug;
 pub mod hud;
+pub mod label;
 pub mod orbit_prediction;
 pub mod select;
-pub mod label;
 
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPlugin};
 
-pub struct BaseUiPlugin;
+use crate::gui;
+pub struct GuiPlugin;
 
-impl Plugin for BaseUiPlugin {
+impl Plugin for GuiPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins(EguiPlugin)
-            .insert_resource(ClearColor(Color::BLACK))
-            .insert_resource(AmbientLight {
-                color: Color::NONE,
-                brightness: 0.0,
-            })
-            .add_systems(PostStartup, setup_egui);
+        app.add_plugins((
+            EguiPlugin,
+            gui::hud::HudPlugin,
+            gui::orbit_prediction::OrbitPredictionPlugin,
+            gui::select::SelectionPlugin,
+        ))
+        .insert_resource(ClearColor(Color::BLACK))
+        .insert_resource(AmbientLight {
+            color: Color::NONE,
+            brightness: 0.0,
+        })
+        .add_systems(PostStartup, setup_egui);
     }
 }
 
