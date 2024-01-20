@@ -1,5 +1,5 @@
-SRC ?= learning/SRC/
-DEST ?= docs/SRC/
+SRC ?= learning/notebooks/
+DEST ?= docs/notebooks/
 
 define ipynb-to-md
 	jupyter nbconvert $(join $(SRC), $(1).ipynb) --to html ;
