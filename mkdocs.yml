@@ -4,21 +4,21 @@ repo_url: https://github.com/philiplinden/clocss-abm
 repo_name: philiplinden/clocss-abm
 
 nav:
-  - Home:
+  - CLOCSS-ABM:
     - Home: index.md
     - Approach: approach.md
     - Design Decisions: design-decisions.md
   - Learning:
-    - Thinking by Example: notebooks/
     - Python Demos: python-demos.md
+    - iPy Notebooks: notebooks/
   - Project:
     - Agents: agents.md
-  - API Documentation: api/
+  - API Documentation: api/doc/clocss_abm/index.html
 theme:
   name: material
   font:
-    text: Linden Hill # or Cutive Mono
-    code: Source Code Pro # or Fira Mono
+    text: Space Mono
+    code: Source Code Pro
   icon:
     logo: fontawesome/solid/clock-rotate-left
   palette:
@@ -27,17 +27,6 @@ theme:
       scheme: default
       primary: white
       accent: blue
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: blue
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
   features:
     - content.code.copy
     - navigation.instant

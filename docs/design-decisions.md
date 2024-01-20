@@ -1,9 +1,8 @@
-# Design Decisions
 The code structure of the model will have a significant impact on its complexity
 and performance. It is important for complexity to be minimized and performance
 to be maximized in order for the results to be trusted and reproducible.
 
-## Rust, not Python
+# Rust, not Python
 I am an intermediate-advanced Python developer. I have absolute faith in my ability to build something at least
 marginally functional to meet the goals I set out to achieve with this project. In fact, I already used python in this
 project to illustrate core concepts and practice thinking through the problem.
@@ -24,7 +23,7 @@ projects has dramatically improved in the last month, and I quite enjoy it.
 
 I think it was a wise choice in the long run to go with Rust over python for this project.
 
-## Entity-Component-System (ECS)
+# Entity-Component-System (ECS)
 An ECS architecture allows for a modular and scalable design, making it easier
 to manage the simulation's complexity. Components store data, and systems
 operate on that data, while resources hold shared data needed across systems.
@@ -39,8 +38,8 @@ In our simulation, the _schedule_ is critical. The engine or framework we choose
 will need to decide the order of operations each "tick" of the simulation, and
 we must consider this order when designing the system.
 
-## Choosing a Framework
-### ECS & ABM
+# Choosing a Framework
+## ECS & ABM
 ECS frameworks like [Bevy](https://bevyengine.org/) enable real-time,
 interactive simulations, but it can be less deterministic and structured than a
 discrete-event simulation, since it is [not specially tailored for that purpose](https://github.com/bevyengine/bevy/discussions/1678).
@@ -74,7 +73,7 @@ is using both together.
   isbn={9789811510779},
 }```
 
-### Astrodynamics
+## Astrodynamics
 - **[nyx_space](https://nyxspace.com/)**. The documentation is... sparse. Expect to spend a lot of time in the source
   code or DMing the author. There is a wide set of tools tailored specifically for LEO missions up to lunar
   trajectories, including thrust maneuvers and simulated orbit determination from terrestrial ground stations.
