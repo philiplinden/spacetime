@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "clocss-abm"
+name = "demos"
 version = "0.1.0"
-description = "an Agent-Based Model of Heterogeneous Lunar Networks"
+description = "Learnings for an Agent-Based Model of Heterogeneous Lunar Networks"
 authors = ["Philip Linden <lindenphilipj@gmail.com>"]
 license = "AGPL-3.0-or-later"
 readme = "../README.md"
