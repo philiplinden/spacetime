@@ -15,11 +15,13 @@ impl Default for Clock {
 }
 
 impl Clock {
+    #[allow(dead_code)]
     pub fn new(epoch: Epoch) -> Self {
         Clock {
             epoch,
         }
     }
+    #[allow(dead_code)]
     pub fn tick(&mut self, elapsed: Duration) {
         self.epoch = self.epoch + elapsed
     }
