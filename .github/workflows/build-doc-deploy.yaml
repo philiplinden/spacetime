@@ -49,7 +49,7 @@ jobs:
       - name: Setup Rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
       - name: Build
-        run: cargo build --release --all-features --allow-dead-code
+        run: cargo build --release --all-features
 
   docs-rust:
     needs: build-rust
