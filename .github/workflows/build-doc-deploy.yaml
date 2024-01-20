@@ -20,27 +20,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v3
       - run: pip install poetry
-      - run: poetry build
-  docs-python:
-    needs: build-python
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Setup Python
-        uses: actions/setup-python@v3
-      - run: pip install poetry
-      - run: poetry install --with dev,docs
-      - name: Export notebooks as examples
-        run: poetry run make ipynb2md
-      - name: MkDocs build
-        run: poetry run mkdocs build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: site
-          path: site
+      - run: cd learning ; poetry build
 
   build-rust:
     runs-on: ubuntu-latest
@@ -61,6 +41,7 @@ jobs:
         with:
           command: build
           args: --release --all-features
+
   docs-rust:
     needs: build-rust
     runs-on: ubuntu-latest
@@ -73,15 +54,35 @@ jobs:
           toolchain: stable
           override: true
           components: rust-docs
-      - name: Build marcopolo-rs docs
-        working-directory: learning/demos/marcopolo-rs
-        run: cargo doc --no-deps --all-features --release --target-dir docs/rust
+      - name: Doc
+        uses: actions-rs/cargo@v1
+        with:
+          command: doc
+          args: --no-deps --target-dir=docs/api
+
+  docs-site:
+    needs: docs-rust
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v3
+      - run: pip install -r docs/requirements.txt
+      - name: Export notebooks as examples
+        run: make ipynb2md
+      - name: MkDocs build
+        run: mkdocs build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: site
 
   docs-deploy:
     if: github.ref == 'refs/heads/main'
-    needs:
-      - docs-python
-      - docs-rust
+    needs: docs-site
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       pages: write      # to deploy to Pages

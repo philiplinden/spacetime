@@ -21,11 +21,26 @@ Lunar Reference Frame.
 
 **Documentation is available at [philiplinden.github.io/clocss-abm](https://philiplinden.github.io/clocss-abm/).**
 
-## Getting Started with Python
+## Quickstart
 
-### Setup
+Install the dependencies for your operating system that are needed to run Bevy: [The Bevy Book - Setup](https://bevyengine.org/learn/book/getting-started/setup/)
 
-Install dependencies to a virtual environment using Python Poetry.
+Then run the project.
+```shell
+cargo run
+```
+
+## Learning
+Learning is one of the main objectives of this project. As such, several code demos and iPy notebooks can be found in
+the `learning` directory.
+
+The repository contains a mix of Python and Rust. See [the docs](https://philiplinden.github.io/clocss-abm) for more
+discussion on code architectures for this project. It's been an exploration with surprising twists.
+
+There are two Python demo models that run interactively in the browser. Install dependencies to a virtual environment
+using [Python Poetry](https://python-poetry.org/). Poetry is then used to spin up the demo projects.
+
+From the `learning` directory:
 ```shell
 # install python poetry
 pip install poetry
@@ -33,36 +48,18 @@ pip install poetry
 # install all dependencies
 poetry install
 ```
-
-### Usage
-There are two demo models that run interactively in the browser.
-
-#### Orbits
-The Orbits model uses Nyx to spawn a collection of satellites and propagate their
+The **Orbits** model uses Nyx to spawn a collection of satellites and propagate their
 trajectories. Mesa is used to set up and execute the simulation.
 
 ```shell
 poetry run mesa runserver learrning/demos/orbits
 ```
 
-#### Marco Polo
-The Marco Polo model uses Mesa to spawn a collection of agents to play the
+The **Marco Polo** model uses Mesa to spawn a collection of agents to play the
 children's game _Marco Polo_.
 
 ```shell
 poetry run mesa runserver learning/demos/marcopolo
-```
-
-## Getting Started with Rust
-
-### Setup
-Install the dependencies for your operating system that are needed to run Bevy:
-< link >
-
-### Usage
-
-```shell
-cargo run
 ```
 
 ## Attribution
