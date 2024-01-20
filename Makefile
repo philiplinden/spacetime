@@ -1,15 +1,15 @@
-NOTEBOOKS ?= learning/notebooks/
-PYTHON_DOCS ?= docs/python/notebooks/
+SRC ?= learning/notebooks/
+DEST ?= docs/notebooks/
 
 define ipynb-to-md
-	jupyter nbconvert $(join $(NOTEBOOKS), $(1).ipynb) --to html ;
-	mv $(join $(NOTEBOOKS), $(1).html) $(join $(PYTHON_DOCS), $(1).md) ;
+	jupyter nbconvert $(join $(SRC), $(1).ipynb) --to html ;
+	mv $(join $(SRC), $(1).html) $(join $(DEST), $(1).md) ;
 endef
 
 ipynb2md:
-	mkdir -p $(PYTHON_DOCS)
+	mkdir -p $(DEST)
 	$(foreach nb, \
-		$(basename $(notdir $(wildcard $(NOTEBOOKS)*.ipynb))), \
+		$(basename $(notdir $(wildcard $(SRC)*.ipynb))), \
 		$(call ipynb-to-md, $(nb)) \
 	)
-	cp $(NOTEBOOKS)*.png $(PYTHON_DOCS)
+	cp $(SRC)*.png $(DEST)

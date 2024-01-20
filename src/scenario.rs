@@ -62,6 +62,7 @@ fn scene_cislunar_real_scale(
     });
 }
 
+#[allow(dead_code)]
 fn scene_pocket_solar_system(
     mut commands: Commands,
     mut event_writer: EventWriter<ComputePredictionEvent>,
