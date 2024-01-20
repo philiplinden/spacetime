@@ -10,62 +10,63 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  build-python:
+  # build-python:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v3
+  #     - run: pip install poetry
+  #     - run: cd learning ; poetry build
+
+  cargo-cache:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
         with:
-          fetch-depth: 0
-      - name: Setup Python
-        uses: actions/setup-python@v3
-      - run: pip install poetry
-      - run: cd learning ; poetry build
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
 
   build-rust:
     runs-on: ubuntu-latest
+    needs: cargo-cache
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
       - name: Install Dependencies
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
-      - name: Build
-        uses: actions-rs/cargo@v1
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          command: build
-          args: --release --all-features
+          fetch-depth: 0
+      - name: Setup Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Build
+        run: cargo build --release --all-features
 
   docs-rust:
     needs: build-rust
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Rust toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-          components: rust-docs
-      - name: Doc
-        uses: actions-rs/cargo@v1
-        with:
-          command: doc
-          args: --no-deps --target-dir=docs/api
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Generate docs
+        run: cargo doc --no-deps --target-dir=docs/api
 
   docs-site:
     needs: docs-rust
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup Python
