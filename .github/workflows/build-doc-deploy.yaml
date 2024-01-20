@@ -31,10 +31,10 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
+      - name: Cargo Check
+        run: cargo check
       - name: Cargo Build
         run: cargo build --release --all-features
-      - name: Cargo Doc
-        run: cargo doc --no-deps --target-dir=docs/api
   #     - name: Setup Python
   #       uses: actions/setup-python@v3
   #     - name: Install Poetry
@@ -46,6 +46,18 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Install Dependencies
+        run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
+      - name: Restore cargo cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -55,6 +67,8 @@ jobs:
       - run: pip install -r docs/requirements.txt
       - name: Export notebooks as examples
         run: make ipynb2md
+      - name: Cargo Doc
+        run: cargo doc --no-deps --target-dir=docs/api
       - name: MkDocs build
         run: mkdocs build
       - uses: actions/upload-artifact@v3
