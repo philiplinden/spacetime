@@ -73,4 +73,3 @@ plugins:
   - include_dir_to_nav
   - git-authors
   - offline
-  - optimize
