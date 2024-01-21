@@ -2,5 +2,6 @@
 docs/* linguist-documentation
 
 # Don't include Jupyter Notebooks or assets/ in language stats
-learning/* liquist-vendored
-assets/* linguist-vendored
+*.ipynb linguist-documentation=true
+learning/** linguist-documentation=true
+assets/** linguist-vendored
