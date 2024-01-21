@@ -33,9 +33,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
       - name: Cargo Check
-        run: cargo check
+        run: cargo check --workspace
       - name: Cargo Build
-        run: cargo build --release --all-features
+        run: cargo build --workspace --release --all-features
   #     - name: Setup Python
   #       uses: actions/setup-python@v3
   #     - name: Install Poetry
