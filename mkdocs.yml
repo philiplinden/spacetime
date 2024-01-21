@@ -1,10 +1,10 @@
-site_name: CLOCSS Agent-Based Model
-site_description: an Agent-Based Model of Heterogeneous Lunar Networks for the Cislunar Open Clock Synchronization System (CLOCSS)
+site_name: spacetime
+site_description: A Simulation of Heterogeneous Networked Lunar Clocks.
 repo_url: https://github.com/philiplinden/clocss-abm
-repo_name: philiplinden/clocss-abm
+repo_name: philiplinden/spacetime
 
 nav:
-  - CLOCSS-ABM:
+  - spacetime:
     - Home: index.md
     - Approach: approach.md
     - Design Decisions: design-decisions.md

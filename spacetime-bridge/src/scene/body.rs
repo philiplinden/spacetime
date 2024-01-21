@@ -1,13 +1,13 @@
 use bevy::prelude::*;
 
-use crate::SCALED_LENGTH;
-use crate::physics::{
-    Interpolated, Acceleration, Velocity, Position, Mass
-};
 use crate::gui::{
     label::Labelled,
+    select::{CanFollow, CanSelect},
+};
+use spacetime_core::{
     orbit_prediction::{PredictionBundle, PredictionDraw},
-    select::{CanSelect, CanFollow}
+    physics::{Acceleration, Interpolated, Mass, Position, Velocity},
+    SCALED_LENGTH,
 };
 
 // Planetoids, stars, and other natural bodies are called CELESTIALS
@@ -93,7 +93,7 @@ pub struct BodySetting {
 }
 
 impl BodySetting {
-   pub fn orbiting(mut self, orbiting: &Self, axis: Vec3) -> Self {
+    pub fn orbiting(mut self, orbiting: &Self, axis: Vec3) -> Self {
         let distance = self.position - orbiting.position;
 
         self.velocity = distance.cross(axis).normalize()

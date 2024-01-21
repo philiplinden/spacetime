@@ -162,3 +162,8 @@ cython_debug/
 .vscode/
 *.parquet
 *.bsp
+
+# Cargo
+.cargo/
+target/
+dist/

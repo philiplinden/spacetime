@@ -1,12 +1,13 @@
 pub mod hud;
 pub mod label;
-pub mod orbit_prediction;
 pub mod select;
 
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPlugin};
 
 use crate::gui;
+use spacetime_core::orbit_prediction;
+
 pub struct GuiPlugin;
 
 impl Plugin for GuiPlugin {

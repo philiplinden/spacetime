@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Dependencies
-        run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
+        # https://github.com/bevyengine/bevy/blob/main/docs/linux_dependencies.md#installing-linux-dependencies
+        run: sudo apt-get install g++ pkg-config libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -47,7 +48,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Dependencies
-        run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
+        # https://github.com/bevyengine/bevy/blob/main/docs/linux_dependencies.md#installing-linux-dependencies
+        run: sudo apt-get install g++ pkg-config libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0
       - name: Restore cargo cache
         uses: actions/cache@v2
         with:

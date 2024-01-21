@@ -1,8 +1,6 @@
-# Mark docs/ as documentation, but not demos
+# Mark docs/ as documentation
 docs/* linguist-documentation
-learning/demos/* -linguist-documentation
 
 # Don't include Jupyter Notebooks or assets/ in language stats
-learning/notebooks/* liquist-vendored
-learning/data/* linguist-vendored
+learning/* liquist-vendored
 assets/* linguist-vendored

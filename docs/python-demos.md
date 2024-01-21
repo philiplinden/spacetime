@@ -9,7 +9,7 @@ In the end I decided to use Rust for this project instead. For discussion on tha
 ## Setup
 Install dependencies to a virtual environment using Python Poetry.
 ```shell
-# from clocss-abm/learning
+# from /learning
 
 # install python poetry
 pip install poetry
@@ -31,7 +31,7 @@ The rules:
     6. The detection threshold of a Seeker is doubled.
 
 ```shell
-# from clocss-abm/learning
+# from /learning
 poetry run mesa runserver demos/marcopolo
 ```
 
@@ -40,6 +40,6 @@ The Orbits model uses Nyx to spawn a collection of satellites and propagate thei
 trajectories. Mesa is used to set up and execute the simulation.
 
 ```shell
-# from clocss-abm/learning
+# from /learning
 poetry run mesa runserver demos/orbits
 ```
