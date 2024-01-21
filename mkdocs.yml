@@ -1,6 +1,6 @@
 site_name: spacetime
 site_description: A Simulation of Heterogeneous Networked Lunar Clocks.
-repo_url: https://github.com/philiplinden/clocss-abm
+repo_url: https://github.com/philiplinden/spacetime
 repo_name: philiplinden/spacetime
 
 nav:
@@ -13,7 +13,7 @@ nav:
     - iPy Notebooks: notebooks/
   - Project:
     - Agents: agents.md
-  - API Documentation: api/doc/clocss_abm/index.html
+  - API Documentation: api/doc/spacetime/index.html
 theme:
   name: material
   font:
