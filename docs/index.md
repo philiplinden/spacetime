@@ -1,6 +1,5 @@
 # clocss-abm
-an Agent-Based Model of Heterogeneous Lunar Networks for the Cislunar Open Clock
-Synchronization System (CLOCSS)
+A Simulation of Heterogeneous Networked Lunar Clocks.
 
 ## Abstract
 This project aims to use agent-based modeling and simulations to explore how

@@ -3,7 +3,7 @@ use bevy::{
     prelude::*,
 };
 
-use crate::SCALED_LENGTH;
+use spacetime_core::SCALED_LENGTH;
 
 static MAX_ZOOM_LIMIT: f32 = 1.0e3;
 

@@ -1,12 +1,12 @@
 use bevy::prelude::*;
 
-use crate::{SCALED_LENGTH, SCALED_MASS};
-use crate::components::body::{BodyBundle, BodySetting};
-use crate::gui::{
+use spacetime_core::{
+    SCALED_LENGTH, SCALED_MASS,
     orbit_prediction::ComputePredictionEvent,
-    select::{Followed, Selected},
 };
-use crate::physics::{PhysicsSettings, constants::G};
+use crate::scene::body::{BodyBundle, BodySetting};
+use crate::gui::select::{Followed, Selected};
+use spacetime_core::physics::{PhysicsSettings, constants::G};
 
 pub struct ScenarioPlugin;
 
