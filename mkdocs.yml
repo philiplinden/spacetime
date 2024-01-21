@@ -13,7 +13,9 @@ nav:
     - iPy Notebooks: notebooks/
   - Project:
     - Agents: agents.md
-  - API Documentation: api/doc/spacetime/index.html
+  - API Documentation:
+    - spacetime_bridge: api/doc/spacetime_bridge/index.html
+    - spacetime_core: api/doc/spacetime_bridge/index.html
 theme:
   name: material
   font:
