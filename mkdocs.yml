@@ -5,17 +5,16 @@ repo_name: philiplinden/spacetime
 
 nav:
   - spacetime:
-    - Home: index.md
-    - Approach: approach.md
-    - Design Decisions: design-decisions.md
-  - Learning:
-    - Python Demos: python-demos.md
-    - iPy Notebooks: notebooks/
-  - Project:
-    - Agents: agents.md
-  - API Documentation:
+    - home: index.md
+    - approach: approach.md
+    - design decisions: design-decisions.md
+  - learning by example:
+    - python demos: python-demos.md
+    - ipy notebooks: notebooks/
+  - technical topics: technical/
+  - api docs:
     - spacetime_bridge: api/doc/spacetime_bridge/index.html
-    - spacetime_core: api/doc/spacetime_bridge/index.html
+    - spacetime_core: api/doc/spacetime_core/index.html
 theme:
   name: material
   font:
@@ -41,6 +40,7 @@ theme:
     - search.highlight
 
 markdown_extensions:
+  - admonition
   - attr_list
   - footnotes
   - pymdownx.emoji:
@@ -55,6 +55,8 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex:
+      generic: true
   - toc:
       permalink: '#'
       baselevel: '2'
@@ -64,3 +66,12 @@ plugins:
   - include_dir_to_nav
   - git-authors
   - offline
+
+# Enable LaTeX-formatted math
+extra_javascript:
+  - scripts/katex.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css

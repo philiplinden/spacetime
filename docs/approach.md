@@ -7,7 +7,7 @@ coverage of decentralized PNT services and/or GNSS-like beacons providing PNT to
 lunar missions. There is an abundance of prior art describing optimal orbit
 configurations for such systems that can also be evaluated in this way.
 
-# Model
+# model
 The model will feature a population of agents, where each agent has a Stratum, a
 location and velocity, a clock with drift, and a communications system with a
 spectral band and radiation power. Agents belong to one of three groups based on
@@ -56,7 +56,7 @@ service configuration over the next 5 to 15 years, and also computing the
 equivalent cost per user for terrestrial GNSS, data-driven investment decisions
 related to deploying new PNT fleets in cislunar space are possible.
 
-## Metrics
+## metrics
 The following metrics and quantitative evaluation criteria will be used to
 evaluate PNT service characteristics.
 
@@ -86,7 +86,7 @@ evaluate PNT service characteristics.
   packets
 - *Channel dominance* - signal-to-noise ratio, jam-to-signal ratio
 
-# Motivation
+# motivation
 Recent advancements in space technologies have prompted a surge in lunar
 missions, both crewed and uncrewed. Such an influx demands scalable,
 commercially-accessible Positioning, Navigation, and Timing (PNT) frameworks for
@@ -116,7 +116,7 @@ needs and infrastructure combination opportunities, as well as requirements for
 Earth / Earth Orbit systems to be usable with minimum changes for lunar
 applications.
 
-## Diverse Cislunar Ecosystems of PNT and Communications Infrastructures are Inevitable
+## diverse cislunar ecosystems and infrastructures are inevitable
 
 A fundamental characteristic of the this proposed design is its peer-to-peer
 topology, ensuring resilience against centralized points of failure. The
@@ -136,7 +136,7 @@ neutral protocol for timekeeping, bad actors would not only have difficulty
 manipulating the service, but they may use this infrastructure themselves and
 even work to support its canonization.
 
-## Interoperability with Other Missions
+## interoperability with other missions
 
 In the design of a lunar PNT system one important consideration is the
 definition of a reference frame to allow for absolute position. This time
