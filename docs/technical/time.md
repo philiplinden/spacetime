@@ -31,15 +31,22 @@ velocity is the distance traveled over time taken. Since the speed of light is c
 "slow down" the proper time with respect to coordinate time to keep the equation valid. This is special relativity at
 work.
 
+![of course there is an xkcd for this](https://imgs.xkcd.com/comics/recipe_relativity.png)[^1]
+
 **General Relativity** deals with gravity, and explains how time slows down in the presence of a large
 [gravitational potential](./potentials.md). Scientists have sent ultra-precise clocks into the void beyond Earth and
 proved that proper time is slower for observers closer to the center of the gravity well. This is general relativity at
 work.
 
+![xkcd strikes again](https://www.explainxkcd.com/wiki/images/thumb/e/ed/bendy_2x.png/437px-bendy_2x.png)[^2]
+
 It's whack, but the math checks out and matches real observations. If you're still not convinced, look to
 [time_dilation.ipynb](../notebooks/time_dilation.md) for a worked out example.
 
-![of course there is an xkcd for this](https://xkcd.com/2767/)
-
 ## precision
 (wip)
+
+
+[^1]: Image credit: Randall Munroe, 2023. _Recipe Relativity_. https://xkcd.com/2767/
+
+[^2]: Image credit: Randall Munroe, 2022. _Bendy_. https://xkcd.com/2706/
