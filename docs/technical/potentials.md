@@ -14,7 +14,7 @@ from Earth, to the Moon or beyond? Does gravity change between here and there? (
 
 ## newtonian physics
 [Newtonian physics tells us](https://openstax.org/books/college-physics-2e/pages/7-3-gravitational-potential-energy)
-gravitaional potential ($PE$) is the work done against gravity ($g$), so it's porportional to changes in height ($h$).
+gravitaional potential ($PE$) is the work done against gravity $g$, so it's porportional to changes in height $h$.
 This is naive, but it hints at deeper intuitions about gravity.
 
 $$
@@ -46,7 +46,7 @@ gravity.
 
 ## barnes-hut algorithm
 The [Barnes-Hut Algorithm](http://arborjs.org/docs/barnes-hut) is a way to use a 
-[quad-tree](https://jimkang.com/quadtreevis/) for n-body problems.[^3] In short, far away bodies are lumped together and
+[quad-tree](https://jimkang.com/quadtreevis/) for n-body problems. In short, far away bodies are lumped together and
 gravitation is approximated using the lump's center of mass rather than all $n$ particles and not bothering to do any
 computations on quadrants without any bodies. This reduces an $O(n^2)$ problem to an $O(n \log{n})$ problem. This is
 also a great use case for GPU-driven parallel computations.
@@ -118,16 +118,20 @@ This method has been used for real-time fluid simulations ([example 1](https://y
 so a potential field should be a piece of cake.
 
 <iframe width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/MsByDK?gui=true&t=10&paused=true&muted=false" allowfullscreen></iframe>
-> Created by [Casheera](https://www.shadertoy.com/user/Casheera) (2017-05-03) via [shadertoy](https://www.shadertoy.com/view/MsByDK).
+[^3]
 
 <iframe width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/XlfSWS?gui=true&t=10&paused=true&muted=false" allowfullscreen></iframe>
-> Created by [charlieamer](https://www.shadertoy.com/user/charlieamer) (2015-08-10) via [shadertoy](https://www.shadertoy.com/view/XlfSWS).
+[^4]
 
 <iframe width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/4dVfWy?gui=true&t=10&paused=true&muted=false" allowfullscreen></iframe>
-> Created by [magician0809](https://www.shadertoy.com/user/magician0809) (2018-06-30) via [shadertoy](https://www.shadertoy.com/view/4dVfWy).
->
-> WASD: rotate camera orbit, QE: go back/forward.
+> WASD: rotate camera orbit, QE: go back/forward.[^5]
 
 [^1]: Fraknoi, Andrew, David Morrison, and Sidney Wolff. 2022. “24.4 Time in General Relativity - Astronomy 2e | OpenStax.” OpenStax. March 9, 2022. https://openstax.org/books/astronomy-2e/pages/24-4-time-in-general-relativity.
 
 [^2]: 3D-Mapper. 2022. “Heightmaps and Textures.” https://3d-mapper.com/heightmaps-and-textures/. Accessed 21 Jan. 2024.
+
+[^3]: [Casheera](https://www.shadertoy.com/user/Casheera), 2017. "Gravity Field Experiments #1" via [Shadertoy](https://www.shadertoy.com/view/MsByDK).
+
+[^4]: [charlieamer](https://www.shadertoy.com/user/charlieamer), 2015. "Gravity" via [Shadertoy](https://www.shadertoy.com/view/XlfSWS).
+
+[^5]: [magician0809](https://www.shadertoy.com/user/magician0809), 2018. "Gravitation Field 3D" via [Shadertoy](https://www.shadertoy.com/view/4dVfWy).
