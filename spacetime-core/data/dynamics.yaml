@@ -1,0 +1,15 @@
+point_masses:
+  - Sun
+  - Earth
+  - Luna
+  - Jupiter
+harmonics:
+  - frame: IAU Earth
+    coeffs: spacetime-core/data/JGM3.cof.gz
+    degree: 10
+    order: 10
+srp:
+  phi: 1367.0
+  shadows:
+    - Sun J2000
+    - Moon J2000

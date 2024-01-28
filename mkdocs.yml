@@ -14,6 +14,7 @@ nav:
   - technical topics:
     - time: technical/time.md
     - potentials: technical/potentials.md
+    - orbits: technical/orbits.md
     - scale: technical/scale.md
     - agents: technical/agents.md
   - api docs:

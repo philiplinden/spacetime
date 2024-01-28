@@ -4,10 +4,10 @@ use crate::gui::{
     label::Labelled,
     select::{CanFollow, CanSelect},
 };
+use crate::orbit_prediction::{PredictionBundle, PredictionDraw};
 use spacetime_core::{
-    orbit_prediction::{PredictionBundle, PredictionDraw},
     physics::{Acceleration, Interpolated, Mass, Position, Velocity},
-    SCALED_LENGTH,
+    SCALE,
 };
 
 // Planetoids, stars, and other natural bodies are called CELESTIALS
@@ -44,7 +44,7 @@ pub fn add_materials(
                     point_light: PointLight {
                         color: material.emissive,
                         intensity: 5E4,
-                        range: 2E3 * SCALED_LENGTH,
+                        range: 2E3 * SCALE,
                         shadows_enabled: true,
                         ..default()
                     },
