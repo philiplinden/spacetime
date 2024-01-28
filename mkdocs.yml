@@ -11,7 +11,11 @@ nav:
   - learning by example:
     - python demos: python-demos.md
     - ipy notebooks: notebooks/
-  - technical topics: technical/
+  - technical topics:
+    - time: technical/time.md
+    - potentials: technical/potentials.md
+    - scale: technical/scale.md
+    - agents: technical/agents.md
   - api docs:
     - spacetime_bridge: api/doc/spacetime_bridge/index.html
     - spacetime_core: api/doc/spacetime_core/index.html
