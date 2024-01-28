@@ -3,7 +3,7 @@ space. Let's take a look at the effects celestial bodies will have on time, star
 eventually thinking about how we can make these calculations on cislunar scales with potentially thousands of entities
 on their own trajectories between Earth and Luna.
 
-## gravitational potential
+# gravitational potential
 _Potential_ is how we represent stored energy in an object "at rest," with our definition of "at rest" basically meaning
 kinetic energy is zero. In our case, we're most interested with gravitational potential, i.e. the potential energy of an
 object at rest caused by gravity.
@@ -12,7 +12,7 @@ All but a lucky few humans have lived their entire lives in a tiny sliver on and
 deepest ocean to the tallest mountain, gravity feels _basically_ the same. But what happens when our object goes far
 from Earth, to the Moon or beyond? Does gravity change between here and there? (yes) What even _is_ gravity? (well...)
 
-### newtonian physics
+## newtonian physics
 [Newtonian physics tells us](https://openstax.org/books/college-physics-2e/pages/7-3-gravitational-potential-energy)
 gravitaional potential ($PE$) is the work done against gravity ($g$), so it's porportional to changes in height ($h$).
 This is naive, but it hints at deeper intuitions about gravity.
@@ -25,7 +25,7 @@ But for Newton, gravity just... is. Look up the value in a table based on measur
 of effort to record. What is it? `9.7803267715 m * s^-2`. Okay, but what IS it? To answer this question, we need a more
 detailed description of gravitational potential.
 
-### general relativity
+## general relativity
 
 General Relativity (GR) gives us the mathematical vocabulary to describe gravitational potential with curved spacetime.
 
@@ -42,9 +42,9 @@ The important takeaway from this discussion of relativity is that the _potential
 that curvature we imagined before. An object "rolls downhill" along this curvature, and the slope of that curve is
 gravity.
 
-## algorithms
+# algorithms
 
-### barnes-hut algorithm
+## barnes-hut algorithm
 The [Barnes-Hut Algorithm](http://arborjs.org/docs/barnes-hut) is a way to use a 
 [quad-tree](https://jimkang.com/quadtreevis/) for n-body problems.[^3] In short, far away bodies are lumped together and
 gravitation is approximated using the lump's center of mass rather than all $n$ particles and not bothering to do any
@@ -62,15 +62,15 @@ of modern CPUs, the gains at $n=4$ from Barnes-Hut are marginal.
 
 I think there is a case to use Barnes-Hut elsewhere, but I don't think we need an n-body simulation here.
 
-### almanac look-ups
+## almanac look-ups
 The fastest calculation is no calculation at all.
 
 If we only consider potential fields from celestial bodies, we can use very accurate and precise almanacs to *look up*
 the exact positions of each body at a given time. Not only is this fast and easier, but I'd wager its more accurate than
 we could ever hope to achieve calculating it ourselves.
 
-## using the gpu
-### texture maps
+# using the gpu
+## texture maps
 A [heightmaps](https://en.wikipedia.org/wiki/Heightmap), or more broadly a "texture map", is a technique in computer 
 graphics where information across a discretized area is stored as an image. Instead of expensive geometry edges and
 vertices carving out every nook and cranny in 3D space, graphics engines interpret the image data from the grid and
@@ -103,7 +103,7 @@ the opacity of volumetric fog in a video game.
 
 But how do we contend with a potential field that evolves over time as celestial bodies move?
 
-### shaders
+## shaders
 Enter: [compute shaders](https://webgl-shaders.com/gravity-example.html). Rather than using _images_, we can implement a
 _shader_ to do simple math based on our world coordinates and the bodies in the world. Shaders are generally used in
 computer graphics, and a particularly interesting case is GPU-accelerated "particle systems". In our use case, we don't
