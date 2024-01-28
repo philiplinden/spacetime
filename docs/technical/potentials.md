@@ -55,8 +55,8 @@ That's great, but this is overkill. The mass of any spacecraft is negligible wit
 in the solar system. Once you leave out all the spacecraft bodies, we're left with $n=4$ at most (Sol, Earth, Luna,
 Jupiter) for our computations. A "true" n-body simulation yields pretty much the same results if we assume all
 spacecraft are massless for gravity calculations, so it's not worth it to simulate the mass of every particle. Given the
-distances between the remaining massive bodies ($n=4$), a Barnes-Hut algorithm ($O(n\log{n}) = 4 \log{4} \approx 2.41)
-is still more efficient than brute-force ($O(n^2) = 4^2 = 16), but not as significantly as the gains when $n$ is very
+distances between the remaining massive bodies ($n=4$), a Barnes-Hut algorithm ($O(n\log{n}) = 4 \log{4} \approx 2.41$)
+is still more efficient than brute-force ($O(n^2) = 4^2 = 16$), but not as significantly as the gains when $n$ is very
 large. For example, if $n=100$ BH needs $200$ computations compared to brute force's $10,000$ computations. In the scope
 of modern CPUs, the gains at $n=4$ from Barnes-Hut are marginal.
 
