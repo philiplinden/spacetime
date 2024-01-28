@@ -1,5 +1,3 @@
-# potentials
-
 For this project we care about _time_, but physics (especially gravity) play a part in timing for objects in cislunar
 space. Let's take a look at the effects celestial bodies will have on time, starting from first principles and
 eventually thinking about how we can make these calculations on cislunar scales with potentially thousands of entities
@@ -106,9 +104,6 @@ the opacity of volumetric fog in a video game.
 But how do we contend with a potential field that evolves over time as celestial bodies move?
 
 ### shaders
-Now that we're thinking in terms of video games, let's leverage other advanced techniques originally developed to
-change _colors_ and rewire it to represent potential instead.
-
 Enter: [compute shaders](https://webgl-shaders.com/gravity-example.html). Rather than using _images_, we can implement a
 _shader_ to do simple math based on our world coordinates and the bodies in the world. Shaders are generally used in
 computer graphics, and a particularly interesting case is GPU-accelerated "particle systems". In our use case, we don't
@@ -122,7 +117,16 @@ This method has been used for real-time fluid simulations ([example 1](https://y
 ([example 1](https://webgl-shaders.com/gravity-example.html), [example 2](https://www.youtube.com/watch?v=qix0rzIaiIs))
 so a potential field should be a piece of cake.
 
-...right?
+<iframe width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/MsByDK?gui=true&t=10&paused=true&muted=false" allowfullscreen></iframe>
+> Created by [Casheera](https://www.shadertoy.com/user/Casheera) (2017-05-03) via [shadertoy](https://www.shadertoy.com/view/MsByDK).
+
+<iframe width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/XlfSWS?gui=true&t=10&paused=true&muted=false" allowfullscreen></iframe>
+> Created by [charlieamer](https://www.shadertoy.com/user/charlieamer) (2015-08-10) via [shadertoy](https://www.shadertoy.com/view/XlfSWS).
+
+<iframe width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/4dVfWy?gui=true&t=10&paused=true&muted=false" allowfullscreen></iframe>
+> Created by [magician0809](https://www.shadertoy.com/user/magician0809) (2018-06-30) via [shadertoy](https://www.shadertoy.com/view/4dVfWy).
+>
+> WASD: rotate camera orbit, QE: go back/forward.
 
 [^1]: Fraknoi, Andrew, David Morrison, and Sidney Wolff. 2022. “24.4 Time in General Relativity - Astronomy 2e | OpenStax.” OpenStax. March 9, 2022. https://openstax.org/books/astronomy-2e/pages/24-4-time-in-general-relativity.
 

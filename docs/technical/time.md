@@ -1,4 +1,3 @@
-# time
 ## frames of reference
 ### coordinate time
 The time as observed by the coordinate frame itself. This is a "god's-eye view" of the time in the system we are
