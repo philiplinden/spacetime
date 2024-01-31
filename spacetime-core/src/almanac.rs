@@ -1,46 +1,35 @@
-// Initialize the cosm which stores the ephemeris
-let cosm = Cosm::de438();
-// Grab the frames we'll use
-let eme2k = cosm.frame("EME2000");
-let iau_earth = cosm.frame("IAU Earth");
-// Define the epoch
-let epoch = Epoch::from_gregorian_utc(2014, 7, 22, 11, 29, 10, 811_000);
-// Define the initial orbit
-let orbit = Orbit::cartesian(
-    -137380.1984338506,
-    75679.87867537055,
-    21487.63875187856,
-    -0.2324532014235503,
-    -0.4462753967758019,
-    0.08561205662877103,
-    epoch,
-    eme2k,
-);
+use anise::constants::{
+    frames::{EARTH_J2000, EARTH_MOON_BARYCENTER_J2000, MOON_J2000},
+    usual_planetary_constants::{
+        MEAN_EARTH_ANGULAR_VELOCITY_DEG_S, MEAN_MOON_ANGULAR_VELOCITY_DEG_S,
+    },
+    SPEED_OF_LIGHT_KM_S,
+};
+use anise::prelude::*;
 
-// Define the spacecraft
-let sat = Spacecraft::new(orbit, 1000.0, 0.0, 1.0, 15.0, 1.7, 2.2);
+pub fn load_almanac() -> Almanac {
+    match MetaAlmanac::latest() {
+        Ok(almanac) => almanac,
+        Err(error) => panic!("Problem setting up Almanac: {:?}", error),
+    }
+}
 
-// Set up the harmonics first because we need to pass them to the overarching orbital dynamics
-// Load the harmonics from the JGM3 file (GMAT uses the JGM2 in this case).
-// It's gunzipped (hence `true` as the last parameter)
-let stor = HarmonicsMem::from_cof("JGM3.cof.gz", 20, 20, true)?;
-// Set up the orbital dynamics: we need to specify the models one by one here
-// because the usual functions wrap the dynamics so that they can be used in a Monte Carlo
-// setup.
-let orbital_dyn = OrbitalDynamics::new(vec![
-    // Note that we are only accounting for Sun, Moon and Jupiter, in addition to the integration frame's GM
-    PointMasses::new(
-        eme2k,
-        &[Bodies::Sun, Bodies::Luna, Bodies::JupiterBarycenter],
-        cosm.clone(),
-    ),
-    // Specify that these harmonics are valid only in the IAU Earth frame. We're using the
-    Harmonics::from_stor(iau_earth, stor, cosm.clone()),
-]);
+pub fn init_earth_moon_system(almanac: Almanac, epoch: Epoch) -> (Orbit, Orbit) {
+    // Earth is at the center of the EARTH_J2000 frame
+    let earth_j2k_frame = almanac.frame_from_uid(EARTH_J2000).unwrap();
+    let earth = Orbit::keplerian(0., 0., 0., 0., 0., 0., epoch, earth_j2k_frame);
+    // Moon is at the center of the MOON_J2000 frame
+    let moon_j2k_frame = almanac.frame_from_uid(MOON_J2000).unwrap();
+    let moon = Orbit::keplerian(0., 0., 0., 0., 0., 0., epoch, moon_j2k_frame);
 
-
-// Set up SRP and Drag second, because we need to pass them to the overarching spacecraft dynamics
-let srp = SolarPressure::default(eme2k, cosm.clone());
-let drag = Drag::std_atm1976(cosm.clone());
-// Set up the spacecraft dynamics
-let sc_dyn = SpacecraftDynamics::from_models(orbital_dyn, vec![srp, drag]);
+    // Now we transform earth and moon into a common frame about the barycenter
+    let barycenter_j2k_frame = almanac.frame_from_uid(EARTH_MOON_BARYCENTER_J2000).unwrap();
+    (
+        almanac
+            .transform_to(earth, barycenter_j2k_frame, None)
+            .unwrap(),
+        almanac
+            .transform_to(moon, barycenter_j2k_frame, None)
+            .unwrap(),
+    )
+}
