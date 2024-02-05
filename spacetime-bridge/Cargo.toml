@@ -2,7 +2,7 @@
 name = "spacetime-bridge"                                                                # as in a spaceship bridge
 version = "0.1.0"
 edition = "2021"
-license = "AGPL-3.0"
+license = "MPL-2.0"
 readme = "README.md"
 description = "Observe and Command a Simulation of Heterogeneous Networked Lunar Clocks"
 authors = ["Philip Linden <lindenphilipj@gmail.com>"]
@@ -19,6 +19,7 @@ bevy_egui = "0.24.0"
 humantime = "2.1.0"
 crossbeam-channel = "0.5.11"
 particular = { version = "0.6.1", features = ["gpu", "parallel"] }
+big_space = "0.4.0"
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]

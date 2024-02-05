@@ -1190,6 +1190,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "big_space"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e188fd79effffde07875b26a2999f6fabbc0695ef25316948dd09d29b6abe74d"
+dependencies = [
+ "bevy",
+]
+
+[[package]]
 name = "bindgen"
 version = "0.69.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4531,6 +4540,7 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "bevy_egui",
+ "big_space",
  "crossbeam-channel",
  "humantime",
  "particular",
@@ -4543,6 +4553,7 @@ version = "0.1.0"
 dependencies = [
  "anise",
  "bevy",
+ "big_space",
  "crossbeam-channel",
  "hifitime",
  "particular",

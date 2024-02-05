@@ -69,10 +69,9 @@ analogy:
   from the arbitrary origin chosen by the cartographer, we can say a location is
   10 meters East, 1 meter North within grid square J4.
 
-# other options
-- Transform Hierarchy: Use Bevy's transform hierarchy to organize entities in a
-hierarchical structure. Group related entities under a parent entity to simplify
-transformations. (Barnes Hut anyone?)
-
-- Spatial Partitioning:Implement spatial partitioning techniques like octrees or
-BVH (Bounding Volume Hierarchy) to optimize collision checks and queries.
+Implementing this idea of many small coordinate frames composing the world space
+is not trivial, but it is a solved problem. The Bevy plugin
+[big_space](https://github.com/aevyrie/big_space) addresses it by placingentities
+in a `GridCell` in a large fixed-precision grid. In the `GridCell`, the entity's
+`Transform` is relative to the center of that cell. If the entity enters a
+neighboring cell, its coordinates are updated to reference the new cell's origin.

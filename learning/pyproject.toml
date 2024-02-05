@@ -3,7 +3,7 @@ name = "demos"
 version = "0.1.0"
 description = "Learnings for an Agent-Based Model of Heterogeneous Lunar Networks"
 authors = ["Philip Linden <lindenphilipj@gmail.com>"]
-license = "AGPL-3.0-or-later"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
