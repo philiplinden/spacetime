@@ -1,7 +1,7 @@
 *Resources* in Bevy are used to store a single global instance of some data type independently of entities. A typical
 use case for resources is to store configuration data and settings, which is one of the ways we'll use it here.
 
-!!! abstract "Additional Resources"
+!!! abstract "Additional Information"
     Bevy's [official](https://bevyengine.org/learn/book/getting-started/resources/) and
     [unofficial](https://bevy-cheatbook.github.io/programming/res.html) books go into more detail about resources and
     how to use them.

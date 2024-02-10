@@ -1,7 +1,4 @@
-use anise::constants::{
-    frames::{EARTH_J2000, EARTH_MOON_BARYCENTER_J2000, MOON_J2000},
-    SPEED_OF_LIGHT_KM_S,
-};
+use anise::constants::frames::{EARTH_J2000, EARTH_MOON_BARYCENTER_J2000, MOON_J2000};
 use anise::prelude::*;
 
 pub fn load_almanac() -> Almanac {
