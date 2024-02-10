@@ -1,0 +1,1 @@
+![architecture](./diagrams/arch.svg)
