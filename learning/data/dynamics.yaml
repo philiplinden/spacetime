@@ -2,6 +2,7 @@ point_masses:
   - Sun
   - Earth
   - Luna
+  - Jupiter
 harmonics:
   - frame: IAU Earth
     coeffs: clocss/data/JGM3.cof.gz

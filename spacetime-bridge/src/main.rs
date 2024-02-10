@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 mod gui;
+mod orbit_prediction;
 mod scenario;
 mod scene;
 

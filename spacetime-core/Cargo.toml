@@ -2,7 +2,7 @@
 name = "spacetime-core"
 version = "0.1.0"
 edition = "2021"
-license = "AGPL-3.0-or-later"
+license = "MPL-2.0"
 readme = "README.md"
 description = "Run a Simulation of Heterogeneous Networked Lunar Clocks"
 authors = ["Philip Linden <lindenphilipj@gmail.com>"]
@@ -10,11 +10,16 @@ homepage = "https://philiplinden.github.io/clocss-abm/"
 repository = "https://github.com/philiplinden/clocss-abm"
 
 [dependencies]
+anise = "0.3.0"
 bevy = { version = "0.12.0", default-features = false, features = [
-    "dynamic_linking", "multi-threaded", "trace"
+    "dynamic_linking",
+    "multi-threaded",
+    "trace",
 ] }
+big_space = "0.4.0"
 crossbeam-channel = "0.5.11"
-particular = { version = "0.6.1", features = ["gpu"] }
+hifitime = "3.9.0"
+particular = { version = "0.6.1", features = ["gpu", "parallel"] }
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]

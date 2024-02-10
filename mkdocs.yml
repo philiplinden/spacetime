@@ -8,12 +8,14 @@ nav:
     - home: index.md
     - approach: approach.md
     - design decisions: design-decisions.md
+    - system architecture: architecture.md
   - learning by example:
     - python demos: python-demos.md
     - ipy notebooks: notebooks/
   - technical topics:
     - time: technical/time.md
     - potentials: technical/potentials.md
+    - orbits: technical/orbits.md
     - scale: technical/scale.md
     - agents: technical/agents.md
   - api docs:

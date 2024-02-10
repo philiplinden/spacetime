@@ -10,7 +10,7 @@ use std::time::Duration;
 use bevy::ecs::schedule;
 use bevy::prelude::*;
 
-use crate::physics::{sympletic_euler, Acceleration, Velocity, Position};
+use crate::{physics::{sympletic_euler, Acceleration, Velocity, Position}, DT};
 
 #[derive(schedule::ScheduleLabel, Debug, Hash, PartialEq, Eq, Clone)]
 pub struct PhysicsSchedule;
@@ -48,7 +48,7 @@ impl PhysicsSettings {
 impl Default for PhysicsSettings {
     fn default() -> Self {
         Self {
-            delta_time: 1.0 / 60.0,
+            delta_time: DT,
             time_scale: 1.0,
         }
     }

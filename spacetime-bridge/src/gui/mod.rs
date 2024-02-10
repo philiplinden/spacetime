@@ -6,7 +6,7 @@ use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPlugin};
 
 use crate::gui;
-use spacetime_core::orbit_prediction;
+use crate::orbit_prediction;
 
 pub struct GuiPlugin;
 
@@ -15,8 +15,8 @@ impl Plugin for GuiPlugin {
         app.add_plugins((
             EguiPlugin,
             gui::hud::HudPlugin,
-            gui::orbit_prediction::OrbitPredictionPlugin,
             gui::select::SelectionPlugin,
+            orbit_prediction::OrbitPredictionPlugin,
         ))
         .insert_resource(ClearColor(Color::BLACK))
         .insert_resource(AmbientLight {

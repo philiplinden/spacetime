@@ -1,12 +1,12 @@
 use bevy::prelude::*;
 
-use spacetime_core::{
-    SCALED_LENGTH, SCALED_MASS,
-    orbit_prediction::ComputePredictionEvent,
-};
-use crate::scene::body::{BodyBundle, BodySetting};
 use crate::gui::select::{Followed, Selected};
-use spacetime_core::physics::{PhysicsSettings, constants::G};
+use crate::orbit_prediction::ComputePredictionEvent;
+use crate::scene::body::{BodyBundle, BodySetting};
+use spacetime_core::{
+    physics::{PhysicsSettings, constants::G},
+    SCALE,
+};
 
 pub struct ScenarioPlugin;
 
@@ -23,9 +23,9 @@ fn scene_cislunar_real_scale(
 ) {
     let earth = BodySetting {
         name: "Earth",
-        position: Vec3::new(0.0, 0.0, 0.0) * SCALED_LENGTH,
-        mu: G * 5.97e24 * SCALED_MASS,
-        radius: 6378.0e3 * SCALED_LENGTH,
+        position: Vec3::new(0.0, 0.0, 0.0) * SCALE,
+        mu: G * 5.97e24 * SCALE,
+        radius: 6378.0e3 * SCALE,
         material: StandardMaterial {
             base_color: Color::rgb(0.0, 0.6, 1.0),
             ..default()
@@ -35,9 +35,9 @@ fn scene_cislunar_real_scale(
 
     let moon = BodySetting {
         name: "Moon",
-        position: earth.position + Vec3::new(384_400.0e3, 0.0, 0.0) * SCALED_LENGTH,
-        mu: G * 0.073e24 * SCALED_MASS,
-        radius: 1737.5e3 * SCALED_LENGTH,
+        position: earth.position + Vec3::new(384_400.0e3, 0.0, 0.0) * SCALE,
+        mu: G * 0.073e24 * SCALE,
+        radius: 1737.5e3 * SCALE,
         material: StandardMaterial {
             base_color: Color::rgb(0.6, 0.4, 0.1),
             ..default()

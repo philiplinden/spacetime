@@ -35,7 +35,7 @@ changes the curvature of spacetime so light has to take the "long way around", b
 
 ![rubber sheet analogy](https://openstax.org/apps/archive/20231109.173216/resources/0531ebe01f0822745bd09fb9caa337b514a5f0a4)[^1]
 
-!!! abstract
+!!! abstract "Additional Resources"
     Read more about Relativity on OpenStax with the [Astronomy 2e](https://openstax.org/books/astronomy-2e/pages/24-2-spacetime-and-gravity).
 
 The important takeaway from this discussion of relativity is that the _potential_ is represented by the intensity of

@@ -3,7 +3,7 @@ use bevy::{
     prelude::*,
 };
 
-use spacetime_core::SCALED_LENGTH;
+use spacetime_core::SCALE;
 
 static MAX_ZOOM_LIMIT: f32 = 1.0e3;
 
@@ -82,7 +82,7 @@ pub fn camera_controls(
 fn setup_camera(mut commands: Commands) {
     commands.spawn((
         Camera3dBundle {
-            transform: Transform::from_xyz(0.0, 0.0, 1.0e3 * SCALED_LENGTH)
+            transform: Transform::from_xyz(0.0, 0.0, 1.0e3 * SCALE)
                 .looking_at(Vec3::new(0.0, 0.0, 0.0), Vec3::Y),
             camera: Camera {
                 hdr: true,
