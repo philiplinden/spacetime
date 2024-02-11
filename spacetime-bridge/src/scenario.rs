@@ -4,8 +4,7 @@ use crate::gui::select::{Followed, Selected};
 use crate::orbit_prediction::ComputePredictionEvent;
 use crate::scene::body::{BodyBundle, BodySetting};
 use spacetime_core::{
-    physics::{PhysicsSettings, constants::G},
-    SCALE,
+    G, PhysicsSettings, SCALE,
 };
 
 pub struct ScenarioPlugin;

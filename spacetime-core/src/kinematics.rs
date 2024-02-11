@@ -1,12 +1,12 @@
 /*!
- * This module handles the warping of spacetime. This includes gravity and time dilation.
+ * This module establishes types and functions for kinematics calculations.
  *
  */
 
 use bevy::prelude::*;
 use particular::prelude::*;
 
-use crate::physics::schedule::{PhysicsSchedule, PhysicsSet};
+use crate::schedule::{PhysicsSchedule, PhysicsSet};
 
 // from particular::prelude
 pub const NBODY_COMPUTE_METHOD: sequential::BruteForcePairs = sequential::BruteForcePairs;

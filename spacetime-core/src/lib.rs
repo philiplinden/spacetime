@@ -1,5 +1,16 @@
 pub mod almanac;
-pub mod physics;
+pub mod schedule;
+pub mod kinematics;
+
+pub use schedule::{
+    ElapsedPhysicsTime, Interpolated, PhysicsSettings, PhysicsTime,
+};
+pub use kinematics::{
+    sympletic_euler, Acceleration, GravityPlugin, Mass, Position, Velocity, NBODY_COMPUTE_METHOD,
+};
+
+// Universal gravitational constant in SI units [N m^2 kg^-2]
+pub const G: f32 = 6.67430e-11;
 
 // The physics engine runs at a fixed timestep, with each step corresponding to the duration specified below.
 pub const DT: f32 = 1.0 / 60.0; // seconds
@@ -17,14 +28,5 @@ mod tests {
         // FIXME(phil): write graceful handling when almanac doesn't load
         let almanac = crate::almanac::load_almanac();
         println!("{:?}", almanac.describe(None, None, None, None, None));
-    }
-
-    #[test]
-    fn test_frame_transformation() {
-        let almanac = crate::almanac::load_almanac();
-        let epoch = hifitime::Epoch::from_gregorian_utc(2000, 2, 29, 14, 57, 29, 37);
-        let (earth, moon) = crate::almanac::init_earth_moon_system(almanac, epoch);
-        println!("{earth:x}");
-        println!("{moon:x}");
     }
 }
