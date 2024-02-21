@@ -4,10 +4,10 @@ use crate::gui::{
     label::Labelled,
     select::{CanFollow, CanSelect},
 };
-use crate::orbit_prediction::{PredictionBundle, PredictionDraw};
 use spacetime_core::{
     kinematics::{Acceleration, Mass, Position, Velocity},
     Interpolated, SCALE,
+    orbit_prediction::{PredictionBundle, PredictionDraw},
 };
 
 // Planetoids, stars, and other natural bodies are called CELESTIALS

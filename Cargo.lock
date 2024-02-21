@@ -4544,11 +4544,12 @@ dependencies = [
  "crossbeam-channel",
  "humantime",
  "particular",
- "spacetime-core",
+ "spacetime-engine",
+ "spacetime-galley",
 ]
 
 [[package]]
-name = "spacetime-core"
+name = "spacetime-engine"
 version = "0.1.0"
 dependencies = [
  "anise",
@@ -4557,6 +4558,14 @@ dependencies = [
  "crossbeam-channel",
  "hifitime",
  "particular",
+]
+
+[[package]]
+name = "spacetime-galley"
+version = "0.1.0"
+dependencies = [
+ "anise",
+ "bevy",
 ]
 
 [[package]]

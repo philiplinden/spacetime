@@ -1,6 +1,8 @@
-pub mod almanac;
-pub mod schedule;
+pub mod celestials;
 pub mod kinematics;
+pub mod schedule;
+pub mod sim;
+pub mod orbit_prediction;
 
 pub use schedule::{
     ElapsedPhysicsTime, Interpolated, PhysicsSettings, PhysicsTime,
@@ -19,14 +21,3 @@ pub const DT: f32 = 1.0 / 60.0; // seconds
 // the physics_scale factor. This should likely always be 1.0 in 3D. In 2D, this is useful to specify a
 // “pixels-per-meter” conversion ratio.
 pub static SCALE: f32 = 1.0e-6;
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test_load_latest_almanac() {
-        // if we don't panic, test is good
-        // FIXME(phil): write graceful handling when almanac doesn't load
-        let almanac = crate::almanac::load_almanac();
-        println!("{:?}", almanac.describe(None, None, None, None, None));
-    }
-}

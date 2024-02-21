@@ -1,11 +1,12 @@
 use bevy::prelude::*;
 mod gui;
-mod orbit_prediction;
 mod scenario;
 mod scene;
 
 use scene::{body, camera};
-use spacetime_core::{schedule, kinematics, DT, PhysicsSettings};
+use spacetime_core::{kinematics, schedule, PhysicsSettings, G, SCALE};
+
+use gui::select::{Followed, Selected};
 
 fn main() {
     App::new()

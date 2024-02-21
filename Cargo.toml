@@ -1,6 +1,7 @@
 [workspace]
 members = [
-    "spacetime-core",
     "spacetime-bridge",
+    "spacetime-engine",
+    "spacetime-galley",
 ]
 resolver = "2"

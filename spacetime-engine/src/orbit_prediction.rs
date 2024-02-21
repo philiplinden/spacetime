@@ -1,4 +1,4 @@
-use spacetime_core::{
+use crate::{
     kinematics::{Mass, Position, Velocity, NBODY_COMPUTE_METHOD, sympletic_euler},
     PhysicsSettings,
 };

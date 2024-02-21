@@ -10,16 +10,14 @@ homepage = "https://philiplinden.github.io/clocss-abm/"
 repository = "https://github.com/philiplinden/clocss-abm"
 
 [dependencies]
-spacetime-core = { path = "../spacetime-core" }
-bevy = { version = "0.12.0", features = [
-    "dynamic_linking",
-    "multi-threaded",
-] }
+spacetime-engine = { path = "../spacetime-engine" }
+spacetime-galley = { path = "../spacetime-galley" }
+big_space = "0.4.0"
+bevy = { version = "0.12.0", features = ["dynamic_linking", "multi-threaded"] }
 bevy_egui = "0.24.0"
 humantime = "2.1.0"
 crossbeam-channel = "0.5.11"
 particular = { version = "0.6.1", features = ["gpu", "parallel"] }
-big_space = "0.4.0"
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]
