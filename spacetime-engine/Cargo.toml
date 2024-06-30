@@ -1,13 +1,13 @@
 [package]
-name = "spacetime-core"
+name = "spacetime-engine"
 version = "0.1.0"
 edition = "2021"
 license = "MPL-2.0"
 readme = "README.md"
 description = "Run a Simulation of Heterogeneous Networked Lunar Clocks"
 authors = ["Philip Linden <lindenphilipj@gmail.com>"]
-homepage = "https://philiplinden.github.io/clocss-abm/"
-repository = "https://github.com/philiplinden/clocss-abm"
+homepage = "https://philiplinden.github.io/spacetime/"
+repository = "https://github.com/philiplinden/spacetime"
 
 [dependencies]
 anise = "0.3.0"

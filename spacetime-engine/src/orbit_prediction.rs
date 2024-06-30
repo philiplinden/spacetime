@@ -1,4 +1,7 @@
-use spacetime_core::physics::{Mass, PhysicsSettings, Position, Velocity, NBODY_COMPUTE_METHOD, sympletic_euler};
+use crate::{
+    kinematics::{Mass, Position, Velocity, NBODY_COMPUTE_METHOD, sympletic_euler},
+    PhysicsSettings,
+};
 
 use bevy::prelude::*;
 use particular::prelude::*;

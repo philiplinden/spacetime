@@ -1,6 +1,6 @@
 use std::time::Duration;
 
-use spacetime_core::physics::{PhysicsTime, ElapsedPhysicsTime, PhysicsSettings};
+use spacetime_core::{PhysicsTime, ElapsedPhysicsTime, PhysicsSettings};
 use crate::gui::{
     format_duration,
     orbit_prediction::{ComputePredictionEvent, PredictionDraw, PredictionState, ResetPredictionEvent},

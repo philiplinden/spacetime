@@ -1,11 +1,12 @@
 use bevy::prelude::*;
 mod gui;
-mod orbit_prediction;
 mod scenario;
 mod scene;
 
 use scene::{body, camera};
-use spacetime_core::{physics, DT};
+use spacetime_core::{kinematics, schedule, PhysicsSettings, G, SCALE};
+
+use gui::select::{Followed, Selected};
 
 fn main() {
     App::new()
@@ -25,8 +26,8 @@ fn main() {
             gui::GuiPlugin,
             camera::CameraPlugin,
             // Physics
-            physics::PhysicsSchedulePlugin,
-            physics::GravityPlugin,
+            schedule::PhysicsSchedulePlugin,
+            kinematics::GravityPlugin,
             // Scene
             scenario::ScenarioPlugin,
         ))
@@ -36,7 +37,7 @@ fn main() {
             color: Color::WHITE,
             brightness: 0.5,
         })
-        .insert_resource(physics::PhysicsSettings::delta_time(DT))
+        .insert_resource(PhysicsSettings::delta_time(DT))
         .add_systems(First, body::add_materials)
         .run();
 }

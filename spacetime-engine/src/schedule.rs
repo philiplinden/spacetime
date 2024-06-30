@@ -10,7 +10,7 @@ use std::time::Duration;
 use bevy::ecs::schedule;
 use bevy::prelude::*;
 
-use crate::{physics::{sympletic_euler, Acceleration, Velocity, Position}, DT};
+use crate::{sympletic_euler, Acceleration, Velocity, Position, DT};
 
 #[derive(schedule::ScheduleLabel, Debug, Hash, PartialEq, Eq, Clone)]
 pub struct PhysicsSchedule;
