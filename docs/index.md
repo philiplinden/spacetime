@@ -1,43 +1,49 @@
-# spacetime
-A Simulation of Heterogeneous Networked Lunar Clocks.
+# Goal
+This project aims to use simulations to explore how centralized and decentralized PNT service network topologies evolve
+in a growing lunar ecosystem. Modeling network topologies representative of near-term lunar missions and large future
+populations of cislunar actors will predict the relative performance, “critical mass” of assets required for service,
+and coverage of decentralized PNT services and/or GNSS-like beacons providing PNT to lunar missions. There is an
+abundance of prior art describing optimal orbit configurations for such systems that can also be evaluated in this way.
 
-## Abstract
-This project aims to use agent-based modeling and simulations to explore how
-network topology and time synchronization evolve in a growing lunar ecosystem.
-Modeling how the approach may be used in practice and at scale informs decisions
-about how to architect a robust cislunar PNT system that scales with the
-population.
+---
 
-## Purpose
+# Motivation
+Recent advancements in space technologies have prompted a surge in lunar missions, both crewed and uncrewed. Such an
+influx demands scalable, commercially-accessible Positioning, Navigation, and Timing (PNT) frameworks for the
+development of a cislunar economy. In order to bring PNT infrastructure to the lunar ecosystem and have it be as
+ubiquitous and as useful as Global Navigation Satellite Systems (GNSS) are in the interoperable Space Service Volume
+(SSV), there needs to be accurate, traceable and accessible timing and ranging infrastructure that is also resilient,
+reliable and flexible. NASA’s LunaNet and ESA’s Moonlight are two major initiatives to promote interoperability and
+connectivity in cislunar space by providing a common communications framework and standards. Lunar constellations
+equivalent to terrestrial GNSS are one approach to delivering a cislunar PNT but it is not the only solution.
+Peer-to-peer networks of satellites with precision timekeeping may serve as an alternative method of implementing a PNT
+service to traditional GNSS constellations.
 
-1. The code in this repository is intended for analytical use for a specific
-   problem. It is not meant to be a general-purpose library.
-2. This project and its code are evolving as my personal understanding of
-   modeling and coding techniques on the way to discovering answers to questions
-   about the nature of a possible decentralized PNT service for the Moon.
+This project will use simulation and system modeling to compare satellite network topologies using metrics known from
+the current PNT solution such as accuracy, availability, continuity and integrity, in addition to costs, timeline and
+technology development requirements of implementing each system in a cislunar context. The goal is to develop the
+proposed solution to a level mature enough to predict the system’s performance relative to the number and distribution
+of interconnected assets, and quantitatively demonstrate that our approach becomes more robust and performant as it
+scales to service the anticipated demands of a thriving lunar ecosystem. The study will also consider specific lunar PNT
+user needs and infrastructure combination opportunities, as well as requirements for Earth / Earth Orbit systems to be
+usable with minimum changes for lunar applications.
 
-## Problem statement
+## Diverse cislunar ecosystems and infrastructures are inevitable
 
-The effectiveness of Decentralized PNT versus traditional Lunar GNSS is only meaningful if we can evaluate both paradigms (independently or concurrently) at different scales in population.
+It is likely that several independent PNT services could emerge on different parts of the spectrum. This allows actors
+to maintain closed PNT utilities or to offer services for a self-sustaining, monetizable, commercially
+owned-and-operated lunar infrastructure. Critically, public and private PNT utilities may coexist under this paradigm,
+like how a single transponder can access both terrestrial open-air radio and encrypted radio channels. In essence, this
+philosophy aims to nurture a resilient PNT ecosystem that accommodates both public and private ventures. Through a
+credibly neutral protocol for timekeeping, bad actors would not only have difficulty manipulating the service, but they
+may use this infrastructure themselves and even work to support its canonization.
 
-| Goals | Apples-to-apples comparisons in performance of a decentralized, centralized, peer-to-peer, transmitter/receiver, and combinations therein based on quantitative metrics. |
-| --- | --- |
-| Non-goals | This study does not intend to discern optimal constellation architectures or compositions. It also does not claim to produce true-to-life simulations of system performance. |
+## Interoperability requires a common temporal reference frame
 
-### The model shall…
-
-1. depend only on open source software.
-2. simulate populations of heterogeneous agents.
-3. simulate interactions between tens of agents and thousands of agents.
-4. simulate events over a time span of days and a span of years.
-5. allow an agent’s perception of the environment (epoch, motion) to differ from the “true” environment parameters.
-6. simulate spacetime (motion, time with relativity, light propagation) on a cislunar scale.
-7. simulate things that inhibit interactions like distance (attenuation, inverse square law) or obstructions (line of sight blocked by a planetary body).
-8. allow rulesets for permitted interactions between agents (faction dynamics, transmit/receive limitations, data transfer vs passive sensing, limited communication spectral bands).
-
-### The model should…
-
-1. feed visualizations of populations by type, position, and/or interactions.
-2. execute in less than an hour on my laptop.
-3. permit rapid execution loops or batched runs with varied model parameters.
-4. be easy to replicate by others and on other machines.
+In the design of a lunar PNT system, one important consideration is the definition of a reference frame to allow for
+absolute position. This time transfer and relative position concept could be used to define a network of realization
+points (fixed points for the reference frame) to assist in the realization of a Lunar Reference Frame. These lunar
+realization points would be located on the near side of the Moon and equipped with e.g., laser retroreflectors for
+accurate ranging from Earth by the existing Lunar Laser Ranging (LLR) stations. Like GNSS, passive receivers can obtain
+the time and position in reference to the PNT node’s position by observing the transmitted signal so long as the
+receiver’s clock is synchronized to the node.
