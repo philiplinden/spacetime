@@ -1,7 +1,27 @@
-[workspace]
-members = [
-    "spacetime-bridge",
-    "spacetime-engine",
-    "spacetime-galley",
-]
-resolver = "2"
+[package]
+name = "spacetime"
+version = "0.1.0"
+edition = "2021"
+license = "MPL-2.0"
+readme = "README.md"
+description = "A real(istic) time simulator"
+authors = ["Philip Linden <lindenphilipj@gmail.com>"]
+homepage = "https://philiplinden.github.io/spacetime/"
+repository = "https://github.com/philiplinden/spacetime"
+
+[dependencies]
+big_space = "0.4.0"
+bevy = { version = "0.12.0", features = ["dynamic_linking", "multi-threaded"] }
+bevy_egui = "0.24.0"
+humantime = "2.1.0"
+crossbeam-channel = "0.5.11"
+particular = { version = "0.6.1", features = ["gpu", "parallel"] }
+
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+incremental = true
+
+# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+[profile.dev.package."*"]
+opt-level = 3

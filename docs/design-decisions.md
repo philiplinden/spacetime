@@ -1,13 +1,14 @@
-The code structure of the model will have a significant impact on its complexity
-and performance. It is important for complexity to be minimized and performance
-to be maximized in order for the results to be trusted and reproducible.
+The code structure of the model will have a significant impact on its complexity and performance. It is important for
+complexity to be minimized and performance to be maximized in order for the results to be trusted and reproducible.
+
+That said, this is a personal project and I wish to get some personal growth from it.
 
 # rust, not python
 I am an intermediate-advanced Python developer. I have absolute faith in my ability to build something at least
 marginally functional to meet the goals I set out to achieve with this project. In fact, I already used python in this
 project to illustrate core concepts and practice thinking through the problem.
 
-But I chose Rust for this project, not Python.
+But I chose **Rust** for this project, not Python.
 
 The primary motivator here is personal growth. I have been looking for a reason to learn Rust for years. This project
 affords me low stakes (consequence of failure is ruined pride and that's it), a flexible deadline (no dependents), and a
