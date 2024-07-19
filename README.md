@@ -26,13 +26,15 @@ Learning is one of the main objectives of this project. See [the docs](https://p
 discussion on code architectures for this project. It's been a true journey of discovery, with surprising twists.
 
 ## Attribution
+Repository architecture, baseline `Cargo.toml`, and boilerplate modules for Bevy 0.14 were provided by
+[TheBevyFlock/bevy_quickstart](https://github.com/TheBevyFlock/bevy_quickstart).
 
-This project borrows inspiration from 
+This project also borrows inspiration from 
 [krABMaga/examples](https://github.com/krABMaga/examples),
 [nyx-space/nyx](https://github.com/nyx-space/nyx), and
 [Canleskis/particular](https://github.com/Canleskis/particular).
 
-Attributions for all assets are listed in [assets/README.md](assets/README.md).
+Attributions for assets are listed in [assets/README.md](assets/README.md).
 
 ## License
 This repository is distributed under the Mozilla Public License 2.0 (MPL-2.0). MPL-2.0 requires that modifications to

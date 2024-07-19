@@ -9,6 +9,7 @@ nav:
     - design decisions: design-decisions.md
     - system architecture: architecture.md
   - technical topics: technical/
+  - releases: 
   - api docs:
     - spacetime_bridge: api/doc/spacetime_bridge/index.html
     - spacetime_core: api/doc/spacetime_core/index.html
