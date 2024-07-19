@@ -97,6 +97,9 @@ jobs:
       - name: Check documentation
         run: cargo doc --workspace --all-features --document-private-items --no-deps
 
+      - name: Install MkDocs dependencies
+        run: pip install -r docs/requirements.txt
+
       - name: Build site with MkDocs
         run: mkdocs build
 

@@ -267,6 +267,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install MkDocs dependencies
+        run: pip install -r docs/requirements.txt
+
       - name: Build site with MkDocs
         run: mkdocs build
 
