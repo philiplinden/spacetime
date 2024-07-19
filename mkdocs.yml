@@ -1,5 +1,5 @@
 site_name: spacetime
-site_description: A Simulation of Heterogeneous Networked Lunar Clocks.
+site_description: A real(istic) time simulator.
 repo_url: https://github.com/philiplinden/spacetime
 repo_name: philiplinden/spacetime
 
@@ -9,7 +9,6 @@ nav:
     - design decisions: design-decisions.md
     - system architecture: architecture.md
   - technical topics: technical/
-  - releases: 
   - api docs:
     - spacetime_bridge: api/doc/spacetime_bridge/index.html
     - spacetime_core: api/doc/spacetime_core/index.html
