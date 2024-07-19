@@ -15,3 +15,12 @@ Cargo.lock
 
 # VS Code
 .vscode/
+
+# Trunk builds
+/web/dist/
+
+# This file contains environment-specific configuration like linker settings
+.cargo/config.toml
+
+# Site builds
+site/
