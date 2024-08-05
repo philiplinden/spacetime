@@ -77,7 +77,7 @@ jobs:
         run: cargo fmt --all -- --check
 
   # Check documentation.
-  doc:
+  doc-cargo:
     name: Docs
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -97,8 +97,16 @@ jobs:
       - name: Check documentation
         run: cargo doc --workspace --all-features --document-private-items --no-deps
 
+  doc-mkdocs:
+    name: Mkdocs
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Install MkDocs dependencies
-        run: pip install -r docs/docs-requirements.txt
+        run: pip install -r docs/requirements.txt
 
       - name: Build site with MkDocs
         run: mkdocs build
@@ -108,3 +116,31 @@ jobs:
         with:
           name: site
           path: site
+
+  deploy-gh-pages:
+    name: Deploy to GH Pages
+    needs: doc-mkdocs
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v3
+        with:
+          name: site
+          path: site
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
