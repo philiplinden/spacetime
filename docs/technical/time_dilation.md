@@ -886,7 +886,7 @@ plt.ylabel(f"Time difference [$\mu$s per Earth day]")
     
 
 
-![time dilation plot](./Time_Dilation_vs_Orbital_Height.png)
+![time dilation plot](./time_dilation_files/Time_Dilation_vs_Orbital_Height.png)
 
 
 ```python
@@ -919,8 +919,5 @@ plt.xlim([0, 50_000])
     
 ![png](time_dilation_files/time_dilation_66_1.png)
     
-
-
-![](./Orbit_times.svg.png)
 
 Hmm...this look right in terms of the numbers but wrong in terms of order of magnitude...

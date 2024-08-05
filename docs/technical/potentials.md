@@ -31,7 +31,7 @@ General Relativity (GR) gives us the mathematical vocabulary to describe gravita
 
 The classic example here is imagining gravity as a big weight in the middle of a rubber sheet. The mass of large objects
 changes the curvature of spacetime so light has to take the "long way around", but the speed of light is constant so
-[time has to slow down](./time.md) to make up the difference.
+[time has to slow down](./time_dilation.md) to make up the difference.
 
 ![rubber sheet analogy](https://openstax.org/apps/archive/20231109.173216/resources/0531ebe01f0822745bd09fb9caa337b514a5f0a4)[^1]
 

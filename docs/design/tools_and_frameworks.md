@@ -33,6 +33,7 @@ separation of concerns and data-driven approach is a key characteristic of ECS. 
 
 [Rust Example](https://github.com/bevyengine/bevy/blob/main/examples/ecs/ecs_guide.rs)
 
+## bevy
 In our simulation, the _schedule_ is critical. The engine or framework we choose will need to decide the order of
 operations each "tick" of the simulation, and we must consider this order when designing the system.
 
@@ -55,6 +56,10 @@ to. It doesn't _technically_ support time dilation, so that is up to me.
 [big-space](https://docs.rs/big_space/latest/big_space/) is a Bevy plugin purpose-built for the large-and-small scale
 issue that comes with using realistic scaling for all entities in the Earth-Moon system. Like hifitime, the maintainers
 probably didn't have relativity in mind when they built it, so I might have extra work to do.
+
+I suspect most of the large computations for gravitational potential or GR dilation could be handed to the GPU by way of
+shaders, then queried as a lookup table by entities back on the CPU. If nothing else, that would be the idea method of
+displaying things like potential or dilation as a color map.
 
 ### agent-based models (abm)
 Agent-based models are a no-brainer observing emergent, macro-scale behaviors in simulations with large populations of

@@ -4,38 +4,25 @@ repo_url: https://github.com/philiplinden/spacetime
 repo_name: philiplinden/spacetime
 
 nav:
-  - spacetime:
-    - home: index.md
-    - design decisions: design-decisions.md
-    - system architecture: architecture.md
-  - technical topics: technical/
-  - api docs:
-    - spacetime_bridge: api/doc/spacetime_bridge/index.html
-    - spacetime_core: api/doc/spacetime_core/index.html
+  - design:
+    - goals: index.md
+    - tools_and_frameworks: design/tools_and_frameworks.md
+  - technical: technical/
+  - devlog:
+    - latest: devlog/v0.2.0.md
+    - v0.1.0: devlog/v0.1.0.md
+    - v0.0.0: devlog/v0.0.0.md
 theme:
   name: material
   font:
-    text: Assistant #Quicksand
+    text: Lekton #Changa #Lekton #Quicksand #Assistant
     code: Source Code Pro
   icon:
     logo: fontawesome/solid/clock-rotate-left
   palette:
-    # Palette toggle for light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
+    - scheme: slate
       primary: black
       accent: green
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to dark mode
-    # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: green
-      toggle:
-        icon: material/weather-night
-        name: Switch to light mode
   features:
     - content.code.copy
     - navigation.instant
@@ -73,9 +60,10 @@ plugins:
 
 # Enable LaTeX-formatted math
 extra_javascript:
-  - scripts/katex.js
+  - extras/katex.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
 
 extra_css:
+  - extras/site.css
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css

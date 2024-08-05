@@ -4,7 +4,7 @@ One of the difficult parts of modeling space systems is scale.
 2. We must track of time on the order of nanoseconds (or better!) to model real
    systems.
 3. The numerical precision in our code is limited, and we're pushing those
-   limits. ([Example](./notebooks/time_dilation.md))
+   limits. ([Example](./time_dilation.md))
 
 Even if we forget the idea of visualizing the system, the math still depends on
 very fine precision of these very large quantities.
