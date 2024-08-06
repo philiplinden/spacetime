@@ -29,12 +29,7 @@ log = { version = "0.4.22", features = [
     "release_max_level_warn",
 ] }
 bevy_egui = { version = "0.28.0", features = ["serde"] }
-avian2d = { version = "0.1.1", default-features = false, features = [
-    "2d",
-    "bevy_scene",
-    "f64",
-    "parallel",
-    "parry-f64",
+avian2d = { version = "0.1.1", features = [
     "default-collider",
     "enhanced-determinism",
     "serialize",
@@ -42,6 +37,7 @@ avian2d = { version = "0.1.1", default-features = false, features = [
 bevy_lit = "0.2.2"
 bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
 bevy_pancam = { version = "0.13.0", features = ["bevy_egui"] }
+bevy_prototype_lyon = "0.12.0"
 
 [dev-dependencies]
 bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
