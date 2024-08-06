@@ -1,7 +1,7 @@
 # Mark docs/ as documentation
 docs/* linguist-documentation
 
-# Don't include Jupyter Notebooks or assets/ in language stats
-*.ipynb linguist-documentation=true
-learning/** linguist-documentation=true
+# Hide web stuff and assets from code stats
 assets/** linguist-vendored
+web/** linguist-vendored
+*.js linguist-vendored
