@@ -5,23 +5,43 @@ version = "0.2.0"
 edition = "2021"
 
 [dependencies]
-avian = "0.0.0"
 bevy = "0.14.0"
-bevy_asset_loader = { version = "0.21.0", features = ["progress_tracking"] }
-bevy_kira_audio = "0.20.0"
-bevy_mod_picking = { version = "0.20.1", features = ["backend_avian", "bevy_picking_avian", "bevy_picking_highlight"] }
-iyes_progress = { version = "0.12.0", features = ["assets", "bevy_asset", "bevy_log"] }
-leafwing-input-manager = "0.14.0"
-# Disable low-severity logs at compile time for performance.
-log = { version = "0.4.22", features = [
-    "max_level_debug",
-    "release_max_level_warn",
+bevy_mod_picking = { version = "0.20.1", features = [
+    "backend_avian",
+    "backend_egui",
+    "bevy_picking_avian",
+    "bevy_picking_egui",
+    "bevy_picking_highlight",
 ] }
+iyes_progress = { version = "0.12.0", features = [
+    "assets",
+    "bevy_asset",
+    "bevy_log",
+] }
+iyes_perf_ui = "0.3.0"
 rand = "0.8"
-sickle_ui = { rev = "a548517", git = "https://github.com/UmbraLuminosa/sickle_ui" }
 big_space = "0.7.0"
 hifitime = "3.9.0"
 particular = { version = "0.7.0", features = ["gpu", "parallel"] }
+log = { version = "0.4.22", features = [
+    # Disable low-severity logs at compile time for performance.
+    "max_level_debug",
+    "release_max_level_warn",
+] }
+bevy_egui = { version = "0.28.0", features = ["serde"] }
+avian2d = { version = "0.1.1", default-features = false, features = [
+    "2d",
+    "bevy_scene",
+    "f64",
+    "parallel",
+    "parry-f64",
+    "default-collider",
+    "enhanced-determinism",
+    "serialize",
+] }
+bevy_lit = "0.2.2"
+bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
+bevy_pancam = { version = "0.13.0", features = ["bevy_egui"] }
 
 [dev-dependencies]
 bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
@@ -38,6 +58,7 @@ dev = [
     "bevy/dynamic_linking",
     "bevy/bevy_dev_tools",
     "iyes_progress/debug",
+    "avian2d/debug-plugin",
 ]
 dev_native = [
     "dev",
@@ -66,10 +87,6 @@ opt-level = 1
 # Enable a large amount of optimization in the dev profile for dependencies.
 [profile.dev.package."*"]
 opt-level = 3
-
-# Remove expensive debug assertions due to <https://github.com/bevyengine/bevy/issues/14291>
-[profile.dev.package.wgpu-types]
-debug-assertions = false
 
 # The default profile is optimized for Wasm builds because
 # that's what [Trunk reads](https://github.com/trunk-rs/trunk/issues/605).

@@ -1,3 +1,6 @@
+mod ui;
+pub mod palette;
+
 use bevy::prelude::*;
 pub struct AppPlugin;
 
@@ -17,10 +20,25 @@ impl Plugin for AppPlugin {
                     }
                     .into(),
                     ..default()
-                }),
+                })
+                .set(ImagePlugin::default_nearest()),
         );
 
         // Add custom plugins.
+        app.add_plugins(ui::UserInterfacePlugins);
 
+        // Initialize the app state enum
+        app.init_state::<AppState>();
+
+        // Change the background color.
+        app.insert_resource(ClearColor(palette::BEVY_GRAY));
     }
+}
+
+
+#[derive(Resource, Debug, Clone, Eq, PartialEq, Hash, States, Default)]
+pub enum AppState {
+    Paused,
+    #[default]
+    Running,
 }
