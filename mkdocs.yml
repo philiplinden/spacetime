@@ -27,6 +27,7 @@ theme:
       accent: green
   features:
     - content.code.copy
+    - content.code.select
     - navigation.instant
     - navigation.instant.progress
     - navigation.tabs
@@ -43,8 +44,8 @@ markdown_extensions:
   - footnotes   # enables inline footnotes by using [^1] to mark and [^1]: to define
   - pymdownx.mark # enables markdown highlighting with `==text==` syntax
   - pymdownx.tilde # enables markdown strikethrough with `~~text~~` syntax
-  - pymdownx.snippets # grabs snippets from files instead of copy/pasting (https://facelessuser.github.io/pymdown-extensions/extensions/snippets/)
-  - pymdownx.inlinehilite
+  - pymdownx.superfences # prerequisite for code highlighting
+  - pymdownx.inlinehilite # in line code syntax highlights
   - pymdownx.highlight:
       anchor_linenums: true
       use_pygments: true
