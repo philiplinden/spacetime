@@ -1,4 +1,4 @@
-mod time_dilation;
+pub mod time;
 
 use avian2d::prelude::*;
 use bevy::prelude::*;
@@ -6,7 +6,7 @@ use bevy::prelude::*;
 pub(super) fn plugin(app: &mut App) {
     app.add_plugins((
         PhysicsPlugins::default().with_length_unit(1.0),
-        time_dilation::plugin,
+        time::plugin,
     ));
 
     // we will handle gravity ourselves

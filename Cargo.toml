@@ -18,7 +18,6 @@ iyes_progress = { version = "0.12.0", features = [
     "bevy_asset",
     "bevy_log",
 ] }
-iyes_perf_ui = "0.3.0"
 rand = "0.8"
 big_space = "0.7.0"
 hifitime = "3.9.0"
@@ -34,10 +33,11 @@ avian2d = { version = "0.1.1", features = [
     "enhanced-determinism",
     "serialize",
 ] }
-bevy_lit = "0.2.2"
+bevy_lit = "0.3.0"
 bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
 bevy_pancam = { version = "0.13.0", features = ["bevy_egui"] }
 bevy_prototype_lyon = "0.12.0"
+egui_extras = { version = "0.28.1", features = ["datepicker"] }
 
 [dev-dependencies]
 bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
@@ -63,6 +63,7 @@ dev_native = [
     # Enable embedded asset hot reloading for native dev builds.
     "bevy/embedded_watcher",
 ]
+inspect = []
 
 # Idiomatic Bevy code often triggers these lints, and the CI workflow treats them as errors.
 # In some cases they may still signal poor code quality however, so consider commenting out these lines.
