@@ -1,0 +1,71 @@
+[package]
+name = "spacetime"
+version = "0.2.0"
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+bevy = "0.14.1"
+bevy_mod_picking = { version = "0.20.1", features = [
+    "backend_avian",
+    "backend_egui",
+    "bevy_picking_avian",
+    "bevy_picking_egui",
+    "bevy_picking_highlight",
+] }
+iyes_progress = { version = "0.12.0", features = [
+    "assets",
+    "bevy_asset",
+    "bevy_log",
+] }
+rand = "0.8"
+big_space = "0.7.0"
+hifitime = "3.9.0"
+particular = { version = "0.7.0", features = ["gpu", "parallel"] }
+log = { workspace  = true }
+bevy_egui = { version = "0.28.0", features = ["serde"] }
+avian2d = { version = "0.1.1", features = [
+    "default-collider",
+    "enhanced-determinism",
+    "serialize",
+] }
+bevy_lit = "0.3.0"
+bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
+bevy_pancam = { version = "0.13.0", features = ["bevy_egui"] }
+bevy_prototype_lyon = "0.12.0"
+egui_extras = { version = "0.28.1", features = ["datepicker"] }
+
+[dev-dependencies]
+bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
+bevy_mod_debugdump = "0.11.0"
+
+
+[features]
+default = [
+    # Default to a native dev build.
+    "dev_native",
+]
+dev = [
+    # Improve compile times for dev builds by linking Bevy as a dynamic library.
+    "bevy/dynamic_linking",
+    "bevy/bevy_dev_tools",
+    "iyes_progress/debug",
+    "avian2d/debug-plugin",
+]
+dev_native = [
+    "dev",
+    # Enable asset hot reloading for native dev builds.
+    "bevy/file_watcher",
+    # Enable embedded asset hot reloading for native dev builds.
+    "bevy/embedded_watcher",
+]
+inspect = []
+
+# Idiomatic Bevy code often triggers these lints, and the CI workflow treats them as errors.
+# In some cases they may still signal poor code quality however, so consider commenting out these lines.
+[lints.clippy]
+# Bevy supplies arguments to systems via dependency injection, so it's natural for systems to
+# request more than 7 arguments -- which triggers this lint.
+too_many_arguments = "allow"
+# Queries that access many components may trigger this lint.
+type_complexity = "allow"

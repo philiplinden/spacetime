@@ -1,0 +1,9 @@
+[package]
+name = "hifitime_egui"
+version = "0.1.0"
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+egui_extras = { version = "0.28.1", features = ["datepicker"] }
+hifitime = "3.9.0"
