@@ -1,0 +1,10 @@
+[package]
+name = "lofitime"
+description = "Handy translations between Hifitime and Chrono datetimes and durations."
+version = "0.1.0"
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+chrono = "0.4.38"
+hifitime = "3.9.0"
