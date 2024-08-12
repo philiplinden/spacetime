@@ -1,7 +1,7 @@
 [workspace]
 members = [
     "spacetime",
-    # "hifitime_egui",
+    "lofitime",
 ]
 resolver = "2"
 
