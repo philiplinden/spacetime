@@ -1,6 +1,6 @@
 mod camera;
 mod cursor;
-mod datepicker;
+mod datetime;
 mod diagnostics;
 mod shell;
 
@@ -14,7 +14,6 @@ impl PluginGroup for UserInterfacePlugins {
             .add(bevy_egui::EguiPlugin)
             .add(camera::plugin)
             .add(cursor::plugin)
-            .add(datepicker::plugin)
             .add(diagnostics::plugin)
             .add(shell::plugin)
     }
