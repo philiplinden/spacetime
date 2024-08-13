@@ -120,6 +120,8 @@ jobs:
   deploy-gh-pages:
     name: Deploy to GH Pages
     needs: doc-mkdocs
+    # Only run this job on pushes to the main branch
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       pages: write      # to deploy to Pages
