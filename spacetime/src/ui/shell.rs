@@ -1,6 +1,5 @@
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts};
-use hifitime::TimeScale;
 use crate::physics::time::CoordinateTime;
 
 /// The main Ui that contains everything else. This should be just Egui sugar that triggers events handled elsewhere.
