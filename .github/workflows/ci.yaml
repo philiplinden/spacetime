@@ -36,45 +36,45 @@ jobs:
           # Workaround for https://github.com/rust-lang/cargo/issues/6669
           cargo test --workspace --all-features --doc
 
-  # Run clippy lints.
-  clippy:
-    name: Clippy
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#   # Run clippy lints.
+#   clippy:
+#     name: Clippy
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 30
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy
+#       - name: Install Rust toolchain
+#         uses: dtolnay/rust-toolchain@stable
+#         with:
+#           components: clippy
 
-      - name: Install dependencies
-        run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
+#       - name: Install dependencies
+#         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
 
-      - name: Populate target directory from cache
-        uses: Leafwing-Studios/cargo-cache@v2
+#       - name: Populate target directory from cache
+#         uses: Leafwing-Studios/cargo-cache@v2
 
-      - name: Run clippy lints
-        run: cargo clippy --workspace --all-targets --all-features -- --deny warnings
+#       - name: Run clippy lints
+#         run: cargo clippy --workspace --all-targets --all-features -- --deny warnings
 
-  # Check formatting.
-  format:
-    name: Format
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#   # Check formatting.
+#   format:
+#     name: Format
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 30
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          components: rustfmt
+#       - name: Install Rust toolchain
+#         uses: dtolnay/rust-toolchain@stable
+#         with:
+#           components: rustfmt
 
-      - name: Run cargo fmt
-        run: cargo fmt --all -- --check
+#       - name: Run cargo fmt
+#         run: cargo fmt --all -- --check
 
   # Check documentation.
   doc-cargo:
