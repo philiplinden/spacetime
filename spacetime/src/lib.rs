@@ -23,7 +23,6 @@ impl Plugin for AppPlugin {
                     .into(),
                     ..default()
                 })
-                .set(ImagePlugin::default_nearest()), // to make pixel art crisp
         );
 
         // Add custom plugins.
