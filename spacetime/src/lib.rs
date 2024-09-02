@@ -1,11 +1,9 @@
 mod physics;
 mod ui;
 pub mod components;
-pub mod spawners;
 pub mod palette;
 
 use bevy::prelude::*;
-use spawners::SpawnPlanetoid;
 pub struct AppPlugin;
 
 impl Plugin for AppPlugin {
@@ -31,7 +29,6 @@ impl Plugin for AppPlugin {
         // Add custom plugins.
         app.add_plugins((
             ui::UserInterfacePlugins,
-            spawners::plugin,
             physics::plugin,
             components::plugin,
         ));
@@ -55,9 +52,9 @@ pub enum AppState {
     Running,
 }
 
-fn initialize(mut events: EventWriter<SpawnPlanetoid>) {
+fn initialize(mut events: EventWriter<components::bodies::SpawnPlanetoid>) {
     // spawn center body
-    events.send(spawners::SpawnPlanetoid {
+    events.send(components::bodies::SpawnPlanetoid {
         position: Vec2::new(0.0, 0.0),
         velocity: Vec2::new(0.0, 0.0),
         mass: 100_000.0,
