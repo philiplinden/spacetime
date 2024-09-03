@@ -3,6 +3,8 @@ mod cursor;
 mod datetime;
 mod diagnostics;
 mod shell;
+// mod shaders;
+pub mod palette;
 
 use bevy::{app::PluginGroupBuilder, prelude::*};
 

@@ -21,10 +21,10 @@ iyes_progress = { version = "0.12.0", features = [
 rand = "0.8"
 big_space = "0.7.0"
 hifitime = "3.9.0"
-lofitime = { path = "../lofitime" }
+lofitime = { path = "../lofitime" } # for adapting hifitime<->chrono
 particular = { version = "0.7.0", features = ["gpu", "parallel"] }
 log = { workspace = true }
-bevy_egui = { version = "0.28.0", features = ["serde"] }
+bevy_egui = { version = "0.29.0", features = ["serde"] }
 avian2d = { version = "0.1.1", features = [
     "default-collider",
     "enhanced-determinism",
@@ -33,9 +33,10 @@ avian2d = { version = "0.1.1", features = [
 bevy_lit = "0.3.0"
 bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
 bevy_pancam = { version = "0.13.0", features = ["bevy_egui"] }
-bevy_prototype_lyon = "0.12.0"
 egui_extras = { version = "0.28.1", features = ["datepicker"] }
 chrono = { version = "0.4.38", default-features = false }
+bevy_common_assets = { version = "0.11.0", features = ["ron"] }
+serde = { version = "1.0.209", features = ["derive"] }
 
 [dev-dependencies]
 bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
@@ -51,7 +52,6 @@ dev = [
     # Improve compile times for dev builds by linking Bevy as a dynamic library.
     "bevy/dynamic_linking",
     "bevy/bevy_dev_tools",
-    "iyes_progress/debug",
     "avian2d/debug-plugin",
 ]
 dev_native = [

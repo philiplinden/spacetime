@@ -1,0 +1,79 @@
+// Characteristics of artificial satellites.
+// FIXME(phil): RON does not support inline comments :(
+// (
+//     satellites: [
+//         (
+//             name: "GPS IIIA-6",
+//             mass: 2161.0,  // kg
+//             dimensions: [2.55, 2.24, 4.62],  // m
+//             semi_major_axis: 26559800.0,  // m
+//             eccentricity: 0.0,
+//             inclination: 0.9599,  // radians
+//             orbital_period: 43082.0,  // s
+//             launch_date: "2022-01-13",
+//             clock_frequency: 10.23e6,  // Hz (fundamental frequency)
+//             time_dilation_correction: 4.4647e-10,  // s/s (combined effect of special and general relativity)
+//         ),
+//         (
+//             name: "Lunar Reconnaissance Orbiter",
+//             mass: 1916.0,  // kg (at launch)
+//             dimensions: [3.6, 3.6, 4.4],  // m (width, height, length)
+//             power: 1850.0,  // W (maximum)
+//             orbit_type: "Polar",
+//             semi_major_axis: 1789000.0,  // m (average, 1737.1 km Moon radius + ~50 km altitude)
+//             eccentricity: 0.0093,  // Varies due to maneuvers
+//             inclination: 1.5533,  // radians (89 degrees)
+//             orbital_period: 7200.0,  // s (approximate, 2 hours)
+//             launch_date: "2009-06-18",
+//             clock_type: "USO",  // Ultra Stable Oscillator
+//             clock_stability: 1e-13,  // Allan deviation at 1000s (estimated)
+//             clock_frequency: 40e6,  // Hz (nominal)
+//         ),
+//         (
+//             name: "LADEE",  // Lunar Atmosphere and Dust Environment Explorer
+//             mass: 383.0,  // kg (at launch)
+//             dimensions: [2.37, 1.85, 1.85],  // m (length, width, height)
+//             power: 295.0,  // W (maximum)
+//             orbit_type: "Equatorial",
+//             semi_major_axis: 1784100.0,  // m (average, varies 20-60 km altitude)
+//             eccentricity: 0.0,  // Near-circular
+//             inclination: 0.1047,  // radians (6 degrees)
+//             orbital_period: 6990.0,  // s (approximate)
+//             launch_date: "2013-09-07",
+//             mission_end_date: "2014-04-18",
+//             clock_type: "USO", // Ultra Stable Oscillator
+//             clock_stability: 5e-13,  // Allan deviation at 1s (estimated)
+//             clock_frequency: 40e6,  // Hz (assumed similar to LRO)
+//         ),
+//         (
+//             name: "Chandrayaan-2 Orbiter",
+//             mass: 2379.0,  // kg (at launch, including lander and rover)
+//             dimensions: [3.2, 5.8, 2.1],  // m (length, width, height)
+//             power: 1000.0,  // W (solar array capacity)
+//             orbit_type: "Polar",
+//             semi_major_axis: 1783100.0,  // m (100 km circular orbit)
+//             eccentricity: 0.0,  // Circular
+//             inclination: 1.5708,  // radians (90 degrees)
+//             orbital_period: 6930.0,  // s (approximate)
+//             launch_date: "2019-07-22",
+//             clock_type: "Atomic Clock",  // Rubidium Atomic Clock
+//             clock_stability: 1e-11,  // Allan deviation at 1s (estimated)
+//             clock_frequency: 10e6,  // Hz (assumed)
+//         ),
+//         (
+//             name: "CAPSTONE",  // Cislunar Autonomous Positioning System Technology Operations and Navigation Experiment
+//             mass: 25.0,  // kg
+//             dimensions: [0.3, 0.3, 0.6],  // m (12U CubeSat)
+//             power: 35.0,  // W (estimated)
+//             orbit_type: "NRHO",  // Near Rectilinear Halo Orbit
+//             semi_major_axis: 70000000.0,  // m (highly elliptical, average)
+//             eccentricity: 0.57,  // Approximate
+//             inclination: 1.4835,  // radians (85 degrees)
+//             orbital_period: 432000.0,  // s (6.5 days)
+//             launch_date: "2022-06-28",
+//             clock_type: "TCXO",  // Temperature Compensated Crystal Oscillator (assumed)
+//             clock_stability: 1e-9,  // Allan deviation at 1s (estimated)
+//             clock_frequency: 10e6,  // Hz (assumed)
+//         ),
+//     ],
+// )
