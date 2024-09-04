@@ -33,17 +33,23 @@ impl Default for CoordinateTime {
 }
 
 impl CoordinateTime {
+    /// The current epoch (starting epoch + elapsed system time)
     pub fn epoch(&self) -> Epoch {
         self.start_epoch
             .unwrap_or_else(|| Epoch::from_duration(Duration::ZERO, self.scale))
             + self.elapsed
     }
 
+    /// The current epoch, represented in some other timescale. Might be useless
+    #[allow(dead_code)]
     pub fn epoch_in_scale(&self, time_scale: TimeScale) -> Epoch {
         let native_epoch = self.start_epoch.unwrap_or_default() + self.elapsed;
         native_epoch.in_time_scale(time_scale)
     }
 
+    /// Number of seconds of system time that have elapsed since the start
+    /// epoch. This is here for convenience for when we don't want to clutter
+    /// code converting from hifitime::Durations.
     pub fn elapsed_seconds(&self) -> f64 {
         self.elapsed.to_seconds()
     }
@@ -67,7 +73,11 @@ impl fmt::Debug for CoordinateTime {
     }
 }
 
-/// Avian Physics Time is used as the Coordinate Time
+/// Increment the elapsed coordinate time by adding the time since the last tick
+///
+/// Avian Physics Time is used as the Coordinate Time but this system runs every
+/// update. That means the actual time updates with the physics schedule, and
+/// the coordinate time resource is always as up to date as possible.
 fn sync_coordinate_time(
     physics_time: Res<Time<Physics>>,
     mut coordinate_time: ResMut<CoordinateTime>,
