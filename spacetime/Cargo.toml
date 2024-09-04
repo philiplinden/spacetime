@@ -20,7 +20,7 @@ iyes_progress = { version = "0.12.0", features = [
 ] }
 rand = "0.8"
 big_space = "0.7.0"
-hifitime = "4.0.0-alpha"
+hifitime = { workspace = true }
 lofitime = { path = "../lofitime" } # for adapting hifitime<->chrono
 particular = { version = "0.7.0", features = ["gpu", "parallel"] }
 log = { workspace = true }

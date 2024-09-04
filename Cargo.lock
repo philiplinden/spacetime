@@ -2942,21 +2942,6 @@ checksum = "dfa686283ad6dd069f105e5ab091b04c62850d3e4cf5d67debad1933f55023df"
 
 [[package]]
 name = "hifitime"
-version = "3.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7c587aef1280b84f15bfd84eefff9ee55d1a2826e67f089ed263a8c3a029c273"
-dependencies = [
- "js-sys",
- "lexical-core",
- "num-traits",
- "serde",
- "serde_derive",
- "wasm-bindgen",
- "web-sys",
-]
-
-[[package]]
-name = "hifitime"
 version = "4.0.0-alpha"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1234bcbfc5d693515132f49d5b0a4ce0ca807fa150428d85103ea78e1f7100c4"
@@ -3407,7 +3392,7 @@ name = "lofitime"
 version = "0.2.0"
 dependencies = [
  "chrono",
- "hifitime 3.9.0",
+ "hifitime",
 ]
 
 [[package]]
@@ -4927,7 +4912,7 @@ dependencies = [
  "big_space",
  "chrono",
  "egui_extras",
- "hifitime 4.0.0-alpha",
+ "hifitime",
  "iyes_progress",
  "lofitime",
  "log",

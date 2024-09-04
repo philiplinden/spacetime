@@ -2,11 +2,10 @@ use std::fmt;
 
 use avian2d::schedule::Physics;
 use bevy::prelude::*;
-use hifitime::prelude::*;
-use lofitime::{HifiDateTime, LofiDateTime};
+use hifitime::{Duration, Epoch, TimeScale};
 
 pub(super) fn plugin(app: &mut App) {
-    app.init_resource::<CoordinateTime>();
+    app.insert_resource::<CoordinateTime>(CoordinateTime::new(TimeScale::UTC, None));
     app.add_systems(Update, sync_coordinate_time);
 }
 
@@ -27,15 +26,23 @@ impl Default for CoordinateTime {
             Err(_) => Epoch::from_utc_duration(zero_seconds),
         };
         CoordinateTime {
-            scale: TimeScale::TAI,
+            scale: TimeScale::UTC,
             elapsed: zero_seconds,
             start_epoch: Some(start_epoch),
         }
     }
 }
 
-
 impl CoordinateTime {
+    pub fn new(scale: TimeScale, start_epoch: Option<Epoch>) -> Self {
+        let zero_seconds = Duration::from_seconds(0.0);
+        CoordinateTime {
+            scale,
+            elapsed: zero_seconds,
+            start_epoch: Some(start_epoch.unwrap_or_default()),
+        }
+    }
+
     /// Get the current epoch (start_epoch + elapsed time). It also casts to the
     /// currently set time scale just in case it was changed.
     pub fn epoch(&self) -> Epoch {
@@ -46,22 +53,6 @@ impl CoordinateTime {
     /// patterns and returns a simple float rather than a Duration type.
     pub fn elapsed_seconds(&self) -> f64 {
         self.elapsed.to_seconds()
-    }
-}
-
-impl HifiDateTime for CoordinateTime {
-    fn to_lofi_utc(&self) -> chrono::DateTime<chrono::Utc> {
-        self.epoch().to_lofi_utc()
-    }
-
-    fn to_lofi_naive(&self) -> chrono::NaiveDateTime {
-        self.epoch().to_lofi_naive()
-    }
-}
-
-impl LofiDateTime for CoordinateTime {
-    fn to_hifi_epoch(&self) -> Epoch {
-        self.epoch()
     }
 }
 
@@ -88,6 +79,6 @@ fn sync_coordinate_time(
     physics_time: Res<Time<Physics>>,
     mut coordinate_time: ResMut<CoordinateTime>,
 ) {
-    coordinate_time.elapsed = coordinate_time.elapsed
-        + Duration::from_seconds(physics_time.delta_seconds_f64());
+    coordinate_time.elapsed =
+        coordinate_time.elapsed + Duration::from_seconds(physics_time.delta_seconds_f64());
 }

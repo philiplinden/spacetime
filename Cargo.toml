@@ -17,6 +17,7 @@ log = { version = "0.4.22", features = [
     "max_level_debug",
     "release_max_level_warn",
 ] }
+hifitime = "4.0.0-alpha"
 
 # Compile with Performance Optimizations:
 # https://bevyengine.org/learn/quick-start/getting-started/setup/#compile-with-performance-optimizations

@@ -7,4 +7,4 @@ edition.workspace = true
 
 [dependencies]
 chrono = "0.4.38"
-hifitime = "3.9.0"
+hifitime = { workspace = true }
