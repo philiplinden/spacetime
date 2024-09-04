@@ -49,8 +49,9 @@ impl CoordinateTime {
         self.start_epoch.unwrap_or_default() + self.elapsed
     }
 
-    /// Map the elapsed time to a convenience function that follows hifitime
-    /// patterns and returns a simple float rather than a Duration type.
+    /// Number of seconds of system time that have elapsed since the start
+    /// epoch. This is here for convenience for when we don't want to clutter
+    /// code converting from hifitime::Durations.
     pub fn elapsed_seconds(&self) -> f64 {
         self.elapsed.to_seconds()
     }
@@ -74,7 +75,11 @@ impl fmt::Debug for CoordinateTime {
     }
 }
 
-/// Avian Physics Time is used as the Coordinate Time
+/// Increment the elapsed coordinate time by adding the time since the last tick
+///
+/// Avian Physics Time is used as the Coordinate Time but this system runs every
+/// update. That means the actual time updates with the physics schedule, and
+/// the coordinate time resource is always as up to date as possible.
 fn sync_coordinate_time(
     physics_time: Res<Time<Physics>>,
     mut coordinate_time: ResMut<CoordinateTime>,
