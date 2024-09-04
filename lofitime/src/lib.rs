@@ -1,105 +1,159 @@
-use chrono;
+use chrono::{Datelike, Timelike};
 use hifitime;
+use std::ops::{Deref, DerefMut};
 
-/// Adds functions to a hifitime epoch so it can be represented as a chrono time.
-pub trait HifiDateTime {
-    fn to_lofi_utc(&self) -> chrono::DateTime<chrono::Utc>;
-    fn to_lofi_naive(&self) -> chrono::NaiveDateTime;
+// Wrapper types
+#[derive(Clone, Copy)]
+pub struct HifiEpoch(pub hifitime::Epoch);
+#[derive(Clone, Copy)]
+pub struct HifiDuration(pub hifitime::Duration);
+#[derive(Clone, Copy)]
+pub struct LofiDateTime(pub chrono::DateTime<chrono::Utc>);
+#[derive(Clone, Copy)]
+pub struct LofiDuration(pub chrono::Duration);
+
+// Implement Deref and DerefMut for wrapper types
+impl Deref for HifiEpoch {
+    type Target = hifitime::Epoch;
+    fn deref(&self) -> &Self::Target { &self.0 }
+}
+impl DerefMut for HifiEpoch {
+    fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
 }
 
-impl HifiDateTime for hifitime::Epoch {
-    /// Represents an Epoch as a UTC date and time
-    fn to_lofi_utc(&self) -> chrono::DateTime<chrono::Utc> {
-        chrono::DateTime::from_timestamp_millis(self.to_unix_milliseconds() as i64).unwrap()
+impl Deref for HifiDuration {
+    type Target = hifitime::Duration;
+    fn deref(&self) -> &Self::Target { &self.0 }
+}
+impl DerefMut for HifiDuration {
+    fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
+}
+
+impl Deref for LofiDateTime {
+    type Target = chrono::DateTime<chrono::Utc>;
+    fn deref(&self) -> &Self::Target { &self.0 }
+}
+impl DerefMut for LofiDateTime {
+    fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
+}
+
+impl Deref for LofiDuration {
+    type Target = chrono::Duration;
+    fn deref(&self) -> &Self::Target { &self.0 }
+}
+impl DerefMut for LofiDuration {
+    fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
+}
+
+/// Expose some of the chrono::DateLike features but not all of them because
+/// there are soooo many trait functions for DateLike that you'll probably never
+/// use.
+trait SimpleDateLike {
+    fn year(&self) -> i32;
+    fn month(&self) -> u32;
+    fn day(&self) -> u32;
+}
+
+impl SimpleDateLike for LofiDateTime {
+    fn year(&self) -> i32 { self.0.year() }
+    fn month(&self) -> u32 { self.0.month() }
+    fn day(&self) -> u32 { self.0.day() }
+}
+
+// Implement necessary traits for LofiDateTime
+impl Timelike for LofiDateTime {
+    fn hour(&self) -> u32 { self.0.hour() }
+    fn minute(&self) -> u32 { self.0.minute() }
+    fn second(&self) -> u32 { self.0.second() }
+    fn nanosecond(&self) -> u32 { self.0.nanosecond() }
+    fn with_hour(&self, hour: u32) -> Option<Self> {
+        self.0.with_hour(hour).map(LofiDateTime)
     }
-    /// Represents an Epoch in UTC then strips it down to a naive time
-    /// (no time zone).
-    fn to_lofi_naive(&self) -> chrono::NaiveDateTime {
-        self.to_lofi_utc().naive_utc()
+    fn with_minute(&self, min: u32) -> Option<Self> {
+        self.0.with_minute(min).map(LofiDateTime)
+    }
+    fn with_second(&self, sec: u32) -> Option<Self> {
+        self.0.with_second(sec).map(LofiDateTime)
+    }
+    fn with_nanosecond(&self, nano: u32) -> Option<Self> {
+        self.0.with_nanosecond(nano).map(LofiDateTime)
     }
 }
 
-/// Adds functions to a hifitime duration so it can be represented as a chrono duration.
-pub trait HifiDuration {
-    fn to_lofi_duration(&self) -> chrono::Duration;
+// Implement From for wrapper types
+impl From<HifiEpoch> for LofiDateTime {
+    fn from(epoch: HifiEpoch) -> Self {
+        LofiDateTime(chrono::DateTime::from_timestamp_millis(epoch.to_unix_milliseconds() as i64).unwrap())
+    }
 }
 
-impl HifiDuration for hifitime::Duration {
-    fn to_lofi_duration(&self) -> chrono::Duration {
-        let (centuries, nanos) = self.to_parts();
+impl From<HifiEpoch> for chrono::NaiveDateTime {
+    fn from(epoch: HifiEpoch) -> Self {
+        LofiDateTime::from(epoch).naive_utc()
+    }
+}
+
+impl From<HifiDuration> for LofiDuration {
+    fn from(duration: HifiDuration) -> Self {
+        let (centuries, nanos) = duration.to_parts();
         let centuries_as_days = centuries as i64 / hifitime::DAYS_PER_CENTURY_I64;
         let chrono_days = chrono::Duration::days(centuries_as_days);
         let chrono_nanos = chrono::Duration::nanoseconds(nanos as i64);
-        chrono_days + chrono_nanos
+        LofiDuration(chrono_days + chrono_nanos)
     }
 }
 
-/// Adds functions to a chrono time so it can be represented as a hifitime epoch.
-/// We only keep precision to the nearest millisecond from chrono.
-pub trait LofiDateTime {
-    fn to_hifi_epoch(&self) -> hifitime::Epoch;
-}
-
-impl<Tz> LofiDateTime for chrono::DateTime<Tz>
-where
-    Tz: chrono::TimeZone,
-{
-    fn to_hifi_epoch(&self) -> hifitime::Epoch {
-        hifitime::Epoch::from_unix_duration(hifitime::Duration::from_milliseconds(
-            self.to_utc().timestamp_millis() as f64,
-        ))
+impl From<LofiDateTime> for HifiEpoch {
+    fn from(datetime: LofiDateTime) -> Self {
+        HifiEpoch(hifitime::Epoch::from_unix_duration(hifitime::Duration::from_milliseconds(
+            datetime.timestamp_millis() as f64,
+        )))
     }
 }
 
-/// Adds functions to a chrono duration so it can be represented as a hifitime duration.
-/// We only keep precision to the nearest millisecond from chrono.
-pub trait LofiDuration {
-    fn to_hifi_duration(&self) -> hifitime::Duration;
-}
-
-impl LofiDuration for chrono::TimeDelta {
-    fn to_hifi_duration(&self) -> hifitime::Duration {
-        hifitime::Duration::from_milliseconds(self.num_milliseconds() as f64)
+impl From<LofiDuration> for HifiDuration {
+    fn from(duration: LofiDuration) -> Self {
+        HifiDuration(hifitime::Duration::from_milliseconds(duration.num_milliseconds() as f64))
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use chrono;
-    use hifitime;
+    use chrono::TimeZone;
 
     #[test]
     fn test_hifi_to_lofi_utc() {
-        let hifi_epoch = hifitime::Epoch::from_gregorian_utc(2023, 8, 12, 15, 30, 45, 0);
-        let lofi_utc = hifi_epoch.to_lofi_utc();
+        let hifi_epoch = HifiEpoch(hifitime::Epoch::from_gregorian_utc(2023, 8, 12, 15, 30, 45, 0));
+        let lofi_utc: LofiDateTime = hifi_epoch.into();
 
-        assert_eq!(chrono::Datelike::year(&lofi_utc), 2023);
-        assert_eq!(chrono::Datelike::month(&lofi_utc), 8);
-        assert_eq!(chrono::Datelike::day(&lofi_utc), 12);
-        assert_eq!(chrono::Timelike::hour(&lofi_utc), 15);
-        assert_eq!(chrono::Timelike::minute(&lofi_utc), 30);
-        assert_eq!(chrono::Timelike::second(&lofi_utc), 45);
+        assert_eq!(lofi_utc.year(), 2023);
+        assert_eq!(lofi_utc.month(), 8);
+        assert_eq!(lofi_utc.day(), 12);
+        assert_eq!(lofi_utc.hour(), 15);
+        assert_eq!(lofi_utc.minute(), 30);
+        assert_eq!(lofi_utc.second(), 45);
     }
 
     #[test]
     fn test_hifi_to_lofi_naive() {
-        let hifi_epoch = hifitime::Epoch::from_gregorian_utc(2023, 8, 12, 15, 30, 45, 0);
-        let lofi_naive = hifi_epoch.to_lofi_naive();
+        let hifi_epoch = HifiEpoch(hifitime::Epoch::from_gregorian_utc(2023, 8, 12, 15, 30, 45, 0));
+        let lofi_naive: chrono::NaiveDateTime = hifi_epoch.into();
 
-        assert_eq!(chrono::Datelike::year(&lofi_naive), 2023);
-        assert_eq!(chrono::Datelike::month(&lofi_naive), 8);
-        assert_eq!(chrono::Datelike::day(&lofi_naive), 12);
-        assert_eq!(chrono::Timelike::hour(&lofi_naive), 15);
-        assert_eq!(chrono::Timelike::minute(&lofi_naive), 30);
-        assert_eq!(chrono::Timelike::second(&lofi_naive), 45);
+        assert_eq!(lofi_naive.year(), 2023);
+        assert_eq!(lofi_naive.month(), 8);
+        assert_eq!(lofi_naive.day(), 12);
+        assert_eq!(lofi_naive.hour(), 15);
+        assert_eq!(lofi_naive.minute(), 30);
+        assert_eq!(lofi_naive.second(), 45);
     }
 
     #[test]
     fn test_hifi_duration_to_lofi_duration() {
-        let hifi_duration =
-            hifitime::Duration::from_days(365.) + hifitime::Duration::from_hours(6.);
-        let lofi_duration = hifi_duration.to_lofi_duration();
+        let hifi_duration = HifiDuration(
+            hifitime::Duration::from_days(365.) + hifitime::Duration::from_hours(6.)
+        );
+        let lofi_duration: LofiDuration = hifi_duration.into();
 
         assert_eq!(lofi_duration.num_days(), 365);
         assert_eq!(lofi_duration.num_hours() % 24, 6);
@@ -107,10 +161,8 @@ mod tests {
 
     #[test]
     fn test_lofi_to_hifi_epoch() {
-        use chrono::TimeZone;
-
-        let lofi_datetime = chrono::Utc.with_ymd_and_hms(2023, 8, 12, 15, 30, 45).unwrap();
-        let hifi_epoch = lofi_datetime.to_hifi_epoch();
+        let lofi_datetime = LofiDateTime(chrono::Utc.with_ymd_and_hms(2023, 8, 12, 15, 30, 45).unwrap());
+        let hifi_epoch: HifiEpoch = lofi_datetime.into();
 
         let (y, m, d, h, min, s, _) = hifi_epoch.to_gregorian_utc();
         assert_eq!(y, 2023);
@@ -123,8 +175,8 @@ mod tests {
 
     #[test]
     fn test_lofi_duration_to_hifi_duration() {
-        let lofi_duration = chrono::Duration::days(365) + chrono::Duration::hours(6);
-        let hifi_duration = lofi_duration.to_hifi_duration();
+        let lofi_duration = LofiDuration(chrono::Duration::days(365) + chrono::Duration::hours(6));
+        let hifi_duration: HifiDuration = lofi_duration.into();
 
         assert_eq!(
             hifi_duration.to_seconds(),
@@ -134,26 +186,27 @@ mod tests {
 
     #[test]
     fn test_roundtrip_epoch_conversion() {
-        let original_epoch =
-            hifitime::Epoch::from_gregorian_utc(2023, 8, 12, 15, 30, 45, 123_456_789);
-        let roundtrip_epoch = original_epoch.to_lofi_utc().to_hifi_epoch();
+        let original_epoch = HifiEpoch(hifitime::Epoch::from_gregorian_utc(2023, 8, 12, 15, 30, 45, 123_456_789));
+        let roundtrip_epoch: HifiEpoch = LofiDateTime::from(original_epoch).into();
 
         // Note: We lose some precision in the milliseconds because we don't trust Chrono to that precision
         assert!(
-            (original_epoch - roundtrip_epoch).abs() < hifitime::Duration::from_milliseconds(1.)
+            (*original_epoch - *roundtrip_epoch).abs() < hifitime::Duration::from_milliseconds(1.)
         );
     }
 
     #[test]
     fn test_roundtrip_duration_conversion() {
-        let original_duration = hifitime::Duration::from_days(365.)
-            + hifitime::Duration::from_hours(6.)
-            + hifitime::Duration::from_nanoseconds(123_456_789.);
-        let roundtrip_duration = original_duration.to_lofi_duration().to_hifi_duration();
+        let original_duration = HifiDuration(
+            hifitime::Duration::from_days(365.)
+                + hifitime::Duration::from_hours(6.)
+                + hifitime::Duration::from_nanoseconds(123_456_789.)
+        );
+        let roundtrip_duration: HifiDuration = LofiDuration::from(original_duration).into();
 
         // Note: We lose some precision in the milliseconds because we don't trust Chrono to that precision
         assert!(
-            (original_duration - roundtrip_duration).abs()
+            (*original_duration - *roundtrip_duration).abs()
                 < hifitime::Duration::from_milliseconds(1.)
         );
     }
