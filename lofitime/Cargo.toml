@@ -1,7 +1,7 @@
 [package]
 name = "lofitime"
 description = "Handy translations between Hifitime and Chrono datetimes and durations."
-version = "0.1.0"
+version = "0.2.0"
 authors.workspace = true
 edition.workspace = true
 
