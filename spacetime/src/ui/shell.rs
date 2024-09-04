@@ -19,7 +19,13 @@ fn update_shell(
             });
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 egui::warn_if_debug_build(ui);
-                ui.label(format!("Coordinate Time: {:?}", coordinate_time.as_ref()));
+                ui.label(format!("Scale: {:?}", coordinate_time.scale));
+                // ui.label(format!("Coordinate Time: {:}", coordinate_time.epoch()));
+                ui.label(format!(
+                    "{:} ({:.4} elapsed seconds)",
+                    coordinate_time.epoch(),
+                    coordinate_time.elapsed_seconds(),
+                ))
             });
         });
     });

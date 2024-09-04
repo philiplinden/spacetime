@@ -3,7 +3,7 @@
 
 use bevy::prelude::*;
 
-mod bodies;
+mod entities;
 mod physics;
 mod ui;
 
@@ -13,17 +13,19 @@ fn main() -> AppExit {
     app.add_plugins((
         DefaultPlugins.set(WindowPlugin {
             primary_window: Window {
-                title: "spacetime".to_string(),
+                title: "💫 spacetime".to_string(),
                 ..default()
             }
             .into(),
             ..default()
         }),
-        physics::plugin,
-        bodies::CelestialsPlugin,
-        // bodies::SatellitesPlugin,
-        ui::UserInterfacePlugins,
     ));
+
+    app.add_plugins((
+        ui::plugin,
+        physics::plugin,
+    ));
+
     app.init_state::<AppState>();
     app.run()
 }
@@ -32,8 +34,7 @@ fn main() -> AppExit {
 pub enum AppState {
     Splash,
     Loading,
-    Paused,
     #[default]
+    Paused,
     Running,
-    Credits,
 }

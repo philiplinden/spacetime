@@ -4,9 +4,13 @@ mod datetime;
 mod diagnostics;
 mod shell;
 // mod shaders;
-pub mod palette;
 
 use bevy::{app::PluginGroupBuilder, prelude::*};
+
+// We map this to the function format for consistency
+pub(super) fn plugin(app: &mut App) {
+    app.add_plugins(UserInterfacePlugins);
+}
 
 pub struct UserInterfacePlugins;
 
