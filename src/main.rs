@@ -2,8 +2,6 @@
 #![cfg_attr(not(feature = "dev"), windows_subsystem = "windows")]
 
 use bevy::prelude::*;
-
-mod entities;
 mod physics;
 mod ui;
 

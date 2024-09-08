@@ -14,9 +14,6 @@ fn update_shell(
     let ctx = egui_ctx.ctx_mut();
     egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
         egui::menu::bar(ui, |ui| {
-            ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
-                // left side
-            });
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 egui::warn_if_debug_build(ui);
                 ui.label(format!("Scale: {:?}", coordinate_time.scale));

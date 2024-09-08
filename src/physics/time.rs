@@ -23,7 +23,10 @@ impl Default for CoordinateTime {
         let zero_seconds = Duration::from_seconds(0.0);
         let start_epoch = match Epoch::now() {
             Ok(value) => value,
-            Err(_) => Epoch::from_utc_duration(zero_seconds),
+            Err(_) => {
+                error!("Error getting the current time! Using epoch origin");
+                Epoch::from_utc_duration(zero_seconds)
+            }
         };
         CoordinateTime {
             scale: TimeScale::UTC,
