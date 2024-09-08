@@ -1,23 +1,78 @@
-[workspace]
-members = [
-    "spacetime",
-    "lofitime",
-]
-resolver = "2"
-
-[workspace.package]
+[package]
+name = "spacetime"
+version = "0.2.0"
 authors = ["Philip Linden <lindenphilipj@gmail.com>"]
 edition = "2021"
 
-
-[workspace.dependencies]
-# aliases for dependencies that can be imported by member crates
+[dependencies]
+bevy = "0.14.2"
+bevy_mod_picking = { version = "0.20.1", features = [
+    "backend_avian",
+    "backend_egui",
+    "bevy_picking_avian",
+    "bevy_picking_egui",
+    "bevy_picking_highlight",
+] }
+iyes_progress = { version = "0.12.0", features = [
+    "assets",
+    "bevy_asset",
+    "bevy_log",
+] }
 log = { version = "0.4.22", features = [
     # Disable low-severity logs at compile time for performance.
     "max_level_debug",
     "release_max_level_warn",
 ] }
 hifitime = "4.0.0-alpha"
+rand = "0.8"
+big_space = "0.7.0"
+particular = { version = "0.7.0", features = ["gpu", "parallel"] }
+bevy_egui = { version = "0.29.0", features = ["serde"] }
+avian2d = { version = "0.1.1", features = [
+    "default-collider",
+    "enhanced-determinism",
+    "serialize",
+] }
+bevy_lit = "0.3.0"
+bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
+bevy_pancam = { version = "0.14.0", features = ["bevy_egui"] }
+serde = { version = "1.0.209", features = ["derive"] }
+
+[dev-dependencies]
+bevy-inspector-egui = { version = "0.25.1", features = ["highlight_changes"] }
+bevy_mod_debugdump = "0.11.0"
+
+[features]
+default = [
+    # Default to a native dev build.
+    "dev_native",
+]
+dev = [
+    # Improve compile times for dev builds by linking Bevy as a dynamic library.
+    "bevy/dynamic_linking",
+    "bevy/bevy_dev_tools",
+    "avian2d/debug-plugin",
+]
+dev_native = [
+    "dev",
+    # Enable asset hot reloading for native dev builds.
+    "bevy/file_watcher",
+    # Enable embedded asset hot reloading for native dev builds.
+    "bevy/embedded_watcher",
+]
+inspect = [
+    # Load the inspector
+    "bevy-inspector-egui",
+]
+
+# Idiomatic Bevy code often triggers these lints, and the CI workflow treats them as errors.
+# In some cases they may still signal poor code quality however, so consider commenting out these lines.
+[lints.clippy]
+# Bevy supplies arguments to systems via dependency injection, so it's natural for systems to
+# request more than 7 arguments -- which triggers this lint.
+too_many_arguments = "allow"
+# Queries that access many components may trigger this lint.
+type_complexity = "allow"
 
 # Compile with Performance Optimizations:
 # https://bevyengine.org/learn/quick-start/getting-started/setup/#compile-with-performance-optimizations

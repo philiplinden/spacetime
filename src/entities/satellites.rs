@@ -1,15 +1,13 @@
 #[allow(dead_code)]
 
 use bevy::prelude::*;
-use bevy_common_assets::ron::RonAssetPlugin;
 use serde::Deserialize;
 
 pub struct SatellitesPlugin;
 
 impl Plugin for SatellitesPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins(RonAssetPlugin::<Satellites>::new(&["ron"]));
-        app.add_systems(Startup, load_satellites);
+        // app.add_systems(Startup, load_satellites);
     }
 }
 
@@ -37,17 +35,17 @@ pub struct Satellites {
     pub satellites: Vec<Satellite>,
 }
 
-fn load_satellites(
-    asset_server: Res<AssetServer>,
-    satellites: Res<Assets<Satellites>>,
-) {
-    // Load the RON file
-    let _handle: Handle<Satellites> = asset_server.load("config/satellites.ron");
+// fn load_satellites(
+//     asset_server: Res<AssetServer>,
+//     satellites: Res<Assets<Satellites>>,
+// ) {
+//     // Load the RON file
+//     let _handle: Handle<Satellites> = asset_server.load("config/satellites.ron");
 
-    // After the RON file is loaded, we can access the satellite data
-    for satellite_data in satellites.iter() {
-        for satellite in &satellite_data.1.satellites {
-            println!("Satellite: {:?}", satellite);
-        }
-    }
-}
+//     // After the RON file is loaded, we can access the satellite data
+//     for satellite_data in satellites.iter() {
+//         for satellite in &satellite_data.1.satellites {
+//             println!("Satellite: {:?}", satellite);
+//         }
+//     }
+// }

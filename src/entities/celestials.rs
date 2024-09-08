@@ -1,15 +1,13 @@
 #[allow(dead_code)]
 
 use bevy::prelude::*;
-use bevy_common_assets::ron::RonAssetPlugin;
 use serde::Deserialize;
 
 pub struct CelestialsPlugin;
 
 impl Plugin for CelestialsPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins(RonAssetPlugin::<Celestials>::new(&["ron"]));
-        app.add_systems(Startup, load_celestials);
+        // app.add_systems(Startup, load_celestials);
     }
 }
 
@@ -35,14 +33,14 @@ pub struct Celestials {
     pub celestials: Vec<Celestial>,
 }
 
-fn load_celestials(asset_server: Res<AssetServer>, celestials: Res<Assets<Celestials>>) {
-    // Load the RON file
-    let _handle: Handle<Celestials> = asset_server.load("config/celestials.ron");
+// fn load_celestials(asset_server: Res<AssetServer>, celestials: Res<Assets<Celestials>>) {
+//     // Load the RON file
+//     let _handle: Handle<Celestials> = asset_server.load("config/celestials.ron");
 
-    // After the RON file is loaded, we can access the celestial data
-    for celestial_data in celestials.iter() {
-        for celestial in &celestial_data.1.celestials {
-            println!("Celestial Object: {:?}", celestial);
-        }
-    }
-}
+//     // After the RON file is loaded, we can access the celestial data
+//     for celestial_data in celestials.iter() {
+//         for celestial in &celestial_data.1.celestials {
+//             println!("Celestial Object: {:?}", celestial);
+//         }
+//     }
+// }

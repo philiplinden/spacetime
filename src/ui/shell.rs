@@ -8,15 +8,14 @@ pub(super) fn plugin(app: &mut App) {
 }
 
 fn update_shell(
-    commands: Commands,
     mut egui_ctx: EguiContexts,
-    mut coordinate_time: ResMut<CoordinateTime>,
+    coordinate_time: Res<CoordinateTime>,
 ) {
     let ctx = egui_ctx.ctx_mut();
     egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
         egui::menu::bar(ui, |ui| {
             ui.with_layout(egui::Layout::left_to_right(egui::Align::Center), |ui| {
-                super::datetime::set_time_menu(commands, ui, &mut coordinate_time);
+                // left side
             });
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 egui::warn_if_debug_build(ui);
