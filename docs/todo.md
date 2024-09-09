@@ -1,9 +1,9 @@
 # Physics
-- [ ] Spawn a central body and an orbiting body.
+- [x] Spawn a central body and an orbiting body.
 - [ ] Speed up or slow down the simulation clock.
 
 # UI
-- [ ] Add panning and zooming to the camera.
+- [s] Add panning and zooming to the camera.
 - [ ] Allow the camera to follow an entity, and to change which entity is followed.
 
 # Config

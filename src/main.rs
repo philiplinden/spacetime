@@ -4,6 +4,7 @@
 use bevy::prelude::*;
 mod physics;
 mod ui;
+mod scenes;
 
 fn main() -> AppExit {
     let mut app = App::new();
@@ -22,6 +23,7 @@ fn main() -> AppExit {
     app.add_plugins((
         ui::plugin,
         physics::plugin,
+        scenes::plugin,
     ));
 
     app.init_state::<AppState>();

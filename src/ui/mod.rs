@@ -21,5 +21,6 @@ impl PluginGroup for UserInterfacePlugins {
             .add(cursor::plugin)
             .add(diagnostics::plugin)
             .add(shell::plugin)
+            // .add(shaders::plugin)
     }
 }
