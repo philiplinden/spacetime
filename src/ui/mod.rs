@@ -2,7 +2,6 @@ mod camera;
 mod cursor;
 mod diagnostics;
 mod shell;
-// mod shaders;
 
 use bevy::{app::PluginGroupBuilder, prelude::*};
 
@@ -21,6 +20,5 @@ impl PluginGroup for UserInterfacePlugins {
             .add(cursor::plugin)
             .add(diagnostics::plugin)
             .add(shell::plugin)
-            // .add(shaders::plugin)
     }
 }
