@@ -10,6 +10,8 @@ nav:
     - simulation_limits: design/simulation_limits.md
   - technical: technical/
   - devlog:
+    - v0.2.2: devlog/v0.2.2.md
+    - v0.2.1: devlog/v0.2.1.md
     - v0.2.0: devlog/v0.2.0.md
     - v0.1.0: devlog/v0.1.0.md
     - v0.0.0: devlog/v0.0.0.md
