@@ -26,7 +26,7 @@ fn spawn_bodies(
                 material: materials.add(Color::srgb(0.7, 0.7, 0.8)).clone(),
                 ..default()
             },
-            RigidBody::Kinematic,
+            RigidBody::Static,
             Collider::circle(center_radius),
             Mass(1_000_000.0),
         ));
