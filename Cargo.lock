@@ -452,9 +452,9 @@ dependencies = [
 
 [[package]]
 name = "bevy-inspector-egui"
-version = "0.25.2"
+version = "0.26.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8b66b51a66c0be92604c13cd490509d77676c05406f4f4b046672aaffdcc925f"
+checksum = "d46ba955761969dbc9a79d3583a175609b4e370303bc0f9a5846397dcb7f05fd"
 dependencies = [
  "bevy-inspector-egui-derive",
  "bevy_app",
@@ -463,7 +463,7 @@ dependencies = [
  "bevy_core",
  "bevy_core_pipeline",
  "bevy_ecs",
- "bevy_egui 0.28.0",
+ "bevy_egui 0.29.0",
  "bevy_hierarchy",
  "bevy_log",
  "bevy_math",
@@ -485,9 +485,9 @@ dependencies = [
 
 [[package]]
 name = "bevy-inspector-egui-derive"
-version = "0.25.1"
+version = "0.26.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "791acfac11e3d5a750952c5201dc0d414b88431260118b46949bf6b159c5a19c"
+checksum = "06683f27065a27065ef8cebe77d7b347c9d0511a091deafd6dd77c5535434934"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -5324,7 +5324,7 @@ dependencies = [
 
 [[package]]
 name = "spacetime"
-version = "0.2.0"
+version = "0.2.2"
 dependencies = [
  "avian2d",
  "bevy",
