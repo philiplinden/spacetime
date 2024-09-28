@@ -1,40 +1,13 @@
 use std::fmt;
+use std::ops::{Add, AddAssign};
 
-use bevy::prelude::*;
+use log::error;
 use hifitime::{Duration, Epoch, TimeScale};
-
-pub(super) fn plugin(app: &mut App) {
-    app.insert_resource::<CoordinateTime>(CoordinateTime::new(TimeScale::UTC, None))
-        .register_type::<Clock>()
-        .add_systems(Update, update_clock)
-        .add_systems(Update, update_simulation_speed);
-}
-
-/// A scalar factor to speed up or slow down the simulation.
-/// A value of 1.0 will advance the world clock at the same rate as real time.
-/// Values greater than 1.0 speed up the simulation, while values less than 1.0
-/// slow it down.
-#[derive(Resource, Clone, Copy, Reflect)]
-#[reflect(Resource)]
-pub struct SimulationSpeed {
-    pub factor: f64,
-}
-
-impl Default for SimulationSpeed {
-    fn default() -> Self {
-        Self { factor: 1.0 }
-    }
-}
-
-impl SimulationSpeed {
-    pub fn new(factor: f64) -> Self {
-        Self { factor }
-    }
-}
+use krabmaga::rand::{self, Rng};
 
 /// Coordinate Time is the clock belonging to the "external" observer, in this
 /// case the game world.
-#[derive(Resource, Clone, Copy)]
+#[derive(Clone, Copy)]
 pub struct CoordinateTime {
     pub scale: TimeScale,
     pub elapsed: Duration,
@@ -59,6 +32,7 @@ impl Default for CoordinateTime {
     }
 }
 
+#[allow(dead_code)]
 impl CoordinateTime {
     pub fn new(scale: TimeScale, start_epoch: Option<Epoch>) -> Self {
         let zero_seconds = Duration::from_seconds(0.0);
@@ -81,6 +55,33 @@ impl CoordinateTime {
     pub fn elapsed_seconds(&self) -> f64 {
         self.elapsed.to_seconds()
     }
+
+    /// Reset the coordinate time to the start epoch.
+    pub fn reset(&mut self) -> Self {
+        CoordinateTime {
+            scale: self.scale,
+            elapsed: Duration::from_seconds(0.0),
+            start_epoch: self.start_epoch,
+        }
+    }
+}
+
+impl Add<Duration> for CoordinateTime {
+    type Output = Self;
+
+    fn add(self, rhs: Duration) -> Self::Output {
+        CoordinateTime {
+            scale: self.scale,
+            elapsed: self.elapsed + rhs,
+            start_epoch: self.start_epoch,
+        }
+    }
+}
+
+impl AddAssign<Duration> for CoordinateTime {
+    fn add_assign(&mut self, rhs: Duration) {
+        self.elapsed += rhs;
+    }
 }
 
 impl fmt::Display for CoordinateTime {
@@ -101,50 +102,98 @@ impl fmt::Debug for CoordinateTime {
     }
 }
 
-/// A struct representing a unique clock attached to an entity.
-/// The proper time is the time experienced by the clock, and the coordinate
-/// time is the time experienced by an observer at rest with respect to the
-/// clock.
-#[derive(Component, Debug, Clone, Copy, Reflect)]
-#[reflect(Component)]
+/// A struct representing a clock that ticks at a constant rate.
+/// The proper time is the time experienced by the clock, which may diverge from
+/// the simulation's coordinate time.
+#[derive(Debug, Clone, Copy)]
 pub struct Clock {
-    pub proper_time: f64,
-    pub coordinate_time: f64,
+    pub proper_time: Epoch,
 }
 
-impl Default for Clock {
-    fn default() -> Self {
-        Clock {
-            proper_time: 0.0,
-            coordinate_time: 0.0,
+/// The `ClockBehavior` trait defines the interface for different types of
+/// clocks in the simulation. It allows for the creation of various clock models
+/// with different behaviors, such as ideal clocks, real clocks with drift, or
+/// clocks affected by relativistic effects.
+///
+/// This trait exists to provide a common interface for all clock types,
+/// enabling easy interchangeability and extensibility of clock behaviors in the
+/// simulation. It allows for modeling of time-related phenomena and their
+/// effects on different objects or agents in the simulated world.
+pub trait ClockBehavior: Send + Sync + Clone {
+    fn new(coordinate_time: CoordinateTime) -> Self
+    where
+        Self: Sized;
+
+    fn tick(&mut self, delta_time: Duration);
+
+    fn get_time(&self) -> Epoch;
+
+    fn set_time(&mut self, time: Epoch);
+}
+
+impl ClockBehavior for Clock {
+    /// Create a new clock with the given coordinate time.
+    fn new(coordinate_time: CoordinateTime) -> Self {
+        Self {
+            proper_time: coordinate_time.epoch(),
         }
     }
-}
 
-fn update_clock(time: Res<Time<Virtual>>, mut clock_query: Query<&mut Clock>) {
-    if let Ok(mut clock) = clock_query.get_single_mut() {
-        // Update proper time and coordinate time using the engine's time
-        clock.proper_time += time.delta_seconds_f64();
-        clock.coordinate_time += time.delta_seconds_f64();
+    /// Tick the clock by the given amount of delta coordinate time.
+    fn tick(&mut self, _delta_time: Duration) {}
+
+    fn get_time(&self) -> Epoch {
+        self.proper_time
+    }
+
+    fn set_time(&mut self, time: Epoch) {
+        self.proper_time = time;
     }
 }
-fn update_simulation_speed(
-    keyboard_input: Res<ButtonInput<KeyCode>>,
-    mut time: ResMut<Time<Virtual>>,
-) {
-    let speed_change = if keyboard_input.pressed(KeyCode::Period) {
-        0.1
-    } else if keyboard_input.pressed(KeyCode::Comma) {
-        -0.1
-    } else if keyboard_input.pressed(KeyCode::Slash) {
-        1.0 - time.relative_speed()
-    } else {
-        0.0
-    };
 
-    if speed_change != 0.0 {
-        let new_speed = (time.relative_speed() + speed_change).max(0.1).min(10.0);
-        time.set_relative_speed(new_speed);
-        info!("Simulation speed set to {:.1}", new_speed);
+/// An ideal clock that ticks at a constant rate.
+#[derive(Debug, Clone, Copy)]
+pub struct IdealClock(Clock);
+
+impl ClockBehavior for IdealClock {
+    fn new(coordinate_time: CoordinateTime) -> Self {
+        IdealClock(Clock::new(coordinate_time))
+    }
+
+    fn tick(&mut self, delta_time: Duration) {
+        self.0.tick(delta_time);
+    }
+
+    fn get_time(&self) -> Epoch {
+        self.0.get_time()
+    }
+
+    fn set_time(&mut self, time: Epoch) {
+        self.0.set_time(time);
+    }
+}
+
+/// A clock that ticks at a constant rate, but with some random variation.
+#[derive(Debug, Clone, Copy)]
+pub struct RealClock(Clock);
+
+impl ClockBehavior for RealClock {
+    fn new(coordinate_time: CoordinateTime) -> Self {
+        RealClock(Clock::new(coordinate_time))
+    }
+
+    fn tick(&mut self, delta_time: Duration) {
+        let mut rng = rand::thread_rng();
+        let variation = rng.gen_range(-0.1..0.1);
+        let adjusted_delta = delta_time * (1.0 + variation);
+        self.0.tick(adjusted_delta);
+    }
+
+    fn get_time(&self) -> Epoch {
+        self.0.get_time()
+    }
+
+    fn set_time(&mut self, time: Epoch) {
+        self.0.set_time(time);
     }
 }
