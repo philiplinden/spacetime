@@ -18,3 +18,15 @@ are limited by the number of bodies we can simulate.
 
 The benefit of 2D physics is that it's easier to simulate. The benefit of 3D
 physics is that it's more realistic.
+
+# Schedules and Simulation Authority
+
+Krabmaga and Bevy both use a task scheduler to manage the execution of systems.
+They approach the workload distribution differently. I attempted to use Bevy's
+scheduler and some physics crates to govern the simulation schedule, but they
+are very complicated and overcomplicated for what we need.
+
+We need a simple, clear, and well-defined simulation schedule. We also need to
+be able to define authority over what systems can run in parallel and what
+systems must run serially. This is essentially what Krabmaga's scheduler
+attempts to do and pretty much all we need.

@@ -9,13 +9,7 @@ nav:
     - tools_and_frameworks: design/tools_and_frameworks.md
     - simulation_limits: design/simulation_limits.md
   - technical: technical/
-  - devlog:
-    - v0.2.2: devlog/v0.2.2.md
-    - v0.2.1: devlog/v0.2.1.md
-    - v0.2.0: devlog/v0.2.0.md
-    - v0.1.0: devlog/v0.1.0.md
-    - v0.0.0: devlog/v0.0.0.md
-  - to-dos: todo.md
+  - devlog: devlog/
 theme:
   name: material
   font:
@@ -59,7 +53,9 @@ markdown_extensions:
 
 plugins:
   - search
-  - include_dir_to_nav
+  - include_dir_to_nav:
+      sort_file: true
+      reverse_sort_file: true
   - git-authors
   - offline
 

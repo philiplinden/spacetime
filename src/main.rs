@@ -1,40 +1,24 @@
-// Disable console on Windows for non-dev builds.
-#![cfg_attr(not(feature = "dev"), windows_subsystem = "windows")]
+use krabmaga::simulate;
+mod model;
 
-use bevy::prelude::*;
-mod physics;
-mod ui;
-mod scenes;
+use crate::model::state::WorldSpace;
 
-fn main() -> AppExit {
-    let mut app = App::new();
+fn main() {
+    // Initialize the simulation and its visualization here.
+    let steps = 100;
+    // Times to repeat the simulation with different initial conditions
+    let iterations = 10;
 
-    app.add_plugins((
-        DefaultPlugins.set(WindowPlugin {
-            primary_window: Window {
-                title: "💫 spacetime".to_string(),
-                ..default()
-            }
-            .into(),
-            ..default()
-        }),
-    ));
+    let num_agents = 20;
+    let dim: (f32, f32) = (400., 400.);
+    let state = WorldSpace::new(
+        dim,
+        num_agents,
+        hifitime::Duration::from_seconds(1.0),
+        hifitime::Epoch::from_unix_seconds(0.0),
+        hifitime::TimeScale::UTC,
+    );
 
-    app.add_plugins((
-        ui::plugin,
-        physics::plugin,
-        scenes::plugin,
-    ));
-
-    app.init_state::<AppState>();
-    app.run()
-}
-
-#[derive(Resource, Debug, Clone, Eq, PartialEq, Hash, States, Default)]
-pub enum AppState {
-    Splash,
-    Loading,
-    #[default]
-    Paused,
-    Running,
+    // Run the simulation with the built-in visualizer
+    simulate!(state, steps, iterations);
 }
