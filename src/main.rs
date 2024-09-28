@@ -2,7 +2,7 @@
 #![cfg_attr(not(feature = "dev"), windows_subsystem = "windows")]
 
 use bevy::prelude::*;
-mod physics;
+mod model;
 mod ui;
 mod scenes;
 
@@ -22,19 +22,9 @@ fn main() -> AppExit {
 
     app.add_plugins((
         ui::plugin,
-        physics::plugin,
+        model::plugin,
         scenes::plugin,
     ));
 
-    app.init_state::<AppState>();
     app.run()
-}
-
-#[derive(Resource, Debug, Clone, Eq, PartialEq, Hash, States, Default)]
-pub enum AppState {
-    Splash,
-    Loading,
-    #[default]
-    Paused,
-    Running,
 }
