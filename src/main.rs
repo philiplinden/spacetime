@@ -1,24 +1,33 @@
-use krabmaga::simulate;
-mod model;
-
-use crate::model::state::WorldSpace;
+mod constants;
+mod simulation;
+mod ui;
 
 fn main() {
-    // Initialize the simulation and its visualization here.
-    let steps = 100;
-    // Times to repeat the simulation with different initial conditions
-    let iterations = 10;
+    App::new().add_plugins((
+        DefaultPlugins.set(WindowPlugin {
+            primary_window: Some(Window {
+                title: "spacetime".to_string(),
+                ..default()
+            }),
+            ..default()
+        }),
+        ui::InterfacePlugin,
+        simulation::time::TimePlugin,
+    ))
+}
 
-    let num_agents = 20;
-    let dim: (f32, f32) = (400., 400.);
-    let state = WorldSpace::new(
-        dim,
-        num_agents,
-        hifitime::Duration::from_seconds(1.0),
-        hifitime::Epoch::from_unix_seconds(0.0),
-        hifitime::TimeScale::UTC,
-    );
+#[derive(States, Clone, Eq, PartialEq, Debug, Default, Hash)]
+pub enum AppState {
+    #[default]
+    Menu,
+    Loading,
+    Playing,
+    Editing,
+}
 
-    // Run the simulation with the built-in visualizer
-    simulate!(state, steps, iterations);
+#[derive(States, Clone, Eq, PartialEq, Debug, Default, Hash)]
+pub enum WorldState {
+    #[default]
+    Paused,
+    Running,
 }

@@ -11,7 +11,11 @@ log = { version = "0.4.22", features = [
     "release_max_level_warn",
 ] }
 hifitime = "4.0.0-alpha"
-krabmaga = { version = "0.5.0", features = ["parallel"] }
+bevy_egui = "0.30.0"
+egui = "0.29.1"
+egui_extras = "0.29.1"
+egui_plot = "0.29.0"
+rand = "0.8.5"
 
 # [features]
 # dev = [
