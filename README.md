@@ -1,4 +1,5 @@
 # spacetime
+
 A real(istic) time simulator.
 
 `spacetime` attempts to model time propagation of clocks across the Earth-Moon system. It focuses on how network
@@ -17,15 +18,18 @@ definition of a [Lunar Coordinate Time (LTC)](https://www.openlunar.org/research
 Install the dependencies for your operating system that are needed to run Bevy: [The Bevy Book - Setup](https://bevyengine.org/learn/book/getting-started/setup/)
 
 Then run the project.
+
 ```shell
 cargo run
 ```
 
 ## Learning
+
 Learning is one of the main objectives of this project. See [the docs](https://philiplinden.github.io/spacetime) for more
 discussion on code architectures for this project. It's been a true journey of discovery, with surprising twists.
 
 ## Attribution
+
 Repository architecture, baseline `Cargo.toml`, and boilerplate modules for Bevy 0.14 were provided by
 [TheBevyFlock/bevy_quickstart](https://github.com/TheBevyFlock/bevy_quickstart).
 

@@ -4,12 +4,11 @@ repo_url: https://github.com/philiplinden/spacetime
 repo_name: philiplinden/spacetime
 
 nav:
-  - design:
-    - goals: index.md
-    - tools_and_frameworks: design/tools_and_frameworks.md
-    - simulation_limits: design/simulation_limits.md
-  - technical: technical/
+  - home: index.md
+  - physics: physics/
+  - modeling: modeling/
   - devlog: devlog/
+  - research-papers: research-papers/links.md
 theme:
   name: material
   font:
@@ -61,10 +60,10 @@ plugins:
 
 # Enable LaTeX-formatted math
 extra_javascript:
-  - extras/katex.js
+  - katex.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
 
 extra_css:
-  - extras/site.css
+  - site.css
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css

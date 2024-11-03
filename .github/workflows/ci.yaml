@@ -77,8 +77,8 @@ jobs:
 #         run: cargo fmt --all -- --check
 
   # Check documentation.
-  doc-cargo:
-    name: Docs
+  doc-check:
+    name: Check docs
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -97,16 +97,19 @@ jobs:
       - name: Check documentation
         run: cargo doc --workspace --all-features --document-private-items --no-deps
 
-  doc-mkdocs:
-    name: Mkdocs
+  doc-build:
+    name: Build docs
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install MkDocs dependencies
-        run: pip install -r docs/docs-requirements.txt
+      - name: Install docs dependencies
+        run: pip install -r docs/pyproject.toml --all-extras
+
+      - name: Build documentation pages and diagrams
+        run: python docs/build.py
 
       - name: Build site with MkDocs
         run: mkdocs build
@@ -117,9 +120,11 @@ jobs:
           name: site
           path: site
 
-  deploy-gh-pages:
+  doc-deploy:
     name: Deploy to GH Pages
-    needs: doc-mkdocs
+    needs:
+        #   - doc-check
+        - doc-build
     # Only run this job on pushes to the main branch
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
