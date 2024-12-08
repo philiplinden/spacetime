@@ -106,7 +106,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install docs dependencies
-        run: pip install -r docs/pyproject.toml --all-extras
+        run: pip install .[mkdocs,pdf] -r docs/pyproject.toml
 
       - name: Build documentation pages and diagrams
         run: python docs/build.py
