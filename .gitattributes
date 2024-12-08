@@ -3,5 +3,4 @@ docs/* linguist-documentation
 
 # Hide web stuff and assets from code stats
 assets/** linguist-vendored
-web/** linguist-vendored
 *.js linguist-vendored

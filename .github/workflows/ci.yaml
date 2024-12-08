@@ -36,113 +36,23 @@ jobs:
           # Workaround for https://github.com/rust-lang/cargo/issues/6669
           cargo test --workspace --all-features --doc
 
-#   # Run clippy lints.
-#   clippy:
-#     name: Clippy
-#     runs-on: ubuntu-latest
-#     timeout-minutes: 30
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
-
-#       - name: Install Rust toolchain
-#         uses: dtolnay/rust-toolchain@stable
-#         with:
-#           components: clippy
-
-#       - name: Install dependencies
-#         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
-
-#       - name: Populate target directory from cache
-#         uses: Leafwing-Studios/cargo-cache@v2
-
-#       - name: Run clippy lints
-#         run: cargo clippy --workspace --all-targets --all-features -- --deny warnings
-
-#   # Check formatting.
-#   format:
-#     name: Format
-#     runs-on: ubuntu-latest
-#     timeout-minutes: 30
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
-
-#       - name: Install Rust toolchain
-#         uses: dtolnay/rust-toolchain@stable
-#         with:
-#           components: rustfmt
-
-#       - name: Run cargo fmt
-#         run: cargo fmt --all -- --check
-
-  # Check documentation.
-  doc-cargo:
-    name: Docs
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+  doc:
+    runs-on: ubuntu-20.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Install dependencies
-        run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
-
-      - name: Populate target directory from cache
-        uses: Leafwing-Studios/cargo-cache@v2
-
-      - name: Check documentation
-        run: cargo doc --workspace --all-features --document-private-items --no-deps
-
-  doc-mkdocs:
-    name: Mkdocs
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install MkDocs dependencies
-        run: pip install -r docs/docs-requirements.txt
-
-      - name: Build site with MkDocs
-        run: mkdocs build
-
-      - name: Cache static site artifacts
-        uses: actions/upload-artifact@v3
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v2
         with:
-          name: site
-          path: site
+          mdbook-version: '0.4.10'
 
-  deploy-gh-pages:
-    name: Deploy to GH Pages
-    needs: doc-mkdocs
-    # Only run this job on pushes to the main branch
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-    permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
-    # Deploy to the github-pages environment
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+      - run: mdbook build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
-          fetch-depth: 0
-      - uses: actions/download-artifact@v3
-        with:
-          name: site
-          path: site
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: site
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
