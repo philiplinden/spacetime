@@ -62,7 +62,7 @@ timekeeping, bad actors would not only have difficulty manipulating the service,
 but they may use this infrastructure themselves and even work to support its
 canonization.
 
-### Interoperability requires a common temporal reference frame
+### Interoperability requires a common reference frame
 
 In the design of a lunar PNT system, one important consideration is the
 definition of a reference frame to allow for absolute position. This time

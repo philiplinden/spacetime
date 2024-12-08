@@ -263,11 +263,11 @@ Let's start by importing some constants.
 
 | quantity | symbol | value |
 |---|---|---|
-| speed of light | $c$ | $299792458\ \text{m}/\text{s}$ |
-| gravitational constant | $G$ | $6.6743 \times 10^{-11}\ \frac{\text{m}^3}{\text{kg}\ \text{s}^2}$ |
-| Earth mass | $\text{M}_\oplus$ | $5.97216787\times 10^{24}\ \text{kg}$ |
-| Nominal Earth radius | $\text{R}_\oplus$ | $6378100\ \text{m}$ |
-| Earth rotation rate | $\omega_{\oplus}$ | $7.2921159 \times 10^{−5}\ \text{rad}/\text{sec}$
+| speed of light | \\(c\\) | \\(299792458\ \text{m}/\text{s}\\) |
+| gravitational constant | \\(G\\) | \\(6.6743 \times 10^{-11}\ \frac{\text{m}^3}{\text{kg}\ \text{s}^2}\\) |
+| Earth mass | \\(\text{M}_\oplus\\) | \\(5.97216787\times 10^{24}\ \text{kg}\\) |
+| Nominal Earth radius | \\(\text{R}_\oplus\\) | \\(6378100\ \text{m}\\) |
+| Earth rotation rate | \\(\omega_{\oplus}\\) | \\(7.2921159 \times 10^{−5}\ \text{rad}/\text{sec}\\) |
 
 
 ```python
@@ -290,10 +290,7 @@ r = (altitudes + earth_radius).to(u.m)
 r
 ```
 
-
-
-
-$[6478100,~6478192.2,~6478284.4,~\dots,~1.0045375 \times 10^{9},~1.0054574 \times 10^{9},~1.0063781 \times 10^{9}] \; \mathrm{m}$
+\\( [6478100,~6478192.2,~6478284.4,~\dots,~1.0045375 \times 10^{9},~1.0054574 \times 10^{9},~1.0063781 \times 10^{9}] \; \mathrm{m} \\)
 
 
 
@@ -311,10 +308,7 @@ escape_speed = np.sqrt(escape_speed_squared).to(u.m / u.s)
 escape_speed
 ```
 
-
-
-
-$[11093.282,~11093.203,~11093.124,~\dots,~890.84219,~890.4346,~890.02719] \; \mathrm{\frac{m}{s}}$
+\\( [11093.282,~11093.203,~11093.124,~\dots,~890.84219,~890.4346,~890.02719] \; \mathrm{\frac{m}{s}} \\)
 
 
 
@@ -341,15 +335,11 @@ ax[1].set_ylabel(f'Potential per unit mass, $U$ [{potential.unit}]')
 
 
 
-    Text(0, 0.5, 'Potential per unit mass, $U$ [m2 / s2]')
-
-
-
+    Text(0, 0.5, 'Potential per unit mass, \\(U\\) [m2 / s2]')
 
     
 ![png](time_dilation_files/time_dilation_33_1.png)
     
-
 
 Excellent, this is the shape we expected. As our $R$ value moves away from the center of Earth, the gravitational potential decreases and so too does the escape velocity.
 
@@ -363,20 +353,12 @@ In short, we need to go sideways exactly as fast as we fall at any given point f
 $$g = \frac{G M_\oplus}{r} = \frac{v_{circular}^2}{r}$$
 $$v_{circular} = \sqrt{\frac{G M_\oplus}{r}}$$
 
-
-
 ```python
 circular_velocity = np.sqrt(potential)
 circular_velocity
 ```
 
-
-
-
-$[7844.1347,~7844.0789,~7844.023,~\dots,~629.92055,~629.63234,~629.34426] \; \mathrm{\frac{m}{s}}$
-
-
-
+\\( [7844.1347, 7844.0789, 7844.023,~\dots,~629.92055, 629.63234, 629.34426] \; \mathrm{\frac{m}{s}} \\)
 
 ```python
 plt.plot(altitudes, escape_speed)
@@ -388,18 +370,7 @@ plt.xlabel(f'Orbit altitude, $r - R_\\oplus$ [{altitudes.unit}]')
 plt.ylabel(f'Velocity per unit mass [{escape_speed.unit}]')
 ```
 
-
-
-
-    Text(0, 0.5, 'Velocity per unit mass [m / s]')
-
-
-
-
-    
 ![png](time_dilation_files/time_dilation_37_1.png)
-    
-
 
 A few sanity checks:
 * Do circular velocity and escape speed decrease as orbit altitude leaves the gravity well? **Yes.**
@@ -446,7 +417,6 @@ kinematic_dilation = kinematic_time_dilation(circular_speed)
 total_dilation = grav_dilation + kinematic_dilation
 ```
 
-
 ```python
 def plot_dilation(altitudes,
                   grav_dilation,
@@ -470,7 +440,6 @@ def plot_dilation(altitudes,
     plt.axhline(linewidth=1, color="k")
 ```
 
-
 ```python
 plot_dilation(
     altitudes, 
@@ -480,14 +449,9 @@ plot_dilation(
     )
 ```
 
-
-    
 ![png](time_dilation_files/time_dilation_43_0.png)
-    
-
 
 Yikes that doesn't look right. Perhaps this is a precision issue. Let's inspect some of the numbers in our equation and the results.
-
 
 ```python
 from IPython.display import display, Latex
@@ -501,50 +465,34 @@ display( Latex(f"r = {r[i]:latex}"))
 for quantity in quantities:
     display(Latex(f"{quantity[0]} = {quantity[1]:latex}"))
 ```
-
-
-r = $6478100 \; \mathrm{m}$
-
-
-
-$U$ = $61530449 \; \mathrm{\frac{m^{2}}{s^{2}}}$
-
-
-
-$v$ = $7844.1347 \; \mathrm{\frac{m}{s}}$
-
-
-
-$v_e$ = $11093.282 \; \mathrm{\frac{m}{s}}$
-
+\\[
+r = 6478100 \; \mathrm{m}
+\\]
+\\[
+U = 61530449 \; \mathrm{\frac{m^{2}}{s^{2}}}
+\\]
+\\[
+v = 7844.1347 \; \mathrm{\frac{m}{s}}
+\\]
+\\[
+v_e = 11093.282 \; \mathrm{\frac{m}{s}}
+\\]
 
 This looks alright. Let's see what happens when we square velocities and divide by $c^2$...
-
 
 ```python
 np.power(escape_speed, 2) / c_squared
 ```
 
-
-
-
-$[1.3692371 \times 10^{-9},~1.3692177 \times 10^{-9},~1.3691982 \times 10^{-9},~\dots,~8.8299887 \times 10^{-12},~8.8219105 \times 10^{-12},~8.8138396 \times 10^{-12}] \; \mathrm{}$
-
-
-
+\\( [1.3692371 \times 10^{-9}, 1.3692177 \times 10^{-9}, 1.3691982 \times 10^{-9},~\dots,~8.8299887 \times 10^{-12}, 8.8219105 \times 10^{-12}, 8.8138396 \times 10^{-12}] \; \mathrm{} \\)
 
 ```python
 1 - np.power(escape_speed, 2) / c_squared
 ```
 
+\\( [1, 1, 1, \dots, 1, 1, 1] \; \mathrm{} \\)
 
-
-
-$[1,~1,~1,~\dots,~1,~1,~1] \; \mathrm{}$
-
-
-
-Aha, Python is interpreting numbers $n \leq 10^{-12}$ as $\approx 0$. In most cases this is probably fine, but not for us! Let's fix that.
+Aha, Python is interpreting numbers \\( n \leq 10^{-12} \\) as \\( \approx 0 \\). In most cases this is probably fine, but not for us! Let's fix that.
 
 ### Dealing with precision
 ![xkcd for everything](https://www.explainxkcd.com/wiki/images/8/88/coordinate_precision.png)
@@ -557,7 +505,6 @@ There are a few ways to deal with precision here.
 Let's try option 2.
 
 If we make a custom class and define what should happen for math operations, we won't even have to change our functions from before.
-
 
 ```python
 from dataclasses import dataclass
@@ -674,7 +621,6 @@ def from_precise(pq: PreciseQuantity | list):
 
 Sanity check! Does this class behave how we expect?
 
-
 ```python
 print(f"{'lists:':>11s}  {[Quantity(1), Quantity(2)]} == {from_precise([to_precise(q) for q in [1, 2]])}")
 print(f"{'convert:':>11s} {c:e} -> {to_precise(c)=}")
@@ -693,6 +639,7 @@ except Exception as e:
     print(f"{'imaginary:':>11s}  sqrt(-1) == {e}")
 ```
 
+```text
          lists:  [<Quantity 1.>, <Quantity 2.>] == [<Quantity 1.>, <Quantity 2.>]
        convert: 2.997925e+08 m / s -> to_precise(c)=PreciseQuantity(scalar=2.99792458, order=8.0, unit=Unit("m / s"))
        restore: 2.997925e+08 m / s == from_precise(to_precise(c))=<Quantity 2.99792458e+08 m / s>
@@ -704,16 +651,14 @@ except Exception as e:
          power: 9.000000e+00 == PreciseQuantity(scalar=9.0, order=0.0, unit=Unit(dimensionless))
      large add: 1.000001e+03 == PreciseQuantity(scalar=1000001.0, order=3.0, unit=Unit(dimensionless))
      imaginary:  sqrt(-1) == Failed to raise PreciseQuantity(scalar=-1.0, order=0.0, unit=Unit(dimensionless)) to the power 0.5: Result is imaginary
-    
+```
 
 Great, now let's apply our functions using our new data type.
-
 
 ```python
 precise_potential = [to_precise(p) for p in potential]
 precise_circular_speed = [to_precise(v) for v in circular_speed]
 ```
-
 
 ```python
 precise_grav_dilation = [gravitational_time_dilation(p) for p in precise_potential]
@@ -732,11 +677,7 @@ plot_dilation(
 )
 ```
 
-
-    
 ![png](time_dilation_files/time_dilation_56_0.png)
-    
-
 
 Before we continue, let's do one more sanity check by doing a few of the calculations ourselves.
 
@@ -746,7 +687,6 @@ $$
 $$
 where:
 $$v_e = \sqrt{\frac{2GM_\oplus}{r}}, \quad v_{circular} = \sqrt{\frac{G M_\oplus}{r}}$$
-
 
 ```python
 indices = [0, int(len(r)/2), -1]
@@ -782,8 +722,8 @@ for index in indices:
 Kinematic dilation also looks flipped from what we expect. This is because the figure from Wikipedia is measuring the dilation from Earth's surface but we're displaying dilation with respect to coordinate time for the gravitational dilation.
 
 We want to arrange the equation such that
-* $\Delta t_{drift} > 0$ means $other$'s clock will be **faster** than $self$'s clock, and
-* $\Delta t_{drift} < 0$ means $other$'s clock will be **slower** than $self$'s clock
+* \\(\Delta t_{drift} > 0\\) means `other`'s clock will be **faster** than `self`'s clock, and
+* \\(\Delta t_{drift} < 0\\) means `other`'s clock will be **slower** than `self`'s clock
 
 $$\Delta t_{drift} = 1 - \Big[ (\gamma_{U,self} - \gamma_{U,other}) + (\gamma_{K,self} - \gamma_{K,other}) \Big]$$
 
@@ -793,7 +733,6 @@ $$
 where:
 $$v_{surface} = \omega_{\oplus} R_{\oplus}$$
 $$v_{satellite} = v_{circular} = \sqrt{\frac{G M_\oplus}{r}}$$
-
 
 ```python
 ref_potential = GM_earth / earth_radius.to(u.m)
@@ -826,21 +765,9 @@ plot_dilation(
 plt.ylabel(f"Time difference [s per Earth second]")
 ```
 
-
-
-
-    Text(0, 0.5, 'Time difference [s per Earth second]')
-
-
-
-
-    
 ![png](time_dilation_files/time_dilation_61_1.png)
-    
-
 
 The shape looks right, but the y-axis doesn't match our reference (the pink line below). First of all, we have to convert $s/s$ to $\mu s/day$.
-
 
 ```python
 def to_us_per_day(sec_per_sec):
@@ -848,7 +775,6 @@ def to_us_per_day(sec_per_sec):
     sec_per_day = 86_400
     return sec_per_sec * us_per_sec * sec_per_day
 ```
-
 
 ```python
 scaled_grav_dilation = [to_us_per_day(gamma) for gamma in rel_grav_dilation]
@@ -867,27 +793,9 @@ plot_dilation(
 plt.ylabel(f"Time difference [$\mu$s per Earth day]")
 ```
 
-    <>:14: SyntaxWarning: invalid escape sequence '\m'
-    <>:14: SyntaxWarning: invalid escape sequence '\m'
-    E:\Temp\ipykernel_29312\721535034.py:14: SyntaxWarning: invalid escape sequence '\m'
-      plt.ylabel(f"Time difference [$\mu$s per Earth day]")
-    
-
-
-
-
-    Text(0, 0.5, 'Time difference [$\\mu$s per Earth day]')
-
-
-
-
-    
 ![png](time_dilation_files/time_dilation_64_2.png)
-    
-
 
 ![time dilation plot](./time_dilation_files/Time_Dilation_vs_Orbital_Height.png)
-
 
 ```python
 plt.figure(figsize=(10,12))
@@ -908,16 +816,6 @@ plt.ticklabel_format(style='plain')
 plt.xlim([0, 50_000])
 ```
 
-
-
-
-    (0.0, 50000.0)
-
-
-
-
-    
 ![png](time_dilation_files/time_dilation_66_1.png)
-    
 
 Hmm...this look right in terms of the numbers but wrong in terms of order of magnitude...

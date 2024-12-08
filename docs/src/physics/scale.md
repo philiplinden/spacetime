@@ -1,3 +1,5 @@
+# Scale
+
 One of the difficult parts of modeling space systems is scale.
 
 1. Space is huge, spacecraft are tiny.
@@ -11,14 +13,14 @@ very fine precision of these very large quantities.
 
 Or that's what I assume. Let's pick apart this idea.
 
-# scale factor
-Can't we just shrink values down by some scale factor like $10^-6$ and carry on?
+## scale factor
+Can't we just shrink values down by some scale factor like \\( 10^{-6}\\) and carry on?
 Maybe.
 
 Scaling down the numbers doesn't get rid of the precision problem since the
 small deltas between values are important.
 
-# coordinate frames
+## coordinate frames
 coordinates are how we describe positions of entities. Simple matrix math and
 rotations can translate a position from one coordinate frame to another.
 
@@ -30,7 +32,7 @@ transformations:
    result is that both earth and moon are rotating about the barycenter. we have
    the earth moon orbits now.
 
-## global frames are the problem
+### global frames are the problem
 Normal astronomical coordinate frames are based on observable datums: Earth, the
 moon, Earth-moon barycenter, the sun, solar system barycenter, etc...
 
@@ -49,7 +51,7 @@ values, and for small changes.
   velocity) lead to very small timing differences of nanoseconds, which as we
   saw before, is significant.
 
-## local frames are the answer
+### local frames are the answer
 the traditional coordinate frames defined by nasa are not the _only_ coordinate
 frames that exist.
 
