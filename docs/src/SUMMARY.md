@@ -2,6 +2,8 @@
 
 [Introduction](index.md)
 
+[Devlog](devlog.md)
+
 ---
 
 # Notes
