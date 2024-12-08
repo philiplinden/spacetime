@@ -6,7 +6,6 @@ repo_name: philiplinden/spacetime
 nav:
   - home: index.md
   - physics: physics/
-  - modeling: modeling/
   - devlog: devlog/
   - research-papers: research-papers/links.md
 theme:
