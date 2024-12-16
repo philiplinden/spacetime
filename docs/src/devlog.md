@@ -37,3 +37,7 @@ Similarly, I think we can build up the app's features bit by bit.
 While the math _could_ be implemented with real physical constants, it would be
 much easier to see what's happening if we use simple scale factors, especially
 if we can change them on the fly.
+
+I've said this before and I'll say it again: I am a huge fan of the "retro
+radar" aesthetic. It would be fun to lean into that. Here is a Pinterest board
+for inspiration: https://pin.it/CgMRWzHFl
