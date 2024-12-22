@@ -17,7 +17,7 @@ bevy = { version = "0.15", default-features = false, features = [
     "bevy_asset",
     "bevy_state",
     "bevy_window",
-    "multi_threading",
+    "multi_threaded",
 ]}
 
 [features]

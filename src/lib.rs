@@ -9,12 +9,6 @@ pub struct AppPlugin;
 
 impl Plugin for AppPlugin {
     fn build(&self, app: &mut App) {
-        // Order new `AppStep` variants by adding them here:
-        app.configure_sets(
-            Update,
-            (AppSet::TickTimers, AppSet::RecordInput, AppSet::Update).chain(),
-        );
-
         // Add Bevy plugins.
         app.add_plugins(
             DefaultPlugins
@@ -44,12 +38,5 @@ impl Plugin for AppPlugin {
                     ..default()
                 })
         );
-
-        // Add other plugins.
-        app.add_plugins((
-            assets::AssetLoaderPlugin,
-            game::plugin,
-            ui::plugin,
-        ));
     }
 }
