@@ -3,7 +3,6 @@ use std::ops::{Add, AddAssign};
 
 use log::error;
 use hifitime::{Duration, Epoch, TimeScale};
-use krabmaga::rand::{self, Rng};
 
 /// Coordinate Time is the clock belonging to the "external" observer, in this
 /// case the game world.

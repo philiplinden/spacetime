@@ -1,0 +1,68 @@
+name: Docs
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write  # To push a branch
+  pages: write  # To push to a GitHub Pages site
+  id-token: write # To update the deployment status
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Populate target directory from cache
+        uses: Leafwing-Studios/cargo-cache@v2
+
+      - name: Install mdbook and admonish plugin
+        uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: |
+            mdbook
+            mdbook-admonish
+            mdbook-katex
+            mdbook-mermaid
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build Book
+        run: |
+          mdbook-admonish install .
+          mdbook-mermaid install .
+          mdbook build
+
+      - name: Make target directory so build doesn't crash
+        run: mkdir -p target
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./docs/book
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

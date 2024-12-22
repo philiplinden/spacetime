@@ -1,4 +1,4 @@
-name: CI
+name: Bevy
 
 on:
   push:
@@ -33,26 +33,3 @@ jobs:
       - name: Run tests
         run: |
           cargo test --workspace --all-features --all-targets
-          # Workaround for https://github.com/rust-lang/cargo/issues/6669
-          cargo test --workspace --all-features --doc
-
-  doc:
-    runs-on: ubuntu-20.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup mdBook
-        uses: peaceiris/actions-mdbook@v2
-        with:
-          mdbook-version: '0.4.10'
-
-      - run: mdbook build
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./book

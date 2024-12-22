@@ -1,6 +1,7 @@
 [package]
 name = "spacetime"
-version = "0.3.0"
+description = "Time dilation in relativistic spacetime"
+version = "0.4.0"
 authors = ["Philip Linden <lindenphilipj@gmail.com>"]
 edition = "2021"
 
@@ -10,13 +11,20 @@ log = { version = "0.4.22", features = [
     "max_level_debug",
     "release_max_level_warn",
 ] }
-hifitime = "4.0.0-alpha"
-krabmaga = { version = "0.5.0", features = ["parallel"] }
+hifitime = "4.0.1"
+thiserror = "2.0.7"
+bevy = { version = "0.15", default-features = false, features = [
+    "bevy_asset",
+    "bevy_state",
+    "bevy_window",
+    "multi_threaded",
+]}
 
-# [features]
-# dev = [
-#
-# ]
+[features]
+default = ["dev"]
+dev = [
+    "bevy/dynamic_linking"
+]
 
 # Idiomatic Bevy code often triggers these lints, and the CI workflow treats them as errors.
 # In some cases they may still signal poor code quality however, so consider commenting out these lines.
