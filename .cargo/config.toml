@@ -74,7 +74,7 @@ rustflags = [
   # - Ubuntu: `sudo apt-get install lld clang`
   # - Fedora: `sudo dnf install lld clang`
   # - Arch: `sudo pacman -S lld clang`
-  "-Clink-arg=-fuse-ld=lld",
+  # "-Clink-arg=-fuse-ld=lld",
 
   # Mold linker
   #
@@ -83,7 +83,7 @@ rustflags = [
   # - Ubuntu: `sudo apt-get install mold clang`
   # - Fedora: `sudo dnf install mold clang`
   # - Arch: `sudo pacman -S mold clang`
-  # "-Clink-arg=-fuse-ld=/usr/bin/mold",
+  "-Clink-arg=-fuse-ld=/usr/bin/mold",
 
   # Nightly
   # "-Zshare-generics=y",
