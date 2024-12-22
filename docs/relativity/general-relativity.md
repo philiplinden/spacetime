@@ -47,5 +47,5 @@ Time
 +---------------→ Space
 ```
 
-Working out the math, we find that the length of each space-time vector is
+Working out the math, we find that the length of both space-time vectors is
 exactly $c$.
