@@ -55,3 +55,10 @@ these intuitions here.
   - [How gravity bends light even though it has no mass](https://youtu.be/05jFhuRs-w0)
   - [Gravity comes from time curving space](https://youtu.be/OpOER8Eec2A)
   - [Curved spacetime changes trajectories of light and matter](https://www.youtube.com/watch?v=S78h8zQwQe0)
+
+## 2024-12-23
+
+I reworked the docs on relativity, more to come.
+
+I started a new repo to use for manim figures:
+[philiplinden/manim-sandbox](https://github.com/philiplinden/manim-sandbox)

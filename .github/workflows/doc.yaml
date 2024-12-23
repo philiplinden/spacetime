@@ -28,15 +28,12 @@ jobs:
       - name: Populate target directory from cache
         uses: Leafwing-Studios/cargo-cache@v2
 
-      - name: Install mdbook and admonish plugin
-        uses: actions-rs/cargo@v1
-        with:
-          command: install
-          args: |
-            mdbook
-            mdbook-admonish
-            mdbook-katex
-            mdbook-mermaid
+      - name: Install mdbook and plugins
+        run: |
+          cargo install mdbook --force
+          cargo install mdbook-admonish --force
+          cargo install mdbook-katex --force
+          cargo install mdbook-mermaid --force
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
