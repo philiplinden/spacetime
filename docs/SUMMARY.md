@@ -1,10 +1,9 @@
 # Summary
 
 - [Introduction](index.md)
-- [Relativity](relativity/index.md)
-  - [Special Relativity](relativity/special-relativity.md)
-  - [General Relativity](relativity/general-relativity.md)
-  - [Time Dilation](relativity/time-dilation.md)
+- [Relativity](relativity/00-index.md)
+  - [From Motion](relativity/01-from-motion.md)
+  - [From Gravity](relativity/02-from-gravity.md)
 - [Timekeeping](timekeeping/index.md)
 - [Positioning, Navigation, and Timing Networks](pnt-networks/index.md)
 
