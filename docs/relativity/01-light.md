@@ -1,7 +1,10 @@
-# Intuitions for Relativity - From Motion
+# Intuitions for Relativity - Light
 
-To begin, we will consider the simplest case of special relativity: when all
-objects are moving at constant velocities relative to each other.
+To begin, we develop some intuitions around the consequences of the speed of
+light being constant. To narrow the scope and really dial in our understanding
+of the fundamentals, consider the special case where all objects are moving at
+constant velocity, far from any gravity well (aka, _special_ relativity). Let's
+follow the logic and see where it takes us.
 
 ## Inertial reference frames
 
