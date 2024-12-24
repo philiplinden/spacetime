@@ -29,6 +29,16 @@ the station. The train is moving at speed $v$ relative to the station.
 `Ash` and `Brock` experience the world from their respective inertial reference
 frames. Each of their observations are true, and they are all valid.
 
+Lastly, it is important to define how an object moves with respect to the
+reference frame. Within _its_ reference frame, an object is at rest or moving
+with constant velocity. Think of the reference frame as the "grid" of the frame.
+
+A key insight that will help us later is to understand that this definition
+holds true _even if we morph the reference frame_. So on the grid, an object
+would still move from point A to point B with respect to the grid.
+
+<iframe width="1290" height="735" src="https://www.youtube.com/embed/x1dGfxBdDlM" title="Examples Of Nonlinear Two Dimensional Transformations" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Measuring time
 
 The time experienced by an observer at rest is called its _proper time_.
