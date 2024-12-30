@@ -67,3 +67,7 @@ I think this repo should basically be an interactive implementation of the
 visualizations described
 [here](https://youtu.be/wrwgIjBUYVc?si=aY4raU4TI56Kl7XV) and
 [here](https://youtu.be/YNqTamaKMC8?si=jMuLrQSQaqbRfsB8)
+
+## 2024-12-30
+
+More relativity docs.

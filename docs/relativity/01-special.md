@@ -16,17 +16,12 @@ $$
 \text{speed} = \frac{\text{distance}}{\text{elapsed time}}
 $$
 
-```admonish tip
-This effect is the origin of the [twin paradox](https://www.youtube.com/watch?v=GsMqCHCV5Xc).
-```
-
 The distance a photon travels in a given amount of time is constant in every
 inertial reference frame.
 
 - how we define "speed"
 - how we define "time"
 - how we define "reference frame"
-
 
 ## Inertial reference frames
 
@@ -67,7 +62,6 @@ the station. The train is moving at speed $v$ relative to the station.
 
 `Ash` and `Brock` experience the world from their respective inertial reference
 frames. Each of their observations are true, and they are all valid.
-
 
 ## Measuring time
 
