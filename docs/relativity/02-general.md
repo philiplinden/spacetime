@@ -1,4 +1,7 @@
-# Intiutions for General Relativity
+# Gravity, Curved Space, & Curved Time
+
+Now let's bring our understanding of relative to the general case where there
+could be a gravity well nearby (aka _general_ relativity).
 
 General Relativity is a theory of gravity that describes how gravity affects the
 curvature of spacetime. It builds on the principles of Special Relativity,

@@ -26,7 +26,7 @@ cargo run
 ## Learning
 
 Learning is one of the main objectives of this project. See [the docs](https://philiplinden.github.io/spacetime) for more
-discussion on code architectures for this project. It's been a true journey of discovery, with surprising twists.
+discussion on code architectures for this project. It's been a true journey of discovery with surprising twists.
 
 ## Attribution
 

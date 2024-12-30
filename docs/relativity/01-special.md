@@ -1,7 +1,32 @@
-# Intuitions for Relativity - From Motion
+# Light Speed, Reference Frames & Time
 
-To begin, we will consider the simplest case of special relativity: when all
-objects are moving at constant velocities relative to each other.
+To begin, we develop some intuitions around the consequences of the speed of
+light being constant. To narrow the scope and really dial in our understanding
+of the fundamentals, consider the special case where all objects are moving at
+constant velocity, far from any gravity well (aka, _special_ relativity). Let's
+follow the logic and see where it takes us.
+
+## The speed of light is constant
+
+Remember, the first postulate of special relativity is that the speed of light
+is constant in all inertial reference frames. Let's follow the math and see what
+happens when we assume all of the observations are true.
+
+$$
+\text{speed} = \frac{\text{distance}}{\text{elapsed time}}
+$$
+
+```admonish tip
+This effect is the origin of the [twin paradox](https://www.youtube.com/watch?v=GsMqCHCV5Xc).
+```
+
+The distance a photon travels in a given amount of time is constant in every
+inertial reference frame.
+
+- how we define "speed"
+- how we define "time"
+- how we define "reference frame"
+
 
 ## Inertial reference frames
 
@@ -9,6 +34,23 @@ The first key insight is to approach the problem with the understanding that
 motion is relative to the _inertial reference frame_ of the _observer_. In any
 situation, we can always choose an inertial reference frame in which one object
 is at rest and everything else is moving relative to it.
+
+Lastly, it is important to define how an object moves with respect to the
+reference frame. Within _its_ reference frame, an object is at rest or moving
+with constant velocity. Think of the reference frame as the "grid" of the frame.
+
+A key insight that will help us later is to understand that this definition
+holds true _even if we morph the reference frame_. So on the grid, an object
+would still move from point A to point B with respect to the grid.
+
+<iframe
+    width="1290" height="735"
+    src="https://www.youtube.com/embed/x1dGfxBdDlM"
+    title="Examples Of Nonlinear Two Dimensional Transformations"
+    frameborder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+
+### By example
 
 ```admonish example
 `Ash` is a train conductor, and `Brock` is waiting for the train to arrive at
@@ -26,6 +68,7 @@ the station. The train is moving at speed $v$ relative to the station.
 `Ash` and `Brock` experience the world from their respective inertial reference
 frames. Each of their observations are true, and they are all valid.
 
+
 ## Measuring time
 
 The time experienced by an observer at rest is called its _proper time_.
@@ -39,6 +82,8 @@ light, $c$.
 The physics of relativity happen regardless of what we use to measure time, but
 this "light clock" isn't arbitrary. We will use the fact that we are measuring
 how long it takes for a photon to travel a given distance to measure time.
+
+### By example
 
 Let's give a light clock to `Ash` and `Brock` and see what happens.
 
@@ -73,18 +118,4 @@ It is natural to pause at this point and ask "how can this be true?" or "why is
 the speed of light constant?"---stop yourself. For a moment, accept that it is
 true and instead we should ask **"what must happen for this to be true?"** Trust
 the process. 🙏
-```
-
-## The speed of light is constant
-
-Remember, the first postulate of special relativity is that the speed of light
-is constant in all inertial reference frames. Let's follow the math and see what
-happens when we assume all of the observations are true.
-
-$$
-\text{speed} = \frac{\text{distance}}{\text{elapsed time}}
-$$
-
-```admonish tip
-This effect is the origin of the [twin paradox](https://www.youtube.com/watch?v=GsMqCHCV5Xc).
 ```

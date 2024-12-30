@@ -2,8 +2,8 @@
 
 - [Introduction](index.md)
 - [Relativity](relativity/00-index.md)
-  - [From Motion](relativity/01-from-motion.md)
-  - [From Gravity](relativity/02-from-gravity.md)
+  - [Light Speed, Reference Frames, & Time](relativity/01-special.md)
+  - [Gravity, Curved Space, & Curved Time](relativity/02-general.md)
 - [Timekeeping](timekeeping/index.md)
 - [Positioning, Navigation, and Timing Networks](pnt-networks/index.md)
 

@@ -9,7 +9,8 @@ on the logical consequences of two core postulates:
 2. The speed of light is the same in all inertial reference frames and is not
    affected by the speed of its source.
 
-```admonish tip
+## Demystifying Terms
+
 The term **inertial reference frame** simply refers to a frame of reference where
 all objects follow Newton’s first law of motion:
 
@@ -18,9 +19,7 @@ all objects follow Newton’s first law of motion:
 
 For example, the inside of a car moving along a road at constant velocity and the
 inside of a stationary house are inertial reference frames.
-```
 
-```admonish note
 The _special_ in special relativity refers to the fact that it is a special case
 of general relativity: situations when objects are moving at constant velocities
 in a vacuum. When the theory is extended to follow what happens when objects
@@ -28,9 +27,7 @@ accelerate, it is called _general relativity_.
 
 From here on out, we will not worry about distinguishing between special or
 general relativity. They describe the same phenomena.
-```
 
-```admonish note
 Here we will ignore the effects of light passing through a medium for the sake
 of brevity, but know that the physics still holds.
 [This video](https://youtu.be/KTzGBJPuJwM?si=YbBgHIcYyOL3UuSA) provides an
@@ -40,7 +37,6 @@ light moves "slower" through a medium.
 **TLDW**; The "true" speed of light is still constant in any medium. The "slower"
 speed is a sort of illusion caused by "phase kicks" between the light and the
 medium as electromagnetic waves propagate through the medium.
-```
 
 ## Having the right mindset
 
