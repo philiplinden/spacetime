@@ -8,6 +8,17 @@ curvature of spacetime. It builds on the principles of Special Relativity,
 following the natural consequences of the constancy of the speed of light
 further and leading to the emergence of gravity and curved spacetime.
 
+A key insight that will help us later is to understand that this definition
+holds true _even if we morph the reference frame_. So on the grid, an object
+would still move from point A to point B with respect to the reference frame.
+
+<iframe
+    width="1290" height="735"
+    src="https://www.youtube.com/embed/x1dGfxBdDlM"
+    title="Examples Of Nonlinear Two Dimensional Transformations"
+    frameborder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+
 ## Space-time coordinates
 
 Instead of thinking only in spatial coordinates, we can think in space-time
