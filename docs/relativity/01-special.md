@@ -73,47 +73,9 @@ Since the speed of light is constant in all inertial reference frames, an
 observer watching their clock will **always** observe the photon moving at the
 speed of light, $c$, in their own reference frame.
 
-The physics of relativity happen regardless of what we use to measure time, but
-this "light clock" isn't arbitrary. We will use the fact that we are measuring
-how long it takes for a photon to travel a given distance to measure time.
-
-Let's give a light clock to `Ash` and `Brock` and see what happens.
-
-```admonish example
-`Ash` is riding a train, and `Brock` is waiting for the train to arrive at the
-station. The train is moving at speed $v$ relative to the station.
-
-`Ash` holds a light clock called `A`. `Brock` also holds a light clock called
-`B`. `Ash` and `Brock` both observe the speed of light in their own light clocks
-and in each other's light clocks.
-
-**From `Ash`'s perspective:**
-- The station is moving towards the train at speed $v$.
-- Light clock `A` is at rest.
-- The photon in the light clock `A` is moving at speed $c$.
-- Light clock `B` is moving towards the train at speed $v$.
-- The photon in the light clock `B` is moving at speed $c$.
-
-**From `Brock`'s perspective:**
-- The train is moving towards the station at speed $v$.
-- Light clock `A` is moving towards the station at speed $v$.
-- The photon in the light clock `A` is moving at speed $c$.
-- Light clock `B` is at rest.
-- The photon in the light clock `B` is moving at speed $c$.
-```
-
-Light clock `A` is moving at speed $v$ relative to `Brock`, but he observes the
-photon inside to be moving at speed $c$, not $c+v$. How can this be?
-
-Let's use the first postulate of special relativity and follow the math to see
-how all of the observations could be true.
-
-```admonish help
-It is natural to pause at this point and ask "how can this be true?" or "why is
-the speed of light constant?"---stop yourself. For a moment, accept that it is
-true and instead we should ask **"what must happen for this to be true?"** Trust
-the process. 🙏
-```
+The physics holds regardless of what we use to measure time, but this "light
+clock" isn't arbitrary. We will use the fact that we are measuring how long it
+takes for a photon to travel a given distance to measure time.
 
 ## The speed of light is constant
 
@@ -147,3 +109,18 @@ It is key to pin the definition of $c$ this way because as we will see later,
 distance and time are _not absolute_, they are _relative_. The time or distance
 can change depending on the observer's reference frame, but **distance traveled
 by a photon divided by elapsed time is always $c$.**
+
+## Time is relative
+
+Light clock `A` is moving at speed $v$ relative to `B`, but he observes the
+photon inside to be moving at speed $c$, not $c+v$. How can this be?
+
+Let's use the first postulate of special relativity and follow the math to see
+how all of the observations could be true.
+
+```admonish help
+It is natural to pause at this point and ask "how can this be true?" or "why is
+the speed of light constant?"---stop yourself. For a moment, accept that it is
+true and instead we should ask **"what must happen for this to be true?"** Trust
+the process. 🙏
+```
