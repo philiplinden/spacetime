@@ -17,8 +17,8 @@ Einstein began with two postulates
 ([source](https://openstax.org/books/university-physics-volume-3/pages/5-1-invariance-of-physical-laws)):
 
 1. **The laws of physics are the same in all inertial reference frames.**
-2. **Light travels in a vacuum with the same speed $c$ in any direction in all
-   inertial frames.**
+2. **Light travels in a vacuum with the same speed $c$ in any direction in all**
+   **inertial frames.**
 
 The "laws of physics" in our analysis are then only those that satisfy the first
 postulate. This also means that there is no "special" inertial reference frame
@@ -56,26 +56,8 @@ around the blue dot?
 
 ![inertial reference frame](./assets/InertialReferenceFrames.gif)
 
-**Solution**: Trick question---it is impossible to tell. In truth, it doesn't
-matter because the physics works the same way in both cases.
+**Solution**: Trick question---the physics works the same way in both cases!
 ```
-
-## Measuring time
-
-The time experienced by an observer at rest is called its _proper time_.
-
-Consider a perfect "light clock" that each observer watches. The light clock
-consists of a photon that bounces between two mirrors once per second. We'll
-
-[ insert visualization of a photon clock ]
-
-Since the speed of light is constant in all inertial reference frames, an
-observer watching their clock will **always** observe the photon moving at the
-speed of light, $c$, in their own reference frame.
-
-The physics holds regardless of what we use to measure time, but this "light
-clock" isn't arbitrary. We will use the fact that we are measuring how long it
-takes for a photon to travel a given distance to measure time.
 
 ## The speed of light is constant
 
@@ -112,15 +94,25 @@ by a photon divided by elapsed time is always $c$.**
 
 ## Time is relative
 
-Light clock `A` is moving at speed $v$ relative to `B`, but he observes the
-photon inside to be moving at speed $c$, not $c+v$. How can this be?
+The time experienced by an observer in its inertial frame is called its _proper_
+_time_. Something interesting happens when we compare the proper time of a body
+at rest to the proper time of a body in motion within the same inertial frame
+that teaches us an important lesson about the nature of time.
 
-Let's use the first postulate of special relativity and follow the math to see
-how all of the observations could be true.
+```admonish cite
+Time intervals have different values when measured in different inertial frames.
 
-```admonish help
-It is natural to pause at this point and ask "how can this be true?" or "why is
-the speed of light constant?"---stop yourself. For a moment, accept that it is
-true and instead we should ask **"what must happen for this to be true?"** Trust
-the process. 🙏
+Time dilation is the lengthening of the time interval between two events for an
+observer in an inertial frame that is moving with respect to the rest frame of
+the events (in which the events occur at the same location).
+
+([source](https://openstax.org/books/university-physics-volume-3/pages/5-3-time-dilation))
 ```
+
+Consider a "light clock" that consists of a photon that bounces between two
+mirrors set a distance $D$ apart. We count one "tick" of the clock when the
+photon makes one full round trip. Since the speed of light is constant in all
+inertial reference frames, an observer will **always** observe the photon moving
+at the speed of light, $c$, regardless of the motion of its source.
+
+[ insert visualization of a photon clock ]
