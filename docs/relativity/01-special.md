@@ -43,20 +43,21 @@ line unless acted upon by an outside force.
 ([source](https://openstax.org/books/university-physics-volume-3/pages/5-1-invariance-of-physical-laws))
 ```
 
+In other words, in an inertial reference frame attached to an object that is
+not accelerating, it is impossible to tell if the object is at rest or moving at
+a constant velocity.
+
 ```admonish example
-`Ash` is a train conductor, and `Brock` is waiting for the train to arrive at
-the station. The train is moving at speed $v$ relative to the station.
+A blue dot is floating in interstellar space. The only object in sight is a red
+dot. The red dot is moving at a constant angular velocity around the blue dot.
 
-**From `Ash`'s perspective:**
-- The train is at rest.
-- The station is moving towards the train at speed $v$.
+**Problem**: Is the blue dot moving around the red dot, or is the red dot moving
+around the blue dot?
 
-**From `Brock`'s perspective:**
-- The train is moving towards the station at speed $v$.
-- The station is at rest.
+![inertial reference frame](./assets/InertialReferenceFrames.gif)
 
-`Ash` and `Brock` experience the world from their respective inertial reference
-frames. Each of their observations are true, and they are all valid.
+**Solution**: Trick question---it is impossible to tell. In truth, it doesn't
+matter because the physics works the same way in both cases.
 ```
 
 ## Measuring time
