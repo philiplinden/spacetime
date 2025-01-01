@@ -71,3 +71,8 @@ visualizations described
 ## 2024-12-30
 
 More relativity docs.
+
+## 2024-01-01
+
+More time making an animation to show time dilation with the light clock
+example.

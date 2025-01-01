@@ -128,6 +128,9 @@ takes for the photon to make one full round trip.
 - The astronomer observes the photon moving at exactly the speed of light, $c$.
 - The astronaut and astronomer disagree on the time it takes for the photon to
   make one full round trip in the light clock.
+  - The astronaut observes the photon completing one round trip in
+    $\Delta \tau$.
+  - The astronomer observes the photon completing one round trip in $\Delta t$.
 
 **Problem**: Whose round-trip duration measurement is correct?
 
@@ -139,12 +142,12 @@ In the astronaut's inertial frame:
 - The light clock is at rest so the photon travels $2D$ in the time it takes to
   complete one round trip.
 - The time it takes for the photon to make one full round trip is
-  $\Delta t = \frac{2D}{c}$.
+  $\Delta \tau = \frac{2D}{c}$.
 
 In the astronomer's inertial frame:
 - The photon moves at speed $c$.
-- The light clock is moving so the photon travels a longer distance in the time
-  it takes to make one full round trip.
+- The light clock is moving relative to the astronomer so the photon travels a
+  longer distance in the time it takes to make one full round trip in the clock.
   - The photon travels sideways a distance $v \Delta t$ in addition to the
     distance $2D$ it travels up and down between the mirrors.
   - The total distance the photon travels can be found by pythagorean theorem.
@@ -153,8 +156,8 @@ In the astronomer's inertial frame:
     $$
     s = \sqrt{(2D)^2 + (v \Delta t)^2}
     $$
-- The time it takes for the photon to make one full round trip is
-  $\Delta t = \frac{2 \sqrt{D^2 + (v \Delta t)^2}}{c}$.
+
+
 ```
 
 We see here that both of Einstein's postulates are satisfied, and we have not
