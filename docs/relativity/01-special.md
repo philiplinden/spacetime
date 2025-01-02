@@ -172,3 +172,5 @@ counterintuitive as it may be,
 ```
 
 ### Exploring time dilation
+
+![time dilation](./assets/TimeDilation.gif)
