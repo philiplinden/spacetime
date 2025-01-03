@@ -129,8 +129,9 @@ takes for the photon to make one full round trip.
 - The astronaut and astronomer disagree on the time it takes for the photon to
   make one full round trip in the light clock.
   - The astronaut observes the photon completing one round trip in
+    $\Delta t$.
+  - The astronomer observes the photon completing one round trip in
     $\Delta \tau$.
-  - The astronomer observes the photon completing one round trip in $\Delta t$.
 
 **Problem**: Whose round-trip duration measurement is correct?
 
@@ -139,25 +140,25 @@ question, this time---we can solve it with 8th-grade math and disciplined logic.
 
 In the astronaut's inertial frame:
 - The photon moves at speed $c$.
-- The light clock is at rest so the photon travels $2D$ in the time it takes to
-  complete one round trip.
-- The time it takes for the photon to make one full round trip is
-  $\Delta \tau = \frac{2D}{c}$.
+- The light clock is at rest so the photon travels the distance between the
+  mirrors in the time it takes to complete one round trip. This is our intuitive
+  understanding of time in the everyday sense.
+- The time it takes for the photon to make one full round trip is $\Delta \tau$.
 
 In the astronomer's inertial frame:
 - The photon moves at speed $c$.
 - The light clock is moving relative to the astronomer so the photon travels a
   longer distance in the time it takes to make one full round trip in the clock.
   - The photon travels sideways a distance $v \Delta t$ in addition to the
-    distance $2D$ it travels up and down between the mirrors.
-  - The total distance the photon travels can be found by pythagorean theorem.
-    One side of a right triangle is $2D$ and the other side is $v \Delta t$. The
-    hypotenuse is the total distance the photon travels over one tick, $s$.
-    $$
-    s = \sqrt{(2D)^2 + (v \Delta t)^2}
-    $$
-
-
+    distance it travels up and down between the mirrors.
+  - Despite moving additional distance in this reference frame compared to the
+    astronaut's frame, the photon travels at speed $c$ in both reference frames.
+  - This means that in the astronaut's frame, the photon travels _more distance_
+    while moving at the _same speed_.
+- The only way this can be true is if the elapsed time experienced by the
+  astronaut, $\Delta \tau$, is longer than the elapsed time experienced by the
+  astronomer, $\Delta t$, when observing the same photon in the astronomer's
+  reference frame.
 ```
 
 We see here that both of Einstein's postulates are satisfied, and we have not
