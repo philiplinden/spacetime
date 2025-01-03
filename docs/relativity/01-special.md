@@ -173,4 +173,11 @@ counterintuitive as it may be,
 
 ### Exploring time dilation
 
-![time dilation](./assets/TimeDilation.gif)
+In the astronomer's reference frame, the photon moves across more space over the
+course of one "tick" of the clock. The only way the speed of the photon, $c$,
+can be the same in all reference frames and yet travel across more distance in
+one reference frame than in another is if the elapsed time experienced by a
+moving object, $\Delta \tau$, "dilates" compared to the elapsed time
+experienced by an observer at rest in the reference frame, $\Delta t$.
+
+![time dilation](./assets/TimeDilationDemo.gif)
