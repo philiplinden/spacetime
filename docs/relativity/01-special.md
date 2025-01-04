@@ -129,11 +129,13 @@ takes for the photon to make one full round trip.
 - The astronaut and astronomer disagree on the time it takes for the photon to
   make one full round trip in the light clock.
   - The astronaut observes the photon completing one round trip in
-    $\Delta t$.
-  - The astronomer observes the photon completing one round trip in
     $\Delta \tau$.
+  - The astronomer observes the photon completing one round trip in
+    $\Delta t$.
 
 **Problem**: Whose round-trip duration measurement is correct?
+
+![openstax example](https://openstax.org/books/university-physics-volume-3/pages/5-3-time-dilation)
 
 **Solution**: The astronaut and astronomer are both correct! It's not a trick
 question, this time---we can solve it with 8th-grade math and disciplined logic.
