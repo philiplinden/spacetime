@@ -87,3 +87,17 @@ math](relativity/vectors/00-index.md) so I can implement it in the app.
 I've split the docs into two sections: _Intuition_ and _Application_. The
 _Intuition_ section is for the fundamental concepts of relativity. The
 _Application_ section is for the hard math and implementation details.
+
+I have a pretty good idea of what I want the app to look like. Short version is
+- I want to be able to select a reference frame and inspect the observed time of
+other objects. 
+- I also want to visualize gravity and the curvature of spacetime like the
+  visualizations here: https://youtu.be/wrwgIjBUYVc?si=b-SFIhcVsm5MMwco
+- A more advanced version would be to ray-trace signal paths through spacetime and
+  perhaps show length contraction.
+- I want to use exaggerated scale factors to demonstrate the effects and make
+  the math simpler. Things like the speed of light, gravitational constant,
+  etc.
+
+I think the visualizations will probably use a shader. I found a good resource
+for learning shaders here: https://thebookofshaders.com/
