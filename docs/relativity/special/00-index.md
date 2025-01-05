@@ -1,4 +1,4 @@
-# Light Speed & Reference Frames
+# Special Relativity
 
 To begin, we develop some intuitions around the consequences of the speed of
 light being constant and that all velocities are measured relative to some

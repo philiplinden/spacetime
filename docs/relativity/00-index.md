@@ -76,8 +76,18 @@ Here are some excellent videos to get started:
   - [Gravity comes from time curving space](https://youtu.be/OpOER8Eec2A)
   - [Curved spacetime changes trajectories of light and matter](https://www.youtube.com/watch?v=S78h8zQwQe0)
 
+
+## The textbook
+
 OpenStax has multiple textbooks with sections on relativity:
 
 - [College Physics 2e](https://openstax.org/books/college-physics-2e/pages/28-introduction-to-special-relativity)
 - [University Physics Volume 3](https://openstax.org/books/university-physics-volume-3/pages/5-introduction)
 - [Astronomy 2e](https://openstax.org/books/astronomy-2e/pages/24-1-introducing-general-relativity)
+
+In the coming chapters we'll see how relativity affects equations of motion for
+events measured between inertial reference frames. The majority of this work is
+based on the Relativity chapter in
+[OpenStax University Physics Volume 3](https://openstax.org/books/university-physics-volume-3/pages/5-5-the-lorentz-transformation).
+We'll be using the same notation and examples as the OpenStax book, but I'll be
+adding some additional commentary and examples to help solidify the concepts.
