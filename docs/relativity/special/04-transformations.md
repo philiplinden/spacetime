@@ -1,10 +1,5 @@
 # Special relativity
 
-In this section we'll see how relativity affects equations of motion for events
-measured between inertial reference frames. The majority of this work is based
-on the Relativity chapter in
-[OpenStax University Physics Volume 3](https://openstax.org/books/university-physics-volume-3/pages/5-5-the-lorentz-transformation).
-
 ## Coordinate transformations between inertial reference frames
 
 An _event_, $s$, is a location and time coordinate relative to an inertial
@@ -24,8 +19,6 @@ $$
 
 But what if we want to define the same event relative to a moving reference
 frame, $S'$?
-
-![moving reference frame](https://openstax.org/apps/archive/20241024.164013/resources/a2b3997dff7a717555902ca3279bc1723837f76d)
 
 ### Galilean Transformations
 
@@ -91,20 +84,49 @@ set of equations that describe how to transform coordinates between two
 inertial reference frames that are in relative motion and are consistent with
 the speed of light postulate.
 
-![moving reference frame](https://openstax.org/apps/archive/20241024.164013/resources/a2b3997dff7a717555902ca3279bc1723837f76d)
-
+```admonish example
 Recall our [previous example](02-time-dilation.md) with the astronaut and the
 astronomer. Let's say the astronomer's frame of reference is $S$ and the
 astronaut's frame of reference is $S'$, moving at velocity $v$ relative to $S$
 and the $x$ axis is the direction of motion.
 
-The astronomer observes the origin of $S'$ at time $t$. The astronomer also
-observes the displacement of a photon in the astronaut's light clock from the
-origin of $S'$ to be $x'\sqrt{1 - \frac{v^2}{c^2}}$.
+The astronomer observes the origin of $S'$ at time $t$ to have a displacement
+$x$. The astronomer also observes the displacement of a photon in the
+astronaut's light clock from the origin of $S'$ as $x'$.
+
+![moving reference frame](https://openstax.org/apps/archive/20241024.164013/resources/a2b3997dff7a717555902ca3279bc1723837f76d)
+
+The origin of $S'$ is moving at velocity $v$ relative to $S$. An event occurs at
+coordinate $(x', 0, 0, t')$ in $S'$ and at coordinate $(x, 0, 0, t)$ in $S$.
+
+- The displacement of the origin of $S'$ is $vt$.
+- The displacement of the event in $S'$ is $x'$.
+- THe displacement of the event in $S$ is the displacement of $S'$ plus the
+  displacement $x'$ after accounting for relativity.
+
+**Problem:** What is the displacement of the event in $S$?
+
+**Solution:**
+In previous chapters we derived the [time dilation](./02-time-dilation.md) and
+[length contraction](./03-length-contraction.md) equations that relate the time
+and distance between two inertial reference frames. Let's apply them here to
+transform between $S$ and $S'$.
 
 $$
-\begin{align*}
-x' &= \gamma (x - vt)\\
-t' &= \gamma (t - \frac{vx}{c^2})
-\end{align*}
+t = \gamma t', \quad x = \frac{x'}{\gamma} \quad \text{where} \quad \gamma = 1/\sqrt{1
+-\Big(\frac{v}{c}\Big)^2} \\
 $$
+therefore
+$$
+x = vt + x' \sqrt{1 - \Big(\frac{v}{c}\Big)^2}, \quad \text{and} \quad x' =
+\frac{x - vt}{\sqrt{1 - \Big(\frac{v}{c}\Big)^2}}
+$$
+
+That was a lot of work, and it was only for the $x$ coordinate!
+```
+
+Shorthand for this operation is to call it a _Lorentz boost_. The inverse
+Lorentz boost is the same thing but with the velocity reversed.
+([source](https://en.wikipedia.org/wiki/Lorentz_transformation)).
+
+## Space-time interval

@@ -43,7 +43,7 @@ takes for the photon to make one full round trip.
 
 **Problem**: Whose round-trip duration measurement is correct?
 
-![openstax example](https://openstax.org/books/university-physics-volume-3/pages/5-3-time-dilation)
+![openstax example](https://openstax.org/apps/archive/20241024.164013/resources/63398977f32f4f656b1c8973d4a7a68038c5155d)
 
 **Solution**: The astronaut and astronomer are both correct! It's not a trick
 question, this time---we can solve it with 8th-grade math and disciplined logic.
@@ -90,3 +90,10 @@ moving object, $\Delta \tau$, "dilates" compared to the elapsed time
 experienced by an observer at rest in the reference frame, $\Delta t$.
 
 ![time dilation](./assets/TimeDilationDemo.gif)
+
+Therefore, the time dilation equation is:
+
+$$
+t = \gamma t' \quad \text{where} \quad \gamma = 1/\sqrt{1
+-\Big(\frac{v}{c}\Big)^2} \\
+$$

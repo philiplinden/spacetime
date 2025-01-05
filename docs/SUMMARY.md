@@ -6,7 +6,7 @@
 
 - [Relativity](relativity/00-index.md)
   - [Special Relativity](relativity/special/00-index.md)
-    - [Light Speed & Reference Frames](relativity/special/01-reference-frames.md)
+    - [The Basics](relativity/special/01-reference-frames.md)
     - [Time Dilation](relativity/special/02-time-dilation.md)
     - [Length Contraction](relativity/special/03-length-contraction.md)
     - [Coordinate Transformations](relativity/special/04-transformations.md)

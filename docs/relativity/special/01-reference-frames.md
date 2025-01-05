@@ -50,8 +50,8 @@ This statement is
 seems, but that's a tale for another time.
 
 - $c$ is defined as the distance traveled by a photon in 1 second.
-- $c$ is _not a measurement_, it is a _definition_. In actuality, the definition
-  of $1 \text{ meter}$ is defined as the distance light travels in
+- $c$ is _not a measurement_, it is a _scientific constant_. In fact, the
+  definition of the meter is derived from the distance that light travels in
   $\frac{1}{299792458}$ seconds.
 - Science has accepted that this value, $299792458 \text{ m/s}$, is what we have
   decided to call the speed of light.
