@@ -76,3 +76,14 @@ More relativity docs.
 
 More time making an animation to show time dilation with the light clock
 example.
+
+## 2025-01-05
+
+I've been working on the [fundamentals of relativity](relativity/00-index.md)
+for a while and I'm finally starting to dig in to the applications. I need to
+have a firm understanding of [relativistic vector
+math](relativity/vectors/00-index.md) so I can implement it in the app.
+
+I've split the docs into two sections: _Intuition_ and _Application_. The
+_Intuition_ section is for the fundamental concepts of relativity. The
+_Application_ section is for the hard math and implementation details.

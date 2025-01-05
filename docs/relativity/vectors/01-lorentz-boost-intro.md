@@ -77,12 +77,15 @@ significant compared to $c$ or we want to be very precise over long distances,
 we need a more accurate transformation that accounts for the effects of
 relativity.
 
-### Lorentz Transformations
+## Lorentz Boosts
 
 Good news, someone already figured this out! The Lorentz transformations are a
 set of equations that describe how to transform coordinates between two
 inertial reference frames that are in relative motion and are consistent with
 the speed of light postulate.
+
+Shorthand for this operation is to call it a _Lorentz boost_
+([source](https://en.wikipedia.org/wiki/Lorentz_transformation)).
 
 ```admonish example
 Recall our [previous example](02-time-dilation.md) with the astronaut and the
@@ -121,12 +124,9 @@ $$
 x = vt + x' \sqrt{1 - \Big(\frac{v}{c}\Big)^2}, \quad \text{and} \quad x' =
 \frac{x - vt}{\sqrt{1 - \Big(\frac{v}{c}\Big)^2}}
 $$
-
-That was a lot of work, and it was only for the $x$ coordinate!
 ```
 
-Shorthand for this operation is to call it a _Lorentz boost_. The inverse
-Lorentz boost is the same thing but with the velocity reversed.
-([source](https://en.wikipedia.org/wiki/Lorentz_transformation)).
+## Vectorized Lorentz Boosts
 
-## Space-time interval
+[Wikipedia](https://en.wikipedia.org/wiki/Lorentz_transformation#Vector_transformations)
+has a great explanation of how to apply a Lorentz boost to a vector.
