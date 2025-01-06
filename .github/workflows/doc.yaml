@@ -7,7 +7,7 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 permissions:
   contents: write  # To push a branch
@@ -34,15 +34,13 @@ jobs:
           cargo install mdbook-admonish --force
           cargo install mdbook-katex --force
           cargo install mdbook-mermaid --force
+          cargo install mdbook-yml-header --force
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Build Book
-        run: |
-          mdbook-admonish install .
-          mdbook-mermaid install .
-          mdbook build
+        run: mdbook build docs
 
       - name: Make target directory so build doesn't crash
         run: mkdir -p target

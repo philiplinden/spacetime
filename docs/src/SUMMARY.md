@@ -20,7 +20,3 @@
 
 - [Relativistic Vector Math](relativity/vectors/00-index.md)
   - [Lorentz Boosts](relativity/vectors/01-lorentz-boost-intro.md)
-
----
-
-- [Devlog](devlog.md)

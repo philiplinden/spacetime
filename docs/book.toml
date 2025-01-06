@@ -3,10 +3,9 @@ authors = ["Philip Linden"]
 language = "en"
 multilingual = false
 title = "spacetime documentation"
-src = "docs"
 
 [build]
-build-dir = "docs/book"
+build-dir = "book"
 create-missing = false
 
 [output.html]
@@ -16,8 +15,8 @@ smart-punctuation = true
 git-repository-url = "https://github.com/philiplinden/spacetime"
 git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/philiplinden/spacetime/edit/main/docs/{path}"
-additional-css = ["./docs/plugins/mdbook-admonish.css"]
-additional-js = ["./docs/plugins/mermaid.min.js", "./docs/plugins/mermaid-init.js"]
+additional-css = ["./plugins/mdbook-admonish.css"]
+additional-js = ["./plugins/mermaid.min.js", "./plugins/mermaid-init.js"]
 
 [output.html.print]
 enable = true    # include support for printable output
@@ -38,3 +37,5 @@ command = "mdbook-mermaid"
 
 [preprocessor.katex]
 after = ["links"]
+
+[preprocessor.yml-header]

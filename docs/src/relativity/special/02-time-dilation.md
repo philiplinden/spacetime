@@ -89,7 +89,7 @@ one reference frame than in another is if the elapsed time experienced by a
 moving object, $\Delta \tau$, "dilates" compared to the elapsed time
 experienced by an observer at rest in the reference frame, $\Delta t$.
 
-![time dilation](./assets/TimeDilationDemo.gif)
+![time dilation](/relativity/special/assets/TimeDilationDemo.gif)
 
 Therefore, the time dilation equation is:
 
