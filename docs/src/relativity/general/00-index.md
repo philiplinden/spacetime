@@ -17,7 +17,7 @@ continuous _spacetime_.
 In Newtonian physics, gravity is a force that pulls objects together. On Earth,
 this would look like a uniform force acting on all objects pulling them towards
 the ground. But our exploration of Einstein's postulate on
-[inertial reference frames](relativity/00-index.md#inertial-reference-frames)
+[inertial reference frames](/relativity/00-index.md#inertial-reference-frames)
 showed us that we can "flip" our reference frame and the physics are the same
 By this definition it is impossible to tell if you are at rest or in motion. So
 taking that to the extreme, maybe you are at rest and the Earth is accelerating
@@ -52,11 +52,11 @@ following video does an excellent job of explaining it:
 
 Video: [Gravity comes from time curving space](https://youtu.be/OpOER8Eec2A)
 
-![alt text](./assets/image.png)
+![alt text](/relativity/general/assets/image.png)
 
-![alt text](./assets/image2.png)
+![alt text](/relativity/general/assets/image2.png)
 
-![alt text](./assets/image3.png)
+![alt text](/relativity/general/assets/image3.png)
 
 ## Curved spacetime
 

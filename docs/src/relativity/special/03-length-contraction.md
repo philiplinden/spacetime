@@ -4,7 +4,7 @@
 
 The relative speed between two inertial reference frames, $v$, is the same in
 both frames. Think about the astronaut and astronomer in the light clock example
-from [the previous chapter](./02-time-dilation.md).
+from [the previous chapter](02-time-dilation.md).
 
 - The astronaut observes the astronomer moving at a constant speed, $v$.
 - The astronomer observes the astronaut moving at a constant speed, $v$.

@@ -22,3 +22,7 @@ Cargo.lock
 
 # This file contains environment-specific configuration like linker settings
 .cargo/config.toml
+
+# Docs exclude
+.obsidian/
+docs/book/
