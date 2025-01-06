@@ -40,10 +40,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build Book
-        run: |
-          mdbook-admonish install docs
-          mdbook-mermaid install docs
-          mdbook build docs
+        run: mdbook build docs
 
       - name: Make target directory so build doesn't crash
         run: mkdir -p target
