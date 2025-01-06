@@ -10,7 +10,7 @@ Positioning, Navigation, and Timing (PNT) service network configurations.
 This book serves as documentation for the `spacetime` project and a guide to the
 fundamental concepts that it seeks to model.
 
-Research papers are available in the [research-papers](docs/research-papers/index.md)
+Research papers are available in the [research-papers](../research-papers/index.md)
 section.
 
 If you find a mistake or have a suggestion, please
