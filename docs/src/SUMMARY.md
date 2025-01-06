@@ -1,6 +1,6 @@
 # Summary
 
-- [Introduction](index.md)
+- [Introduction](docs/src/index.md)
 
 ---
 
