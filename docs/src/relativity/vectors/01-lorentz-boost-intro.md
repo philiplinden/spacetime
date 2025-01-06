@@ -9,10 +9,10 @@ $y$, and $z$ spatial components to remind us that these are vectors in 3D space.
 
 $$
 \begin{align*}
-\text{position\quad}& s = \begin{bmatrix} x \\ y \\ z \end{bmatrix}\\
-\text{velocity\quad}& \dot{s} = \begin{bmatrix} \dot{x} \\ \dot{y} \\
+\text{position}& \quad s = \begin{bmatrix} x \\ y \\ z \end{bmatrix}\\
+\text{velocity}& \quad \dot{s} = \begin{bmatrix} \dot{x} \\ \dot{y} \\
 \dot{z} \end{bmatrix} = \frac{d\vec{s}}{dt}(t)\\
-\text{acceleration\quad}& \ddot{s} = \begin{bmatrix} \ddot{x} \\ \ddot{y} \\
+\text{acceleration}& \quad \ddot{s} = \begin{bmatrix} \ddot{x} \\ \ddot{y} \\
 \ddot{z} \end{bmatrix} = \frac{d^2\vec{s}}{dt^2}(t)
 \end{align*}
 $$
