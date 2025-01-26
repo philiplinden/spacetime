@@ -1,8 +1,11 @@
+mod camera;
+
+#[cfg(feature = "dev")]
+mod dev;
 
 use bevy::{
     prelude::*,
     asset::AssetMetaCheck,
-    window::{EnabledButtons, WindowTheme},
 };
 
 pub struct AppPlugin;
@@ -21,22 +24,24 @@ impl Plugin for AppPlugin {
                 })
                 .set(WindowPlugin {
                     primary_window: Window {
-                        title: "🕳️".to_string(),
+                        title: "s p a c e t i m e".to_string(),
                         canvas: Some("#bevy".to_string()),
                         fit_canvas_to_parent: true,
                         prevent_default_event_handling: true,
-                        resolution: (1640., 1019.).into(),
-                        resizable: false,
-                        window_theme: Some(WindowTheme::Dark),
-                        enabled_buttons: EnabledButtons {
-                            maximize: false,
-                            ..Default::default()
-                        },
                         ..default()
                     }
                     .into(),
                     ..default()
                 })
+                .build()
+                .disable::<bevy::log::LogPlugin>(), // Logging is configured by the dev plugin
         );
+
+        app.add_plugins((
+            camera::plugin,
+        ));
+
+        #[cfg(feature = "dev")]
+        app.add_plugins(dev::plugin);
     }
 }

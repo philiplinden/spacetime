@@ -6,24 +6,24 @@ authors = ["Philip Linden <lindenphilipj@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-log = { version = "0.4.22", features = [
+log = { version = "0.4.25", features = [
     # Disable low-severity logs at compile time for performance.
     "max_level_debug",
     "release_max_level_warn",
 ] }
-hifitime = "4.0.1"
-thiserror = "2.0.7"
-bevy = { version = "0.15", default-features = false, features = [
-    "bevy_asset",
-    "bevy_state",
-    "bevy_window",
-    "multi_threaded",
-]}
+hifitime = "4.0.2"
+bevy = "0.15.1"
+bevy_console = { version = "0.13.1", optional = true }
+clap = { version = "4.5.27", optional = true }
 
 [features]
 default = ["dev"]
 dev = [
-    "bevy/dynamic_linking"
+    "bevy/dynamic_linking",
+    "bevy/bevy_dev_tools",
+    "bevy/bevy_debug_stepping",
+    "bevy_console",
+    "clap",
 ]
 
 # Idiomatic Bevy code often triggers these lints, and the CI workflow treats them as errors.
@@ -58,7 +58,7 @@ codegen-units = 1
 lto = "thin"
 # Optimize with size in mind (also try "z", sometimes it is better).
 # Slightly slows compile times, great improvements to file size and runtime performance.
-opt-level = "s"
+opt-level = "z"
 # Strip all debugging information from the binary to slightly reduce file size.
 strip = "debuginfo"
 

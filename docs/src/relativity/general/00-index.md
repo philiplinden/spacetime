@@ -52,11 +52,11 @@ following video does an excellent job of explaining it:
 
 Video: [Gravity comes from time curving space](https://youtu.be/OpOER8Eec2A)
 
-![alt text](/relativity/general/assets/image.png)
+![alt text](./assets/image.png)
 
-![alt text](/relativity/general/assets/image2.png)
+![alt text](./assets/image2.png)
 
-![alt text](/relativity/general/assets/image3.png)
+![alt text](./assets/image3.png)
 
 ## Curved spacetime
 
