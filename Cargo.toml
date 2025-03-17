@@ -1,65 +1,64 @@
 [package]
 name = "spacetime"
-description = "Time dilation in relativistic spacetime"
-version = "0.4.0"
+version = "0.1.0"
 authors = ["Philip Linden <lindenphilipj@gmail.com>"]
-edition = "2021"
+readme = "README.md"
+edition = "2024"
+license = "MPL-2.0"
+resolver = "2" # Important for Bevy
+
+[[bin]]
+name = "spacetime"
+path = "src/main.rs"
 
 [dependencies]
-log = { version = "0.4.25", features = [
-    # Disable low-severity logs at compile time for performance.
-    "max_level_debug",
-    "release_max_level_warn",
+bevy = { version = "0.15.3", features = ["dynamic_linking", "multi_threaded"] }
+avian3d = "0.2.1"
+big_space = "0.9.1"
+uom = "0.36.0"
+iyes_perf_ui = "0.4.0"
+bevy-inspector-egui = { version = "0.30.0", optional = true, features = [
+    "highlight_changes",
 ] }
-hifitime = "4.0.2"
-bevy = "0.15.1"
-bevy_console = { version = "0.13.1", optional = true }
-clap = { version = "4.5.27", optional = true }
 
 [features]
-default = ["dev"]
-dev = [
-    "bevy/dynamic_linking",
-    "bevy/bevy_dev_tools",
-    "bevy/bevy_debug_stepping",
-    "bevy_console",
-    "clap",
-]
+default = ["dev", "f32"]
+dev = ["avian3d/debug-plugin", "bevy/bevy_dev_tools", "big_space/debug"]
+inspect = ["bevy-inspector-egui"]
+f32 = ["avian3d/f32", "avian3d/parry-f32"]
+f64 = ["avian3d/f64", "avian3d/parry-f64"]
 
-# Idiomatic Bevy code often triggers these lints, and the CI workflow treats them as errors.
-# In some cases they may still signal poor code quality however, so consider commenting out these lines.
-[lints.clippy]
-# Bevy supplies arguments to systems via dependency injection, so it's natural for systems to
-# request more than 7 arguments -- which triggers this lint.
-too_many_arguments = "allow"
-# Queries that access many components may trigger this lint.
-type_complexity = "allow"
+# Precision features are mutually exclusive.
+[package.metadata.mutually_exclusive_features]
+f32 = ["f64"]
+f64 = ["f32"]
 
 # Compile with Performance Optimizations:
 # https://bevyengine.org/learn/quick-start/getting-started/setup/#compile-with-performance-optimizations
 
-# Enable a small amount of optimization in the dev profile.
+# Enable a small amount of optimization in the dev profile for our code.
 [profile.dev]
 opt-level = 1
 
 # Enable a large amount of optimization in the dev profile for dependencies.
 [profile.dev.package."*"]
 opt-level = 3
+debug = false
 
-# The default profile is optimized for Wasm builds because
-# that's what [Trunk reads](https://github.com/trunk-rs/trunk/issues/605).
-# Optimize for size in the wasm-release profile to reduce load times and bandwidth usage on web.
+# The default profile is optimized for Wasm builds because that's what [Trunk
+# reads](https://github.com/trunk-rs/trunk/issues/605). Optimize for size in the
+# wasm-release profile to reduce load times and bandwidth usage on web.
 [profile.release]
-# Compile the entire crate as one unit.
-# Slows compile times, marginal improvements.
-codegen-units = 1
-# Do a second optimization pass over the entire program, including dependencies.
-# Slows compile times, marginal improvements.
-lto = "thin"
+# Compile the entire crate as one unit. Slows compile times, marginal
+# improvements.
+# codegen-units = 1
+
 # Optimize with size in mind (also try "z", sometimes it is better).
-# Slightly slows compile times, great improvements to file size and runtime performance.
-opt-level = "z"
-# Strip all debugging information from the binary to slightly reduce file size.
+# Slightly slows compile times, great improvements to file size and runtime
+# performance.
+opt-level = "s"
+# Strip all debugging information from the binary to slightly reduce file
+# size.
 strip = "debuginfo"
 
 # Override some settings for native builds.
